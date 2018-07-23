@@ -8,22 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		2EB539A121063C1700192FDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539A021063C1700192FDA /* AppDelegate.swift */; };
-		2EB539A321063C1700192FDA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539A221063C1700192FDA /* ViewController.swift */; };
 		2EB539A621063C1700192FDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB539A421063C1700192FDA /* Main.storyboard */; };
 		2EB539A921063C1700192FDA /* TaskIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539A721063C1700192FDA /* TaskIt.xcdatamodeld */; };
 		2EB539AB21063C1700192FDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EB539AA21063C1700192FDA /* Assets.xcassets */; };
 		2EB539AE21063C1700192FDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB539AC21063C1700192FDA /* LaunchScreen.storyboard */; };
+		2EB539B621063EF400192FDA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2EB539B521063EF400192FDA /* GoogleService-Info.plist */; };
+		2EB539BD2106439600192FDA /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539BC2106439600192FDA /* StartVC.swift */; };
+		409A9A22C347DD4CBAD1CE6F /* Pods_TaskIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C320EA302352420BF8CF0C7 /* Pods_TaskIt.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2EB5399D21063C1700192FDA /* TaskIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB539A021063C1700192FDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2EB539A221063C1700192FDA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2EB539A521063C1700192FDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2EB539A821063C1700192FDA /* TaskIt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskIt.xcdatamodel; sourceTree = "<group>"; };
 		2EB539AA21063C1700192FDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EB539AD21063C1700192FDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EB539AF21063C1700192FDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EB539B521063EF400192FDA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2EB539BC2106439600192FDA /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
+		528CF6BC0CF32CC4F47A8F51 /* Pods-TaskIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaskIt/Pods-TaskIt.release.xcconfig"; sourceTree = "<group>"; };
+		6C320EA302352420BF8CF0C7 /* Pods_TaskIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8996872739D1DDD925576CD /* Pods-TaskIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaskIt/Pods-TaskIt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				409A9A22C347DD4CBAD1CE6F /* Pods_TaskIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				2EB5399F21063C1700192FDA /* TaskIt */,
 				2EB5399E21063C1700192FDA /* Products */,
+				5E2708704AD143218140FFB0 /* Pods */,
+				42FE8EB047D6E6BF6EF8D33A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +65,73 @@
 		2EB5399F21063C1700192FDA /* TaskIt */ = {
 			isa = PBXGroup;
 			children = (
+				2EB539BB2106424600192FDA /* Supporting Files */,
+				2EB539BA2106424000192FDA /* Helpers */,
+				2EB539B92106421A00192FDA /* Services */,
+				2EB539B82106421300192FDA /* Models */,
+				2EB539B72106420400192FDA /* Controllers */,
 				2EB539A021063C1700192FDA /* AppDelegate.swift */,
-				2EB539A221063C1700192FDA /* ViewController.swift */,
 				2EB539A421063C1700192FDA /* Main.storyboard */,
 				2EB539AA21063C1700192FDA /* Assets.xcassets */,
 				2EB539AC21063C1700192FDA /* LaunchScreen.storyboard */,
 				2EB539AF21063C1700192FDA /* Info.plist */,
 				2EB539A721063C1700192FDA /* TaskIt.xcdatamodeld */,
+				2EB539B521063EF400192FDA /* GoogleService-Info.plist */,
 			);
 			path = TaskIt;
+			sourceTree = "<group>";
+		};
+		2EB539B72106420400192FDA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2EB539BC2106439600192FDA /* StartVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2EB539B82106421300192FDA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2EB539B92106421A00192FDA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2EB539BA2106424000192FDA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2EB539BB2106424600192FDA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		42FE8EB047D6E6BF6EF8D33A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C320EA302352420BF8CF0C7 /* Pods_TaskIt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E2708704AD143218140FFB0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B8996872739D1DDD925576CD /* Pods-TaskIt.debug.xcconfig */,
+				528CF6BC0CF32CC4F47A8F51 /* Pods-TaskIt.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +141,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2EB539B221063C1700192FDA /* Build configuration list for PBXNativeTarget "TaskIt" */;
 			buildPhases = (
+				B76757BAE01FB073E1F77633 /* [CP] Check Pods Manifest.lock */,
 				2EB5399921063C1700192FDA /* Sources */,
 				2EB5399A21063C1700192FDA /* Frameworks */,
 				2EB5399B21063C1700192FDA /* Resources */,
+				FE8B854AECD672CAD2F1C2EC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,20 +196,62 @@
 			files = (
 				2EB539AE21063C1700192FDA /* LaunchScreen.storyboard in Resources */,
 				2EB539AB21063C1700192FDA /* Assets.xcassets in Resources */,
+				2EB539B621063EF400192FDA /* GoogleService-Info.plist in Resources */,
 				2EB539A621063C1700192FDA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B76757BAE01FB073E1F77633 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TaskIt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE8B854AECD672CAD2F1C2EC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TaskIt/Pods-TaskIt-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TaskIt/Pods-TaskIt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2EB5399921063C1700192FDA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EB539A321063C1700192FDA /* ViewController.swift in Sources */,
 				2EB539A921063C1700192FDA /* TaskIt.xcdatamodeld in Sources */,
 				2EB539A121063C1700192FDA /* AppDelegate.swift in Sources */,
+				2EB539BD2106439600192FDA /* StartVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +386,7 @@
 		};
 		2EB539B321063C1700192FDA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8996872739D1DDD925576CD /* Pods-TaskIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -290,6 +402,7 @@
 		};
 		2EB539B421063C1700192FDA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 528CF6BC0CF32CC4F47A8F51 /* Pods-TaskIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
