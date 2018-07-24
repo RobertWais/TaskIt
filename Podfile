@@ -7,6 +7,8 @@ target 'TaskIt' do
 
   # Pods for TaskIt
   pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+pod 'Firebase/Database'
 
 
 end

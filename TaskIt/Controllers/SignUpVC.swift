@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseAuth.FIRUser
 
 class SignUpVC: UIViewController, UIScrollViewDelegate {
 
@@ -39,18 +41,26 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     @IBAction func joinBtnPressed(_ sender: Any) {
+        if  usernameField?.text == "" || (emailField?.text)! == ""  || (passwordField?.text)! == "" {
+            print("Fill out all sections")
+            return
+        }
+        AuthService.createUser(email: emailField.text!, password: passwordField.text!) { (error, user) in
+            if let error = error {
+                Alerts.simpleAlert(err: error, controller: self)
+                print("didnt work")
+                return
+            }
+            print("No error \(Auth.auth().currentUser?.email)")
+            UserService.create(user: user!, username: self.usernameField.text!, companyID: "1234", completion: { (error, user) in
+                if let error = error {
+                    Alerts.simpleAlert(err: error, controller: self)
+                    return
+                }
+                print("made it")
+            })
+        }
     }
 }
 
