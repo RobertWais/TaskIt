@@ -109,7 +109,7 @@ extension StartVC {
     }
     
     func setViewLogin(){
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+       self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
         loginCredentialsView.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
         loginCredentialsView.layer.cornerRadius = 25
         updateTextFields()
