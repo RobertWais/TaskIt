@@ -1,20 +1,20 @@
 # TaskIt
-#TaskIt
+# TaskIt
 
 TaskIt is a task manager for grounds keepers of all sorts to manage issues on the ground with an easy to use UI that displays tasks through shapes on the grounds’ blueprints
 
-#Audience
+# Audience
 The audience is users who work at any area with grounds.
 
 
-#Experience
+# Experience
 The user opens the app to Login/Signup/Sign a Company Up. The user can sign up and during the sign up stage must give the unique identifier for their given company. The Login is if the user already has an account with a company. The sign a company up is to create a company which has a name and a unique identifier for users to acquire.
 
-#Technical
+# Technical
 Firebase – (Companies, Company Image, Company image layovers,Users, Tasks,)
 CoreData – (Saving image locally on user’s phone so that they don’t have to load that every time from Firebase)
 
-#Models
+# Models
 User – (email,username,password), (potentially tasks being worked on)
 Company – (name, unique identifier)
 Task – (contains a shape)
