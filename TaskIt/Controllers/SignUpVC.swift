@@ -57,15 +57,15 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
 extension SignUpVC {
     func updateTextFields(){
         for field in textFields {
-           field.backgroundColor = UIColor.white
-            field.layer.borderColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0).cgColor
+           field.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+            field.layer.borderColor = UIColor.white.cgColor
             field.layer.borderWidth = 2.0
-            field.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
-            field.textColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+            field.tintColor = UIColor.white
+            field.textColor = UIColor.white
             field.layer.cornerRadius = field.frame.height/2
             field.layer.masksToBounds = true
             
-            let placeholder = NSAttributedString(string: field.placeholder!, attributes: [NSAttributedStringKey.foregroundColor : UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)])
+            let placeholder = NSAttributedString(string: field.placeholder!, attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
             field.attributedPlaceholder = placeholder
             
         }
@@ -77,6 +77,8 @@ extension SignUpVC {
         companyIdField.layer.masksToBounds = true
         companyIdField.tintColor = UIColor.white
         companyIdField.textColor = UIColor.white
+        companyIdField.layer.borderColor = UIColor.white.cgColor
+        companyIdField.layer.borderWidth = 2
         
         
         let placeholder = NSAttributedString(string: companyIdField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
@@ -87,9 +89,12 @@ extension SignUpVC {
         joinBtn.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
         joinBtn.layer.cornerRadius = joinBtn.frame.height/2
         joinBtn.layer.masksToBounds = true
+        joinBtn.layer.borderColor = UIColor.white.cgColor
+        joinBtn.layer.borderWidth = 2.0
     }
     
     func updateAllUI(){
+        self.view.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
         updateTextFields()
         updateJoinBtn()
         updateCompanyField()
@@ -100,6 +105,7 @@ extension SignUpVC: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+        print("Yas")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -124,7 +130,6 @@ extension SignUpVC {
     }
     
     @objc func keyBoardWasShown(notification: NSNotification){
-        print("Opened")
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                 let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 50, right: 0)
@@ -137,7 +142,6 @@ extension SignUpVC {
     
     
     @objc func keyBoardWillHide(notification: NSNotification){
-        print("Closed")
         var contentInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets

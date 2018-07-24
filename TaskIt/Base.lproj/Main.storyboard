@@ -140,38 +140,38 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="HAK-JH-1nL">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="20" width="375" height="563"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="QTH-yB-VDL">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="492"/>
+                                                <rect key="frame" x="60" y="0.0" width="255" height="388"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TmD-0i-4TW">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="113.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="255" height="87.5"/>
                                                         <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRq-wJ-66K">
-                                                        <rect key="frame" x="0.0" y="126.5" width="375" height="113"/>
+                                                        <rect key="frame" x="0.0" y="100.5" width="255" height="87"/>
                                                         <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Bg-dY-wbC">
-                                                        <rect key="frame" x="0.0" y="252.5" width="375" height="113.5"/>
+                                                        <rect key="frame" x="0.0" y="200.5" width="255" height="87.5"/>
                                                         <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Company ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sCu-0T-pw7">
-                                                        <rect key="frame" x="0.0" y="379" width="375" height="113"/>
+                                                        <rect key="frame" x="0.0" y="301" width="255" height="87"/>
                                                         <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -179,7 +179,7 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hd2-IX-bVC">
-                                                <rect key="frame" x="162" y="592" width="51" height="75"/>
+                                                <rect key="frame" x="15" y="488" width="345" height="75"/>
                                                 <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="75" id="BSE-3W-oSi"/>
@@ -194,15 +194,17 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="QTH-yB-VDL" firstAttribute="leading" secondItem="HAK-JH-1nL" secondAttribute="leading" id="1Az-vE-Tgr"/>
-                                            <constraint firstAttribute="trailing" secondItem="QTH-yB-VDL" secondAttribute="trailing" id="hHH-6z-Y4z"/>
+                                            <constraint firstItem="QTH-yB-VDL" firstAttribute="leading" secondItem="HAK-JH-1nL" secondAttribute="leading" constant="60" id="1Az-vE-Tgr"/>
+                                            <constraint firstItem="hd2-IX-bVC" firstAttribute="leading" secondItem="HAK-JH-1nL" secondAttribute="leading" constant="15" id="3AJ-EU-78z"/>
+                                            <constraint firstAttribute="trailing" secondItem="hd2-IX-bVC" secondAttribute="trailing" constant="15" id="XXC-pi-jmC"/>
+                                            <constraint firstAttribute="trailing" secondItem="QTH-yB-VDL" secondAttribute="trailing" constant="60" id="hHH-6z-Y4z"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="HAK-JH-1nL" firstAttribute="top" secondItem="fgr-b4-5Jj" secondAttribute="top" id="1kb-XL-m5T"/>
+                                    <constraint firstItem="HAK-JH-1nL" firstAttribute="top" secondItem="fgr-b4-5Jj" secondAttribute="top" constant="20" id="1kb-XL-m5T"/>
                                     <constraint firstAttribute="trailing" secondItem="HAK-JH-1nL" secondAttribute="trailing" id="YFP-Zt-ZjW"/>
-                                    <constraint firstAttribute="bottom" secondItem="HAK-JH-1nL" secondAttribute="bottom" priority="999" id="k08-QF-kpL"/>
+                                    <constraint firstAttribute="bottom" secondItem="HAK-JH-1nL" secondAttribute="bottom" priority="999" constant="20" id="k08-QF-kpL"/>
                                     <constraint firstItem="HAK-JH-1nL" firstAttribute="leading" secondItem="fgr-b4-5Jj" secondAttribute="leading" id="zcR-Lf-uV6"/>
                                 </constraints>
                             </scrollView>
@@ -210,11 +212,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fgr-b4-5Jj" firstAttribute="top" secondItem="7jM-Jz-Wbt" secondAttribute="top" id="4K7-iy-wrz"/>
-                            <constraint firstItem="HAK-JH-1nL" firstAttribute="height" secondItem="sjd-C8-xPg" secondAttribute="height" id="ATl-h8-uTx"/>
-                            <constraint firstItem="HAK-JH-1nL" firstAttribute="width" secondItem="sjd-C8-xPg" secondAttribute="width" id="D0k-0X-O6j"/>
                             <constraint firstItem="fgr-b4-5Jj" firstAttribute="trailing" secondItem="7jM-Jz-Wbt" secondAttribute="trailing" id="QNv-Zi-vog"/>
                             <constraint firstItem="fgr-b4-5Jj" firstAttribute="bottom" secondItem="7jM-Jz-Wbt" secondAttribute="bottom" id="ebz-hg-M4A"/>
                             <constraint firstItem="fgr-b4-5Jj" firstAttribute="leading" secondItem="7jM-Jz-Wbt" secondAttribute="leading" id="kbD-SJ-FRX"/>
+                            <constraint firstItem="HAK-JH-1nL" firstAttribute="width" secondItem="7jM-Jz-Wbt" secondAttribute="width" id="ngj-fr-9WW"/>
+                            <constraint firstItem="HAK-JH-1nL" firstAttribute="height" secondItem="7jM-Jz-Wbt" secondAttribute="height" constant="-40" id="pK2-MF-aPJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7jM-Jz-Wbt"/>
                     </view>
