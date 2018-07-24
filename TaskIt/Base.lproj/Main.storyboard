@@ -232,11 +232,27 @@
                         <outletCollection property="textFields" destination="TmD-0i-4TW" collectionClass="NSMutableArray" id="bax-b4-oUw"/>
                         <outletCollection property="textFields" destination="9Bg-dY-wbC" collectionClass="NSMutableArray" id="rWO-xe-UyQ"/>
                         <outletCollection property="textFields" destination="sCu-0T-pw7" collectionClass="NSMutableArray" id="IdA-SB-WPi"/>
+                        <segue destination="4Sd-Li-8NF" kind="show" identifier="toMapVC" id="xpl-Ci-dmw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLl-kd-FqV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1176.8" y="122.78860569715144"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="DtR-lt-F3u">
+            <objects>
+                <viewController id="4Sd-Li-8NF" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J0B-yH-HNC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="y0S-7z-nYW"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CRl-Jy-9N0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="430" y="909"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TfU-AI-fRi">

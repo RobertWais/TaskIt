@@ -13,7 +13,7 @@ struct UserService {
     
     
     //Create the user in the database
-    static func create(user: User, username: String, companyID: String,completion: @escaping (Error?,User?)->()){
+    static func create(user: User, username: String, companyID: String,completion: @escaping (Error?,taskUser?)->()){
         
         let userAttribute = ["username" : username,
                              "companyId" : companyID]
@@ -26,8 +26,21 @@ struct UserService {
             
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 let user = taskUser(snapshot: snapshot)
+                completion(nil,user)
             })
         }
-        
+    }
+    
+    static func checkCompanyIds(companyID: String, completion: @escaping (Bool)->()){
+        let ref = Database.database().reference().child("company")
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            if snapshot.hasChild(companyID){
+                //Exists
+                completion(true)
+            }else{
+                //Doesnt exists
+                completion(false)
+            }
+        }
     }
 }

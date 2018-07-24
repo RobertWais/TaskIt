@@ -19,6 +19,8 @@
 		2EB539C52106F4F400192FDA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539C42106F4F400192FDA /* UserService.swift */; };
 		2EB539C72106F87700192FDA /* TaskUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539C62106F87700192FDA /* TaskUser.swift */; };
 		2EB539C92106FBFF00192FDA /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539C82106FBFF00192FDA /* Alerts.swift */; };
+		2EB539CB2107879C00192FDA /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539CA2107879C00192FDA /* Login.swift */; };
+		2EB539CD21079CB500192FDA /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539CC21079CB500192FDA /* MapVC.swift */; };
 		409A9A22C347DD4CBAD1CE6F /* Pods_TaskIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C320EA302352420BF8CF0C7 /* Pods_TaskIt.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		2EB539C42106F4F400192FDA /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		2EB539C62106F87700192FDA /* TaskUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskUser.swift; sourceTree = "<group>"; };
 		2EB539C82106FBFF00192FDA /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		2EB539CA2107879C00192FDA /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		2EB539CC21079CB500192FDA /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		528CF6BC0CF32CC4F47A8F51 /* Pods-TaskIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaskIt/Pods-TaskIt.release.xcconfig"; sourceTree = "<group>"; };
 		6C320EA302352420BF8CF0C7 /* Pods_TaskIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8996872739D1DDD925576CD /* Pods-TaskIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaskIt/Pods-TaskIt.debug.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 			children = (
 				2EB539BC2106439600192FDA /* StartVC.swift */,
 				2EB539BE2106562700192FDA /* SignUpVC.swift */,
+				2EB539CC21079CB500192FDA /* MapVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				2EB539C82106FBFF00192FDA /* Alerts.swift */,
+				2EB539CA2107879C00192FDA /* Login.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -273,7 +279,9 @@
 				2EB539C92106FBFF00192FDA /* Alerts.swift in Sources */,
 				2EB539C52106F4F400192FDA /* UserService.swift in Sources */,
 				2EB539C12106EBED00192FDA /* AuthService.swift in Sources */,
+				2EB539CD21079CB500192FDA /* MapVC.swift in Sources */,
 				2EB539C72106F87700192FDA /* TaskUser.swift in Sources */,
+				2EB539CB2107879C00192FDA /* Login.swift in Sources */,
 				2EB539A121063C1700192FDA /* AppDelegate.swift in Sources */,
 				2EB539BD2106439600192FDA /* StartVC.swift in Sources */,
 			);

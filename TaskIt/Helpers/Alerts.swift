@@ -21,7 +21,32 @@ struct Alerts{
             })
             alert.addAction(cancel)
             controller.present(alert, animated: true, completion: nil)
+    }
+    
+    static func fillOutFields(controller: UIViewController, button: UIButton){
+        let alert = UIAlertController(title: "",
+                                      message: "Must fill out all the fields",
+                                      preferredStyle: .alert)
         
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
+        })
+        alert.addAction(cancel)
+        controller.present(alert, animated: true){
+            button.isEnabled = true
+        }
+    }
+    
+    static func noCompanyId(sender: UIViewController, button: UIButton){
+        let alert = UIAlertController(title: "Company Doesn't exist",
+                                      message: "The company id you entered doesn't exist",
+                                      preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
+        })
+        alert.addAction(cancel)
+        sender.present(alert, animated: true){
+            button.isEnabled = true
+        }
     }
     
     

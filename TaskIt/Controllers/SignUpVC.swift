@@ -42,24 +42,31 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func joinBtnPressed(_ sender: Any) {
-        if  usernameField?.text == "" || (emailField?.text)! == ""  || (passwordField?.text)! == "" {
-            print("Fill out all sections")
+        print("hit")
+        joinBtn.isEnabled = false
+        login()
+    }
+}
+
+//SignUp User wit CompanyID
+extension SignUpVC {
+    func login(){
+        if  usernameField?.text == "" || (emailField?.text)! == ""  || (passwordField?.text)! == "" || (companyIdField?.text)! ==  ""{
+            Alerts.fillOutFields(controller: self, button: joinBtn)
+            
             return
         }
-        AuthService.createUser(email: emailField.text!, password: passwordField.text!) { (error, user) in
-            if let error = error {
-                Alerts.simpleAlert(err: error, controller: self)
-                print("didnt work")
-                return
-            }
-            print("No error \(Auth.auth().currentUser?.email)")
-            UserService.create(user: user!, username: self.usernameField.text!, companyID: "1234", completion: { (error, user) in
-                if let error = error {
-                    Alerts.simpleAlert(err: error, controller: self)
-                    return
+        UserService.checkCompanyIds(companyID: companyIdField.text!){ (found) in
+            if found {
+                Login.signUp(email: self.emailField.text!, password: self.passwordField.text!, username: self.usernameField.text!, controller: self) {  (success) in
+                    if success {
+                        self.performSegue(withIdentifier: "toMapVC", sender: self)
+                        self.joinBtn.isEnabled = true
+                    }
                 }
-                print("made it")
-            })
+            }else{
+                Alerts.noCompanyId(sender: self, button: self.joinBtn)
+            }
         }
     }
 }
