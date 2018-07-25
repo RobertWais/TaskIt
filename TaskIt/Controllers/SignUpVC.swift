@@ -53,21 +53,14 @@ extension SignUpVC {
     func login(){
         if  usernameField?.text == "" || (emailField?.text)! == ""  || (passwordField?.text)! == "" || (companyIdField?.text)! ==  ""{
             Alerts.fillOutFields(controller: self, button: joinBtn)
-            
             return
         }
-        UserService.checkCompanyIds(companyID: companyIdField.text!){ (found) in
-            if found {
-                Login.signUp(email: self.emailField.text!, password: self.passwordField.text!, username: self.usernameField.text!, controller: self) {  (success) in
+            Login.signUp(email: self.emailField.text!, password: self.passwordField.text!, username: self.usernameField.text!,companyId: companyIdField.text!, controller: self) {  (success) in
                     if success {
                         self.performSegue(withIdentifier: "toMapVC", sender: self)
                         self.joinBtn.isEnabled = true
                     }
-                }
-            }else{
-                Alerts.noCompanyId(sender: self, button: self.joinBtn)
             }
-        }
     }
 }
 
@@ -117,6 +110,7 @@ extension SignUpVC {
         updateCompanyField()
     }
 }
+
 
 extension SignUpVC: UITextFieldDelegate {
     

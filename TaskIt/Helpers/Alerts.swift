@@ -49,5 +49,20 @@ struct Alerts{
         }
     }
     
+    static func displayKey(uniqueID: String,sender: UIViewController, finished: @escaping ()->()){
+        let alert = UIAlertController(title: "Unique ID",
+                                      message: "All employees must present this unqiue id \n \(uniqueID) \n There is no way to retrieve this id ",
+                                      preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
+        })
+        alert.addAction(cancel)
+        sender.present(alert, animated: true, completion: {
+            finished()
+        })
+    }
+    
+   
+    
     
 }

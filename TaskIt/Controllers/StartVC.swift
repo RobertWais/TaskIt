@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 class StartVC: UIViewController {
 
@@ -23,12 +25,15 @@ class StartVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setDelegate()
         updateButtonUI()
         setViewLogin()
         // Do any additional setup after loading the view.
     }
 
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -47,8 +52,13 @@ class StartVC: UIViewController {
 
     
     //MARK: Button Listeners
-    
+    let mapVC = MapVC()
     @IBAction func loginBtnPressed(_ sender: Any) {
+        signIn(){ (success) in
+            if success {
+              self.performSegue(withIdentifier: "fromStartToMap", sender: self)
+            }
+        }
     }
     @IBAction func signUpBtnPressed(_ sender: Any) {
     }
@@ -62,6 +72,27 @@ class StartVC: UIViewController {
     
 }
 
+//Login user
+extension StartVC {
+    func signIn(completion: @escaping (Bool)->()){
+        Auth.auth().signIn(withEmail: usernameField.text!, password: passwordField.text!) { (user, error) in
+            if let error = error {
+                Alerts.simpleAlert(err: error, controller: self)
+                completion(false)
+                return
+            }
+            let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
+                
+                ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                    let currUser = taskUser(snapshot: snapshot)
+                    taskUser.setCurrent(currUser!)
+                    print("current user: \(taskUser.current.username)")
+                    completion(true)
+                    return
+                })
+            }
+    }
+}
 
 //MARK: UI Elements
 extension StartVC {
@@ -113,6 +144,24 @@ extension StartVC {
         loginCredentialsView.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
         loginCredentialsView.layer.cornerRadius = 25
         updateTextFields()
+    }
+    
+}
+
+extension StartVC: UITextFieldDelegate {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func setDelegate(){
+        self.passwordField.delegate = self
+        self.usernameField.delegate = self
     }
     
 }
