@@ -10,7 +10,7 @@ import FirebaseDatabase
 
 
 class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate{
-
+    
     let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
 //    @IBOutlet weak var imageView: UIImageView!
@@ -23,7 +23,12 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate{
     var addBtn: UIButton!
     var squareButton: UIButton!
     var collapseButton: UIButton!
-
+    var confirmBtn: UIButton!
+    var revertBtn: UIButton!
+    var currentShape: TaskShape!
+    var firstBarItems = [UIBarButtonItem]()
+    var secondBarItems = [UIBarButtonItem]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,9 +47,6 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-    @objc func pressedBtn(){
-        print("yes")
-    }
 
     /*
     // MARK: - Navigation
@@ -92,6 +94,8 @@ extension MapVC {
     
     func setScrollView(){
         imageView = UIImageView(image: UIImage(named: "testimage2.jpg"))
+        imageView.isUserInteractionEnabled = true
+        imageView.isMultipleTouchEnabled = true
         scrollView = UIScrollView(frame: view.bounds)
         scrollView.backgroundColor = UIColor.white
         //Freezes bottom

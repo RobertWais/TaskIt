@@ -10,7 +10,12 @@ import UIKit
 
 
 extension MapVC {
-    
+    //UI For Buttons
+    func initialButtons(){
+        initialSet()
+        secondSet()
+        setUpAddBtn()
+    }
     
     func initialSet(){
         ////Collapse Button
@@ -30,6 +35,7 @@ extension MapVC {
         
         //Square Button
         squareButton = UIButton(type: .system)
+        squareButton.addTarget(self, action: #selector(addSquare), for: .touchUpInside)
         squareButton.backgroundColor = UIColor.black
         squareButton.setAttributedTitle(NSAttributedString(string: "☐", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,
             NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20.0)]), for: .normal)
@@ -41,7 +47,8 @@ extension MapVC {
         let squareButtonItem = UIBarButtonItem(customView: squareButton)
         squareButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
 
-        tempToolBar.setItems([squareButtonItem,spacer,spacer, collapseButtonItem], animated: true)
+        firstBarItems = [squareButtonItem,spacer,spacer, collapseButtonItem]
+        tempToolBar.setItems(firstBarItems, animated: true)
         tempToolBar.isHidden = true
         tempToolBar.alpha = 0.9
     }
@@ -59,6 +66,32 @@ extension MapVC {
         view.bringSubview(toFront: addBtn)
     }
     
+    func secondSet(){
+        ////Confirm Button
+        confirmBtn = UIButton(type: .system)
+        confirmBtn.backgroundColor = UIColor.green
+        confirmBtn.addTarget(self, action: #selector(confirmShape), for: .touchUpInside)
+        confirmBtn.setAttributedTitle(NSAttributedString(string: "Confirm", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]), for: .normal)
+        let confirmButtonItem = UIBarButtonItem(customView: confirmBtn)
+        confirmButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  50, height: tempToolBar.frame.height/2)
+        
+        
+        //RevertBtn
+        revertBtn = UIButton(type: .system)
+        revertBtn.backgroundColor = UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 1.0)
+        revertBtn.addTarget(self, action: #selector(collapseSecondToolBar), for: .touchUpInside)
+        
+        revertBtn.setAttributedTitle(NSAttributedString(string: "-", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]), for: .normal)
+        revertBtn.sizeToFit()
+        let revertButtonItem = UIBarButtonItem(customView: revertBtn)
+        revertButtonItem.customView?.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        
+        
+        secondBarItems = [revertButtonItem,spacer,spacer,confirmButtonItem]
+    }
+    
+    
+    //Functions that Buttons Call
     @objc func showToolBar(){
         tempToolBar.alpha = 0.0
         tempToolBar.isHidden = false
@@ -71,10 +104,8 @@ extension MapVC {
                 self.addBtn.isHidden = true
             }
         }
-        
-        
-        
     }
+    
     @objc func collapseBar(){
         addBtn.isHidden = false
         UIView.animate(withDuration: 0.6, animations: {
@@ -89,10 +120,46 @@ extension MapVC {
         
     }
     
-    func initialButtons(){
-        initialSet()
-        setUpAddBtn()
+    
+    //Add Square and change toolbar to second set
+    @objc func addSquare(){
+        
+        var startingY = self.collapseButton.center.y
+        
+        currentShape = TaskShape()
+        imageView.addSubview(currentShape)
+        imageView.bringSubview(toFront: currentShape)
+        UIView.animate(withDuration: 0.2, animations: {
+            self.collapseButton.center.y = self.collapseButton.center.y+100
+            self.squareButton.center.y = self.squareButton.center.y+100
+        }) { (success) in
+            print("Yes")
+            self.tempToolBar.setItems(self.secondBarItems, animated: true)
+            var pos =  self.confirmBtn.center.x
+            var pos2 = self.revertBtn.center.x
+            print("pos \(pos)")
+            self.confirmBtn.center.x = self.confirmBtn.center.x + 100
+            self.revertBtn.center.x = self.revertBtn.center.x - 100
+            UIView.animate(withDuration: 0.1, animations: {
+                self.confirmBtn.center.x = pos
+                self.revertBtn.center.x = pos2
+            })
+        }
+//        UIView.animate(withDuration: 0.6, animations: {
+//
+//        })
     }
+    
+    @objc func confirmShape(){
+        currentShape.isUserInteractionEnabled = false
+    }
+    
+    @objc func collapseSecondToolBar(){
+        UIView.animate(withDuration: 0.6, animations: {
+            self.tempToolBar.setItems(self.firstBarItems, animated: true)
+        })
+    }
+    
     
     
     
