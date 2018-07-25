@@ -60,7 +60,7 @@ extension SignUpVC {
                         self.performSegue(withIdentifier: "toMapVC", sender: self)
                         self.joinBtn.isEnabled = true
                     }
-            }
+        }
     }
 }
 
@@ -69,7 +69,7 @@ extension SignUpVC {
         for field in textFields {
            field.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
             field.layer.borderColor = UIColor.white.cgColor
-            field.layer.borderWidth = 2.0
+            field.layer.borderWidth = 5.0
             field.tintColor = UIColor.white
             field.textColor = UIColor.white
             field.layer.cornerRadius = field.frame.height/2
@@ -88,7 +88,7 @@ extension SignUpVC {
         companyIdField.tintColor = UIColor.white
         companyIdField.textColor = UIColor.white
         companyIdField.layer.borderColor = UIColor.white.cgColor
-        companyIdField.layer.borderWidth = 2
+        companyIdField.layer.borderWidth = 5.0
         
         
         let placeholder = NSAttributedString(string: companyIdField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
@@ -100,7 +100,7 @@ extension SignUpVC {
         joinBtn.layer.cornerRadius = joinBtn.frame.height/2
         joinBtn.layer.masksToBounds = true
         joinBtn.layer.borderColor = UIColor.white.cgColor
-        joinBtn.layer.borderWidth = 2.0
+        joinBtn.layer.borderWidth = 5.0
     }
     
     func updateAllUI(){

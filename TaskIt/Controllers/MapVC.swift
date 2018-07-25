@@ -18,6 +18,13 @@ class MapVC: UIViewController, UIScrollViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let btn = UIButton(frame: CGRect(x: (view.frame.width - 100), y:(view.frame.height - 100), width: 75, height: 75))
+        btn.setTitle("+",for: .normal)
+        btn.setTitleColor(UIColor.white, for: UIControlState.normal)
+        btn.layer.cornerRadius = btn.layer.frame.width/2
+        btn.layer.masksToBounds = true
+        btn.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+        btn.addTarget(self, action: #selector(pressedBtn), for: .touchUpInside)
         
 //RUN TEST - Phyliss
 //        let ref = Database.database().reference().child("company").child("234567")
@@ -41,22 +48,21 @@ class MapVC: UIViewController, UIScrollViewDelegate{
         
         
         
-        
-        
-//        Image size: (375.0, 530.357142857143)
-//        Optional(990.0) Optional(700.0)
-//        let image = UIImage(named: "testimage2.jpg")
-//        print("Image height: \(image?.size.height) \(image?.size.width)")
         imageView = UIImageView(image: UIImage(named: "testimage2.jpg"))
         print("Size \(imageView.layer.frame.height)")
         
         scrollView = UIScrollView(frame: view.bounds)
         scrollView.backgroundColor = UIColor.white
-        scrollView.contentSize = imageView.bounds.size
+        //scrollView.contentSize = imageView.bounds.size
         scrollView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
         
         scrollView.addSubview(imageView)
+        view.addSubview(btn)
         view.addSubview(scrollView)
+        view.bringSubview(toFront: btn)
+
+       
+       
         
         scrollView.delegate = self
         setZoomScale()
@@ -68,6 +74,9 @@ class MapVC: UIViewController, UIScrollViewDelegate{
         // Dispose of any resources that can be recreated.
     }
     
+    @objc func pressedBtn(){
+        print("yes")
+    }
 
     /*
     // MARK: - Navigation
@@ -96,14 +105,11 @@ class MapVC: UIViewController, UIScrollViewDelegate{
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        print("Image size: \(imageView.frame.size)")
         let imageViewSize = imageView.frame.size
         let scrollViewSize = scrollView.bounds.size
         
         let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
         let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
-        print("Vertical: \(verticalPadding)")
-        print("horizontalPadding: \(horizontalPadding)")
         
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
