@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseDatabase
 
-
+//◀︎▼▶︎
 class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate{
     
     let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -17,6 +17,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate{
 //    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var tempToolBar: UIToolbar!
+    var dPadView = DirectionalPad()
     var scrollView: UIScrollView!
     var imageView: UIImageView!
     var toolbar: UIToolbar!
@@ -25,6 +26,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate{
     var collapseButton: UIButton!
     var confirmBtn: UIButton!
     var revertBtn: UIButton!
+    var upBtn: UIButton!
     var currentShape: TaskShape!
     var firstBarItems = [UIBarButtonItem]()
     var secondBarItems = [UIBarButtonItem]()
@@ -33,10 +35,23 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate{
         super.viewDidLoad()
         
         
+        dPadView = DirectionalPad(view: self.view,toolbar:  tempToolBar)
+        dPadView.isHidden = true
         setScrollView()
         view.bringSubview(toFront: tempToolBar)
         setZoomScale()
         initialButtons()
+        view.addSubview(dPadView)
+        view.bringSubview(toFront: dPadView)
+        
+        
+        
+        
+        
+        
+        
+        
+        
         // Do any additional setup after loading the view.
     }
     

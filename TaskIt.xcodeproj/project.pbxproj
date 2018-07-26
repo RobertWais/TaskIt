@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2E1FC0402108ED8100FBFCCB /* MapVC+ToolbarButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1FC03F2108ED8100FBFCCB /* MapVC+ToolbarButtons.swift */; };
 		2E1FC0422109172700FBFCCB /* TaskShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1FC0412109172700FBFCCB /* TaskShape.swift */; };
+		2E1FC044210953FD00FBFCCB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1FC043210953FD00FBFCCB /* Constants.swift */; };
+		2E1FC04A210A3A6600FBFCCB /* DirectionalPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1FC049210A3A6600FBFCCB /* DirectionalPad.swift */; };
 		2EB539A121063C1700192FDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539A021063C1700192FDA /* AppDelegate.swift */; };
 		2EB539A621063C1700192FDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB539A421063C1700192FDA /* Main.storyboard */; };
 		2EB539A921063C1700192FDA /* TaskIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539A721063C1700192FDA /* TaskIt.xcdatamodeld */; };
@@ -31,6 +33,8 @@
 /* Begin PBXFileReference section */
 		2E1FC03F2108ED8100FBFCCB /* MapVC+ToolbarButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC+ToolbarButtons.swift"; sourceTree = "<group>"; };
 		2E1FC0412109172700FBFCCB /* TaskShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskShape.swift; sourceTree = "<group>"; };
+		2E1FC043210953FD00FBFCCB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2E1FC049210A3A6600FBFCCB /* DirectionalPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalPad.swift; sourceTree = "<group>"; };
 		2EB5399D21063C1700192FDA /* TaskIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB539A021063C1700192FDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EB539A521063C1700192FDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			children = (
 				2EB539C62106F87700192FDA /* TaskUser.swift */,
 				2E1FC0412109172700FBFCCB /* TaskShape.swift */,
+				2E1FC049210A3A6600FBFCCB /* DirectionalPad.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 		2EB539BB2106424600192FDA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2E1FC043210953FD00FBFCCB /* Constants.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -288,9 +294,11 @@
 			files = (
 				2EB539BF2106562700192FDA /* SignUpVC.swift in Sources */,
 				2EB539A921063C1700192FDA /* TaskIt.xcdatamodeld in Sources */,
+				2E1FC04A210A3A6600FBFCCB /* DirectionalPad.swift in Sources */,
 				2EB539C92106FBFF00192FDA /* Alerts.swift in Sources */,
 				2EB539CF2107B77100192FDA /* StartCompanyVC.swift in Sources */,
 				2EB539C52106F4F400192FDA /* UserService.swift in Sources */,
+				2E1FC044210953FD00FBFCCB /* Constants.swift in Sources */,
 				2EB539C12106EBED00192FDA /* AuthService.swift in Sources */,
 				2E1FC0402108ED8100FBFCCB /* MapVC+ToolbarButtons.swift in Sources */,
 				2EB539D12107CC8900192FDA /* DatabaseService.swift in Sources */,

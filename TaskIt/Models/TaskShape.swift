@@ -10,7 +10,6 @@ import UIKit
 
 class TaskShape: UIView {
     
-    
     init(){
         super.init(frame: CGRect(x: 200.0, y: 300.0, width: 100, height: 100))
         self.backgroundColor = UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 0.9)

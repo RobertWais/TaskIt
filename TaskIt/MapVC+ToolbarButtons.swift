@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//▲▼✔
 
 extension MapVC {
     //UI For Buttons
@@ -19,34 +20,18 @@ extension MapVC {
     
     func initialSet(){
         ////Collapse Button
-        collapseButton = UIButton(type: .system)
-        collapseButton.addTarget(self, action: #selector(collapseBar), for: UIControlEvents.touchUpInside)
-        collapseButton.setTitle("-", for: .normal)
-        collapseButton.backgroundColor = UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 1.0)
+        collapseButton = getToolBarButton(function: #selector(collapseBar), color: Constants.Colors.safeRed, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "-", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,
+                                                                                                                                                                                                           NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20.0)]))
         collapseButton.setTitleColor(UIColor.white, for: UIControlState.normal)
-        collapseButton.layer.borderColor = UIColor.white.cgColor
-        collapseButton.layer.borderWidth = 1.0
-        collapseButton.layer.cornerRadius = 3.0
-        collapseButton.layer.masksToBounds = true
-        collapseButton.sizeToFit()
         let collapseButtonItem = UIBarButtonItem(customView: collapseButton)
         collapseButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
         
         
         //Square Button
-        squareButton = UIButton(type: .system)
-        squareButton.addTarget(self, action: #selector(addSquare), for: .touchUpInside)
-        squareButton.backgroundColor = UIColor.black
-        squareButton.setAttributedTitle(NSAttributedString(string: "☐", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,
-            NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20.0)]), for: .normal)
-        squareButton.layer.borderColor = UIColor.white.cgColor
-        squareButton.layer.borderWidth = 1.0
-        squareButton.layer.cornerRadius = 3.0
-        squareButton.layer.masksToBounds = true
-        squareButton.sizeToFit()
+        squareButton = getToolBarButton(function: #selector(addSquare), color: UIColor.black, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "☐", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,
+                                                                                                                                                                                              NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20.0)]))
         let squareButtonItem = UIBarButtonItem(customView: squareButton)
         squareButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
-
         firstBarItems = [squareButtonItem,spacer,spacer, collapseButtonItem]
         tempToolBar.setItems(firstBarItems, animated: true)
         tempToolBar.isHidden = true
@@ -67,27 +52,43 @@ extension MapVC {
     }
     
     func secondSet(){
+        
+        let downBtn = getToolBarButton(function: #selector(extendUp), color: Constants.Colors.baseColor, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "▼", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,
+                                                                                                                                                                                                         NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20.0)]))
+        
+        let downBtnItem = UIBarButtonItem(customView: downBtn)
+        downBtnItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/4, height: tempToolBar.frame.height/2)
+        upBtn = getToolBarButton(function: #selector(extendUp), color: Constants.Colors.baseColor, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "▲", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,
+                                                                                                                                                                                                           NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20.0)]))
+        let upBtnItem = UIBarButtonItem(customView: upBtn)
+        upBtnItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/4, height: tempToolBar.frame.height/2)
         ////Confirm Button
-        confirmBtn = UIButton(type: .system)
-        confirmBtn.backgroundColor = UIColor.green
-        confirmBtn.addTarget(self, action: #selector(confirmShape), for: .touchUpInside)
-        confirmBtn.setAttributedTitle(NSAttributedString(string: "Confirm", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]), for: .normal)
+        confirmBtn = getToolBarButton(function: #selector(confirmShape), color: Constants.Colors.baseColor, cRadius: tempToolBar.frame.height/4,attrString: NSAttributedString(string: "✓", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white ,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]))
+        
         let confirmButtonItem = UIBarButtonItem(customView: confirmBtn)
-        confirmButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  50, height: tempToolBar.frame.height/2)
+        confirmButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
         
         
         //RevertBtn
-        revertBtn = UIButton(type: .system)
-        revertBtn.backgroundColor = UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 1.0)
-        revertBtn.addTarget(self, action: #selector(collapseSecondToolBar), for: .touchUpInside)
+        revertBtn = getToolBarButton(function: #selector(collapseSecondToolBar), color: Constants.Colors.safeRed, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "-", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]))
         
-        revertBtn.setAttributedTitle(NSAttributedString(string: "-", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]), for: .normal)
-        revertBtn.sizeToFit()
         let revertButtonItem = UIBarButtonItem(customView: revertBtn)
-        revertButtonItem.customView?.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        revertButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
+        secondBarItems = [revertButtonItem,spacer,upBtnItem,spacer,downBtnItem,spacer,confirmButtonItem]
         
         
-        secondBarItems = [revertButtonItem,spacer,spacer,confirmButtonItem]
+        
+        ///SET Functions
+        
+        dPadView.upBtn.addTarget(self, action: #selector(extendUp), for: .touchUpInside)
+        dPadView.downBtn.addTarget(self, action: #selector(extendDown), for: .touchUpInside)
+        dPadView.leftBtn.addTarget(self, action: #selector(extendLeft), for: .touchUpInside)
+        dPadView.rightBtn.addTarget(self, action: #selector(extendRight), for: .touchUpInside)
+        
+        dPadView.invertUpBtn.addTarget(self, action: #selector(invertUp), for: .touchUpInside)
+        dPadView.invertDownBtn.addTarget(self, action: #selector(invertDown), for: .touchUpInside)
+        dPadView.invertLeftBtn.addTarget(self, action: #selector(invertLeft), for: .touchUpInside)
+        dPadView.invertRightBtn.addTarget(self, action: #selector(invertRight), for: .touchUpInside)
     }
     
     
@@ -120,47 +121,101 @@ extension MapVC {
         
     }
     
-    
     //Add Square and change toolbar to second set
     @objc func addSquare(){
-        
         var startingY = self.collapseButton.center.y
-        
         currentShape = TaskShape()
         imageView.addSubview(currentShape)
         imageView.bringSubview(toFront: currentShape)
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.collapseButton.center.y = self.collapseButton.center.y+100
             self.squareButton.center.y = self.squareButton.center.y+100
         }) { (success) in
-            print("Yes")
             self.tempToolBar.setItems(self.secondBarItems, animated: true)
-            var pos =  self.confirmBtn.center.x
-            var pos2 = self.revertBtn.center.x
-            print("pos \(pos)")
+            var confirmPos =  self.confirmBtn.center.x
+            var revertPos = self.revertBtn.center.x
             self.confirmBtn.center.x = self.confirmBtn.center.x + 100
             self.revertBtn.center.x = self.revertBtn.center.x - 100
-            UIView.animate(withDuration: 0.1, animations: {
-                self.confirmBtn.center.x = pos
-                self.revertBtn.center.x = pos2
+            UIView.animate(withDuration: 0.3, animations: {
+                self.confirmBtn.center.x = confirmPos
+                self.revertBtn.center.x = revertPos
+                self.dPadView.isHidden = false
             })
         }
-//        UIView.animate(withDuration: 0.6, animations: {
-//
-//        })
     }
     
     @objc func confirmShape(){
         currentShape.isUserInteractionEnabled = false
+        collapseEditBar()
     }
     
+    @objc func extendRight(){
+        currentShape.frame =  CGRect(x: currentShape.frame.minX, y: currentShape.frame.minY, width: currentShape.frame.width+2, height: currentShape.frame.height)
+    }
+    @objc func extendUp(){
+        
+        currentShape.frame =  CGRect(x: currentShape.frame.minX, y: currentShape.frame.minY-2, width: currentShape.frame.width, height: currentShape.frame.height+2)
+//        currentShape.transform = (currentShape?.transform.scaledBy(x: 1.0, y: 1.1))!
+    }
+    @objc func extendDown(){
+        
+        currentShape.frame =  CGRect(x: currentShape.frame.minX, y: currentShape.frame.minY, width: currentShape.frame.width, height: currentShape.frame.height+2)
+    }
+    @objc func extendLeft(){
+        currentShape.frame =  CGRect(x: currentShape.frame.minX-2, y: currentShape.frame.minY, width: currentShape.frame.width+2, height: currentShape.frame.height)
+    }
+    
+    @objc func invertRight(){
+        currentShape.frame =  CGRect(x: currentShape.frame.minX, y: currentShape.frame.minY, width: currentShape.frame.width-2, height: currentShape.frame.height)
+    }
+    @objc func invertUp(){
+        
+        currentShape.frame =  CGRect(x: currentShape.frame.minX, y: currentShape.frame.minY+2, width: currentShape.frame.width, height: currentShape.frame.height-2)
+        //        currentShape.transform = (currentShape?.transform.scaledBy(x: 1.0, y: 1.1))!
+    }
+    @objc func invertDown(){
+        
+        currentShape.frame =  CGRect(x: currentShape.frame.minX, y: currentShape.frame.minY, width: currentShape.frame.width, height: currentShape.frame.height-2)
+    }
+    @objc func invertLeft(){
+        currentShape.frame =  CGRect(x: currentShape.frame.minX+2, y: currentShape.frame.minY, width: currentShape.frame.width-2, height: currentShape.frame.height)
+    }
+    
+    //Collapse toolbar and if currentShape is already confirmed, dont move it
+    //Will change later
     @objc func collapseSecondToolBar(){
-        UIView.animate(withDuration: 0.6, animations: {
-            self.tempToolBar.setItems(self.firstBarItems, animated: true)
-        })
+        collapseEditBar()
     }
     
+    private func getToolBarButton(function: Selector,color: UIColor, cRadius: CGFloat, attrString: NSAttributedString ) -> UIButton{
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: function, for: .touchUpInside)
+        button.backgroundColor = color
+        button.layer.cornerRadius = cRadius
+        button.sizeToFit()
+        button.setAttributedTitle(attrString, for: .normal)
+        return button
+    }
     
-    
-    
+    func collapseEditBar(){
+        if currentShape.isUserInteractionEnabled == true {
+            currentShape.removeFromSuperview()
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+            self.confirmBtn.center.y = self.confirmBtn.center.y+100
+            self.revertBtn.center.y = self.revertBtn.center.y+100
+            self.dPadView.isHidden = true
+        }) { (success) in
+            print("Yes")
+            self.tempToolBar.setItems(self.firstBarItems, animated: true)
+            var collapsePos =  self.collapseButton.center.x
+            var squarePos = self.squareButton.center.x
+            self.collapseButton.center.x = self.collapseButton.center.x + 100
+            self.squareButton.center.x = self.squareButton.center.x - 100
+            UIView.animate(withDuration: 0.3, animations: {
+                self.collapseButton.center.x = collapsePos
+                self.squareButton.center.x = squarePos
+            })
+        }
+    }
 }
