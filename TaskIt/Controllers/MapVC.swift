@@ -8,8 +8,11 @@
 import UIKit
 import FirebaseDatabase
 
-//◀︎▼▶︎
-class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate{
+protocol confirmDelegate: class {
+    func didConfirm(bool: Bool)
+}
+
+class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmDelegate{
     
     let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
@@ -17,6 +20,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate{
 //    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var tempToolBar: UIToolbar!
+    
     var dPadView = DirectionalPad()
     var scrollView: UIScrollView!
     var imageView: UIImageView!
@@ -33,7 +37,6 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         dPadView = DirectionalPad(view: self.view,toolbar:  tempToolBar)
         dPadView.isHidden = true

@@ -53,12 +53,12 @@ extension MapVC {
     
     func secondSet(){
         
-        let downBtn = getToolBarButton(function: #selector(extendUp), color: Constants.Colors.baseColor, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "▼", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,
+        let downBtn = getToolBarButton(function: #selector(scaleSmaller), color: Constants.Colors.baseColor, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "▼", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,
                                                                                                                                                                                                          NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20.0)]))
         
         let downBtnItem = UIBarButtonItem(customView: downBtn)
         downBtnItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/4, height: tempToolBar.frame.height/2)
-        upBtn = getToolBarButton(function: #selector(extendUp), color: Constants.Colors.baseColor, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "▲", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,
+        upBtn = getToolBarButton(function: #selector(scaleLarger), color: Constants.Colors.baseColor, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "▲", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,
                                                                                                                                                                                                            NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20.0)]))
         let upBtnItem = UIBarButtonItem(customView: upBtn)
         upBtnItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/4, height: tempToolBar.frame.height/2)
@@ -144,20 +144,90 @@ extension MapVC {
         }
     }
     
+    @objc func scaleLarger(){
+         currentShape.transform = (currentShape.transform.scaledBy(x: 1.1, y: 1.1))
+    }
+    
+    @objc func scaleSmaller(){
+        currentShape.transform = (currentShape.transform.scaledBy(x: 0.9, y: 0.9))
+
+    }
+    
+    
+    //MARK: RETURN CALLS
+    
     @objc func confirmShape(){
-        currentShape.isUserInteractionEnabled = false
-        collapseEditBar()
+        let modalVC = storyboard?.instantiateViewController(withIdentifier: "ConfirmationVC") as! ConfirmationVC
+        modalVC.delegate = self
+        modalVC.modalPresentationStyle = .overCurrentContext
+        present(modalVC, animated: true, completion: nil)
+    }
+    
+    func didConfirm(bool: Bool){
+        if bool {
+            print("true")
+            currentShape.isUserInteractionEnabled = false
+            imageView.addSubview(currentShape)
+            //Change when reading from firebase
+            collapseEditBar()
+            
+        }else{
+            currentShape.isUserInteractionEnabled = true
+        }
+    }
+    
+    @IBAction func unwindWithSegue(_ segue: UIStoryboardSegue){
+        print("returning")
+        
     }
     
     @objc func extendRight(){
         currentShape.frame =  CGRect(x: currentShape.frame.minX, y: currentShape.frame.minY, width: currentShape.frame.width+2, height: currentShape.frame.height)
     }
+    
+    
+    
+    
+    
     @objc func extendUp(){
         
-        currentShape.frame =  CGRect(x: currentShape.frame.minX, y: currentShape.frame.minY-2, width: currentShape.frame.width, height: currentShape.frame.height+2)
+        //Save this
+//        currentShape.setAnchorPoint(CGPoint(x: 0.5, y: 1))
+//        currentShape.center.y += currentShape.bounds.height / 2
+//        currentShape.transform = currentShape.transform.scaledBy(x: 1, y: 1.1)
+//        print("Current shape: \(currentShape.bounds.minX) \(currentShape.bounds.maxX)")
+//        currentShape.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+//
+//        return
+        //CHANGE
+        
+        currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width, height: currentShape.bounds.height+2)
+        print("Current bounds: \(currentShape.bounds)")
+//        print("Full frame: \(currentShape.frame)")
+//        print("Frame: \(currentShape.frame.minX) \(currentShape.frame.minY) \(currentShape.frame.width) \(currentShape.frame.height)")
+//        print("Bounds: \(currentShape.bounds)")
+//        currentShape.frame = CGRect(x: initialX, y: initialY, width: self.currentShape.frame.width, height: self.currentShape.frame.height)
+//        print("Result frame: \(currentShape.frame)")
 //        currentShape.transform = (currentShape?.transform.scaledBy(x: 1.0, y: 1.1))!
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @objc func extendDown(){
+        
+        currentShape.setAnchorPoint(CGPoint(x: 0.5, y: 0))
+//        currentShape.center.y -= currentShape.bounds.height / 2
+        currentShape.transform = currentShape.transform.scaledBy(x: 1, y: 1.1)
+        
+        return
         
         currentShape.frame =  CGRect(x: currentShape.frame.minX, y: currentShape.frame.minY, width: currentShape.frame.width, height: currentShape.frame.height+2)
     }
@@ -219,3 +289,158 @@ extension MapVC {
         }
     }
 }
+
+
+
+extension UIView {
+    func setAnchorPoint(_ point: CGPoint) {
+        var newPoint = CGPoint(x: bounds.size.width * point.x, y: bounds.size.height * point.y)
+        var oldPoint = CGPoint(x: bounds.size.width * layer.anchorPoint.x, y: bounds.size.height * layer.anchorPoint.y);
+        
+        newPoint = newPoint.applying(transform)
+        oldPoint = oldPoint.applying(transform)
+        
+        var position = layer.position
+        
+        position.x -= oldPoint.x
+        position.x += newPoint.x
+        
+        position.y -= oldPoint.y
+        position.y += newPoint.y
+        
+        layer.position = position
+        layer.anchorPoint = point
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//#import "ViewController.h"
+//
+//@interface ViewController (){
+//    CGFloat tx; // x translation
+//    CGFloat ty; // y translation
+//    CGFloat scale; // zoom scale
+//    CGFloat theta; // rotation angle
+//    CGFloat initScale ;
+//    CGFloat initTheta ;
+//}
+//@end
+//
+//@implementation ViewController
+//
+//- (void)viewDidLoad
+//{
+//    [super viewDidLoad];
+//    // Do any additional setup after loading the view, typically from a nib.
+//    UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
+//    [rotationGesture setDelegate:self];
+//    [self.view addGestureRecognizer:rotationGesture];
+//    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+//    [pinchGesture setDelegate:self];
+//    [self.view addGestureRecognizer:pinchGesture];
+//    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+//    [panGesture setDelegate:self];
+//    [panGesture setMinimumNumberOfTouches:1];
+//    [panGesture setMaximumNumberOfTouches:1];
+//    [self.view addGestureRecognizer:panGesture];
+//    _baseImage.transform = CGAffineTransformIdentity;
+//    tx = 0.0f; ty = 0.0f; scale = 1.0f; theta = 0.0f;
+//    scale = 1.0;
+//    //removing and adding back to the view seems to fix problems with anchor point I was having, I suspect because of IB layout/scaling and constraints etc
+//    UIView *mySuperView =_baseImage.superview;
+//    [_baseImage removeFromSuperview];
+//    [mySuperView addSubview:_baseImage];
+//}
+//-(void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)myview
+//{
+//    CGPoint oldOrigin = myview.frame.origin;
+//    myview.layer.anchorPoint = anchorPoint;
+//    CGPoint newOrigin = myview.frame.origin;
+//    CGPoint transition;
+//    transition.x = (newOrigin.x - oldOrigin.x);
+//    transition.y = (newOrigin.y - oldOrigin.y);
+//    CGPoint myNewCenter = CGPointMake (myview.center.x - transition.x, myview.center.y - transition.y);
+//    myview.center =  myNewCenter;
+//    }
+//    - (void) updateTransformWithOffset: (CGPoint) translation
+//{
+//    // Create a blended transform representing translation,
+//    // rotation, and scaling
+//    _baseImage.transform = CGAffineTransformMakeTranslation(translation.x + tx, translation.y + ty);
+//    _baseImage.transform = CGAffineTransformRotate(_baseImage.transform, theta);
+//    _baseImage.transform = CGAffineTransformScale(_baseImage.transform, scale, scale);
+//    }
+//    - (void)adjustAnchorPointForGestureRecognizer:(UIGestureRecognizer *)uigr {
+//        if (uigr.state == UIGestureRecognizerStateBegan) {
+//            tx =_baseImage.transform.tx;
+//            ty =_baseImage.transform.ty;
+//            CGPoint locationInView = [uigr locationInView:_baseImage];
+//            CGPoint newAnchor = CGPointMake( (locationInView.x / _baseImage.bounds.size.width), (locationInView.y / _baseImage.bounds.size.height ));
+//            [self setAnchorPoint:newAnchor forView:_baseImage];
+//        }
+//        }
+//        - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+//            // if the gesture recognizers are on different views, don't allow simultaneous recognition
+//            if (gestureRecognizer.view != otherGestureRecognizer.view)
+//            return NO;
+//
+//            if (![gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]] && ![otherGestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+//                return YES;
+//            }
+//            return NO;
+//            }
+//            - (void) handleRotation: (UIRotationGestureRecognizer *) uigr
+//{
+//    if (uigr.state == UIGestureRecognizerStateBegan) {
+//        initTheta = theta;
+//    }
+//    theta = initTheta+uigr.rotation;
+//    [self adjustAnchorPointForGestureRecognizer:uigr];
+//    [self updateTransformWithOffset:CGPointZero];
+//    }
+//    - (void) handlePinch: (UIPinchGestureRecognizer *) uigr
+//{
+//    if (uigr.state == UIGestureRecognizerStateBegan) {
+//        initScale = scale;
+//    }
+//    scale = initScale*uigr.scale;
+//    [self adjustAnchorPointForGestureRecognizer:uigr];
+//    [self updateTransformWithOffset:CGPointZero];
+//
+//    }
+//    - (void) handlePan: (UIPanGestureRecognizer *) uigr
+//{
+//    CGPoint translation = [uigr translationInView:_baseImage.superview];
+//    [self adjustAnchorPointForGestureRecognizer:uigr];
+//    [self updateTransformWithOffset:translation];
+//    }
+//    - (void)didReceiveMemoryWarning
+//        {
+//            [super didReceiveMemoryWarning];
+//            // Dispose of any resources that can be recreated.
+//}

@@ -9,11 +9,15 @@ import Foundation
 import UIKit
 
 class TaskShape: UIView {
-    
+    var rotated = 0
     init(){
         super.init(frame: CGRect(x: 200.0, y: 300.0, width: 100, height: 100))
         self.backgroundColor = UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 0.9)
         self.initGestures()
+        self.isUserInteractionEnabled = true
+//        setTranslatesAutoresizingMaskIntoConstraints:YES
+        
+        
     }
     
     
@@ -24,12 +28,25 @@ class TaskShape: UIView {
     func initGestures(){
         let panGesture = UIPanGestureRecognizer(target: self, action:#selector(didPan(recognizer:)))
         self.addGestureRecognizer(panGesture)
+        
         let tapGesture = UITapGestureRecognizer(target: self, action:#selector(didTap(recognizer:)))
         self.addGestureRecognizer(tapGesture)
         
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(didPinch(recognizer:)))
         self.addGestureRecognizer(pinchGesture)
+        
+        let rotationGR = UIRotationGestureRecognizer(target: self, action:#selector(didRotate(recognizer:)))
+        addGestureRecognizer(rotationGR)
     }
+    
+    @objc func didRotate(recognizer: UIRotationGestureRecognizer){
+        rotated = 1
+        
+        print("recognizer rotation: \(recognizer.rotation)")
+        self.transform = self.transform.rotated(by: recognizer.rotation)
+        recognizer.rotation = 0.0
+    }
+    
     
     @objc func didPan(recognizer: UIPanGestureRecognizer){
         self.superview!.bringSubview(toFront: self)
@@ -46,6 +63,9 @@ class TaskShape: UIView {
     }
     
     @objc func didTap(recognizer: UITapGestureRecognizer){
+        self.translatesAutoresizingMaskIntoConstraints = true
+        let transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        self.transform = transform
         print("Tapped")
     }
 }
