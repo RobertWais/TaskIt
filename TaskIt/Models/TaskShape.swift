@@ -64,7 +64,7 @@ class TaskShape: UIView {
     
     @objc func didTap(recognizer: UITapGestureRecognizer){
         self.translatesAutoresizingMaskIntoConstraints = true
-        let transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        let transform = CGAffineTransform(rotationAngle: 2*CGFloat.pi/3)
         self.transform = transform
         print("Tapped")
     }

@@ -193,16 +193,28 @@ extension MapVC {
         
         //Save this
 //        currentShape.setAnchorPoint(CGPoint(x: 0.5, y: 1))
-//        currentShape.center.y += currentShape.bounds.height / 2
+// ***       currentShape.center.y += currentShape.bounds.height / 2
 //        currentShape.transform = currentShape.transform.scaledBy(x: 1, y: 1.1)
-//        print("Current shape: \(currentShape.bounds.minX) \(currentShape.bounds.maxX)")
 //        currentShape.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+//        currentShape.setNeedsDisplay()
+//        view.reloadInputViews()
+        
+//        print("Current shape: \(currentShape.bounds.minX) \(currentShape.bounds.maxX)")
+
 //
 //        return
         //CHANGE
         
         currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width, height: currentShape.bounds.height+2)
-        print("Current bounds: \(currentShape.bounds)")
+        
+        let radians = atan2f(currentShape.transform.b, currentShape.transform.a);
+        var xValue = -sin(2*CGFloat.pi/3)
+        var yValue =  cos(2*CGFloat.pi/3)
+        print("X value: \(xValue)")
+        print("Y value: \(yValue)")
+        currentShape.center = CGPoint(x: currentShape.center.x-xValue, y: currentShape.center.y-yValue )
+        print("Center: \(currentShape.center)")
+//        print("Current bounds: \(currentShape.bounds)")
 //        print("Full frame: \(currentShape.frame)")
 //        print("Frame: \(currentShape.frame.minX) \(currentShape.frame.minY) \(currentShape.frame.width) \(currentShape.frame.height)")
 //        print("Bounds: \(currentShape.bounds)")
