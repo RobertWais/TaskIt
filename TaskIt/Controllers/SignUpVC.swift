@@ -11,6 +11,7 @@ import FirebaseAuth.FIRUser
 
 class SignUpVC: UIViewController, UIScrollViewDelegate {
 
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mainStackView: UIStackView!
     
@@ -32,6 +33,7 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
         registerForKeyboardNotifications()
         
         scrollView.delegate = self
+        activityView.hidesWhenStopped = true
         
         // Do any additional setup after loading the view.
     }
@@ -51,16 +53,24 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
 //SignUp User wit CompanyID
 extension SignUpVC {
     func login(){
+        activityView.startAnimating()
+        activityView.isHidden = false
         if  usernameField?.text == "" || (emailField?.text)! == ""  || (passwordField?.text)! == "" || (companyIdField?.text)! ==  ""{
             Alerts.fillOutFields(controller: self, button: joinBtn)
+            self.joinBtn.isEnabled = true
             return
         }
             Login.signUp(email: self.emailField.text!, password: self.passwordField.text!, username: self.usernameField.text!,companyId: companyIdField.text!, controller: self) {  (success) in
+                print("Success: \(success)")
                     if success {
                         self.performSegue(withIdentifier: "toMapVC", sender: self)
                         self.joinBtn.isEnabled = true
                     }
+                self.joinBtn.isEnabled = true
+                self.activityView.stopAnimating()
+                
         }
+        
     }
 }
 

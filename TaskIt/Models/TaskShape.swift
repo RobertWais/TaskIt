@@ -40,9 +40,6 @@ class TaskShape: UIView {
     }
     
     @objc func didRotate(recognizer: UIRotationGestureRecognizer){
-        rotated = 1
-        
-        print("recognizer rotation: \(recognizer.rotation)")
         self.transform = self.transform.rotated(by: recognizer.rotation)
         recognizer.rotation = 0.0
     }
@@ -59,13 +56,16 @@ class TaskShape: UIView {
     
     @objc func didPinch(recognizer: UIPinchGestureRecognizer){
         self.transform = self.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
-        recognizer.scale = 1
+//        print("Transform: \(self.transform)")
+//        print("Recognizer scale: \(recognizer.scale)")
+        recognizer.scale = 1.0
+//        print("Transform: \(self.transform)")
     }
     
     @objc func didTap(recognizer: UITapGestureRecognizer){
-        self.translatesAutoresizingMaskIntoConstraints = true
-        let transform = CGAffineTransform(rotationAngle: 2*CGFloat.pi/3)
-        self.transform = transform
-        print("Tapped")
+//        self.translatesAutoresizingMaskIntoConstraints = true
+//        let transform = CGAffineTransform(rotationAngle: 2*CGFloat.pi/3)
+//        self.transform = transform
+//        print("Tapped")
     }
 }

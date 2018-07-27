@@ -28,15 +28,13 @@ struct DatabaseService {
             if let error = error {
                 Alerts.simpleAlert(err: error, controller: sender)
                 completion(false)
-            }
-            print("Ref: \(ref.key)")
-            ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value
-                Alerts.displayKey(uniqueID: "\(snapshot.key)", sender: sender, finished: {
+            }else{
+                Alerts.displayKey(uniqueID: "\(ref.key)", sender: sender, finished: {
                     completion(true)
                     print("Closed")
                 })
-            })
+            }
+           
         }
     }
     

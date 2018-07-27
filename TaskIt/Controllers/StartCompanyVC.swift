@@ -9,11 +9,10 @@ import UIKit
 
 class StartCompanyVC: UIViewController {
 
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var createCompanyBtn: UIButton!
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet weak var addImageBtn: UIButton!
-    @IBOutlet weak var uniqueKeyLbl: UILabel!
-    @IBOutlet weak var getUniqueKeyBtn: UIButton!
     @IBOutlet weak var companyNameField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +25,7 @@ class StartCompanyVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func uniqueKeyBtn(_ sender: Any) {
-        
-    }
-    
-    @IBAction func addImagePressed(_ sender: Any){
-        
-    }
-    
+
     @IBAction func createCompanyPressed(_ sender: Any) {
         createCompanyBtn.isEnabled = false
         
@@ -50,19 +41,7 @@ class StartCompanyVC: UIViewController {
             }
             self.createCompanyBtn.isEnabled = true
         }
-        
-        
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 //UPDATE UI
@@ -98,15 +77,11 @@ extension StartCompanyVC {
         
     }
     
-    func updateLbl(){
-        uniqueKeyLbl.textColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
-    }
     
     func updateAll(){
         updateMainButtons()
         updateCreateBtn()
         updateField()
-        updateLbl()
     }
 }
 
@@ -122,5 +97,29 @@ extension StartCompanyVC: UITextFieldDelegate {
         return true
     }
 
+}
+
+extension StartCompanyVC: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        dismiss(animated: true, completion: nil)
+         let shownImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        if shownImage != nil {
+            print("happeings")
+            imageView.image = shownImage
+        }
+        
+    }
+    
+    
+    @IBAction func addImagePressed(_ sender: Any){
+//        print("aha")
+//        let imagePicker = UIImagePickerController()
+//        imagePicker.delegate = self
+//        imagePicker.allowsEditing = false
+//        imagePicker.sourceType = .photoLibrary
+//        self.present(imagePicker, animated: true)
+    }
+    
 }
 

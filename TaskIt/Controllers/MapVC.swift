@@ -30,7 +30,9 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
     var collapseButton: UIButton!
     var confirmBtn: UIButton!
     var revertBtn: UIButton!
-    var upBtn: UIButton!
+    var slider: UISlider!
+    var buttonScaleUp: UIButton!
+    var buttonScaleDown: UIButton!
     var currentShape: TaskShape!
     var firstBarItems = [UIBarButtonItem]()
     var secondBarItems = [UIBarButtonItem]()
