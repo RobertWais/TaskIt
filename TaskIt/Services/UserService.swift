@@ -13,7 +13,7 @@ struct UserService {
     
     
     //Create the user in the database
-    static func create(user: User, username: String, companyID: String,completion: @escaping (Error?,taskUser?)->()){
+    static func create(user: User, username: String, companyID: String,completion: @escaping (Error?,TaskUser?)->()){
         
         let userAttribute = ["username" : username,
                              "companyId" : companyID]
@@ -25,7 +25,7 @@ struct UserService {
             }
             
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                let user = taskUser(snapshot: snapshot)
+                let user = TaskUser(snapshot: snapshot)
                 completion(nil,user)
             })
         }

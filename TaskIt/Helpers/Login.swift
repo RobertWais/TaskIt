@@ -26,7 +26,7 @@ struct Login {
                     completion(false)
                     return
                 }
-                taskUser.setCurrent(user!)
+                TaskUser.setCurrent(user!)
                 completion(true)
             })
         }

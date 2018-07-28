@@ -19,16 +19,16 @@ import Foundation
 import Foundation
 import FirebaseDatabase.FIRDataSnapshot
 
-class taskUser: Codable {
+class TaskUser: Codable {
     
-    private static var _currUser: taskUser?
+    private static var _currUser: TaskUser?
     
     let uid: String
     let username: String
     let companyID: String
     
     
-    static var current: taskUser {
+    static var current: TaskUser {
         guard let currentUser = _currUser else {
             //Re route user to login screen **
             fatalError("No currecurrentUser")
@@ -36,7 +36,7 @@ class taskUser: Codable {
         return currentUser
     }
     
-    static func setCurrent(_ user: taskUser){
+    static func setCurrent(_ user: TaskUser){
         _currUser = user
     }
     

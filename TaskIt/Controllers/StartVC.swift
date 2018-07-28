@@ -84,9 +84,9 @@ extension StartVC {
             let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
                 
                 ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                    let currUser = taskUser(snapshot: snapshot)
-                    taskUser.setCurrent(currUser!)
-                    print("current user: \(taskUser.current.username)")
+                    let currUser = TaskUser(snapshot: snapshot)
+                    TaskUser.setCurrent(currUser!)
+                    print("current user: \(TaskUser.current.username)")
                     completion(true)
                     return
                 })
