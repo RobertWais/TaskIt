@@ -113,6 +113,7 @@ extension MapVC {
     @objc func confirmShape(){
         let modalVC = storyboard?.instantiateViewController(withIdentifier: "ConfirmationVC") as! ConfirmationVC
         modalVC.delegate = self
+        modalVC.currentShape = currentShape
         modalVC.modalPresentationStyle = .overCurrentContext
         present(modalVC, animated: true, completion: nil)
     }

@@ -37,6 +37,9 @@ class TaskUser: Codable {
     }
     
     static func setCurrent(_ user: TaskUser){
+        if let data = try? JSONEncoder().encode(user){
+            UserDefaults.standard.set(data,forKey: "currentUser")
+        }
         _currUser = user
     }
     

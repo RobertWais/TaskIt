@@ -50,6 +50,15 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
         view.bringSubview(toFront: dPadView)
         
         
+        DatabaseService.retrieveTasks(){  (Tasks) in
+            print("Count: \(Tasks.count)")
+            for task in Tasks{
+                DispatchQueue.main.async {
+                    self.imageView.addSubview(task.shape)
+                    self.imageView.bringSubview(toFront: task.shape)
+                }
+            }
+        }
         
         
         
@@ -113,6 +122,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
 extension MapVC {
     
     func setScrollView(){
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
         imageView = UIImageView(image: UIImage(named: "testimage2.jpg"))
         imageView.isUserInteractionEnabled = true
         imageView.isMultipleTouchEnabled = true
