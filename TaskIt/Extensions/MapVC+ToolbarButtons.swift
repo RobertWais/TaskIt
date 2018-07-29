@@ -151,7 +151,8 @@ extension MapVC {
         currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width, height: currentShape.bounds.height+CGFloat(slider.value))
         let radians:CGFloat = atan2((currentShape.transform.b), (currentShape.transform.a))
         let tuple = getRadians(code: 0, radians: radians)
-        currentShape.center = CGPoint(x: currentShape.center.x-tuple.0, y: currentShape.center.y-tuple.1 )
+        currentShape.curTranslation = (currentShape.center.x-tuple.0,currentShape.center.y-tuple.1)
+//        currentShape.center = CGPoint(x: , y:  )
     }
     
     
