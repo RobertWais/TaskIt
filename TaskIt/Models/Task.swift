@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 import FirebaseDatabase.FIRDataSnapshot
 
-struct Task {
+class Task{
+    
     private var _shape: TaskShape?
     private var _title = ""
     private var _description = ""
@@ -34,7 +35,7 @@ struct Task {
     }
     
     var key: String{
-        return key
+        return _key
     }
     
     var title: String {
@@ -106,5 +107,6 @@ struct Task {
         self._shape?.center.y = positionY
         self._shape?.transform = CGAffineTransform(rotationAngle: angle)
         self._shape?.backgroundColor = UIColor(red: colorR, green: colorG, blue: colorB, alpha: alpha)
+        self._key = snapshot.key
     }
 }

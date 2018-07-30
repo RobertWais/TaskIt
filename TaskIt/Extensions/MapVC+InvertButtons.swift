@@ -122,10 +122,19 @@ extension MapVC {
         
         return (returnTuple.0*(CGFloat(slider.value)/2),returnTuple.1*(CGFloat(slider.value)/2))
     }
+    @objc func freezeZoom(){
+        if freeze == 0{
+            scrollView.isScrollEnabled = false
+            freeze = 1
+            return
+        }
+        scrollView.isScrollEnabled = true
+        freeze = 0
+    }
     
     func setUpDisplayButtons(){
         buttonScaleUp = getToolBarButton(function: #selector(scaleUp), color: UIColor.black, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "+", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]))
-        
+        buttonScaleUp.addTarget(self, action: #selector(freezeZoom), for: .touchUpInside)
          buttonScaleDown =  getToolBarButton(function: #selector(scaleDown), color: UIColor.black, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "-", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]))
         
     }

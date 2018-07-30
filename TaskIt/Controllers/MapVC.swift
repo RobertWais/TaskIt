@@ -21,6 +21,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
     
     @IBOutlet weak var tempToolBar: UIToolbar!
     
+    var freeze = 0
     var dPadView = DirectionalPad()
     var scrollView: UIScrollView!
     var imageView: UIImageView!
@@ -39,10 +40,11 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         dPadView = DirectionalPad(view: self.view,toolbar:  tempToolBar)
         dPadView.isHidden = true
         setScrollView()
+        scrollView.isScrollEnabled = false
+
         view.bringSubview(toFront: tempToolBar)
         setZoomScale()
         initialButtons()
@@ -50,14 +52,32 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
         view.bringSubview(toFront: dPadView)
         
         
-        DatabaseService.retrieveTasks(){  (Tasks) in
-            print("Count: \(Tasks.count)")
-            for task in Tasks{
+        DatabaseService.retrieveTasks(){  (Task,num) in
+            guard let task = Task else{
+                return
+            }
+            switch num {
+            case 0:
                 DispatchQueue.main.async {
                     self.imageView.addSubview(task.shape)
                     self.imageView.bringSubview(toFront: task.shape)
                 }
+            case 1:
+                DispatchQueue.main.async {
+                    let removeTask = Constants.Data.liveTasks.removeValue(forKey: task.key)
+                    removeTask?.shape.removeFromSuperview()
+                    
+                    
+                }
+            case 3:
+                print("Updating")
+            //updated
+            default:
+                print("Eror")
+                //Error
             }
+            
+            
         }
         
         
@@ -93,11 +113,11 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
     
     func setZoomScale() {
         let zoomScale = min(self.view.bounds.size.width / (self.imageView.image?.size.width)!, self.view.bounds.size.height / (self.imageView.image?.size.height)!);
-        
+
         if (zoomScale > 1) {
             self.scrollView.minimumZoomScale = 1;
         }
-        
+
         self.scrollView.minimumZoomScale = zoomScale;
         self.scrollView.zoomScale = zoomScale;
         self.scrollView.maximumZoomScale = 5.0
@@ -106,10 +126,10 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         let imageViewSize = imageView.frame.size
         let scrollViewSize = scrollView.bounds.size
-        
+
         let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
         let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
-        
+
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

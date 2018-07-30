@@ -80,18 +80,34 @@ struct DatabaseService {
     }
     
     
-    static func retrieveTasks(completion: @escaping ([Task])->()){
+    static func retrieveTasks(completion: @escaping (Task?,Int)->()){
         let ref = companyRef.child("currentTasks")
-        var returnTasks = [Task]()
         
-        ref.observe(DataEventType.value) { (data) in
-            for child in data.children {
-                if let task = Task(snapshot: child as! DataSnapshot){
+        //Watches all eventrypes
+        ref.observe(DataEventType.childAdded) { (data) in
+                print("Adding ")
+                if let task = Task(snapshot: data){
                     task.shape.disableInteraction()
-                    returnTasks.append(task)
-                }
+                    Constants.Data.liveTasks[task.key] = task
+                    completion(task,0)
+                }else{
+                    completion(nil,0)
             }
-            completion(returnTasks)
+        }
+        
+        ref.observe(DataEventType.childRemoved) { (data) in
+            print("Child removed")
+            if let task = Task(snapshot: data){
+                completion(task,1)
+            }else{
+                completion(nil,0)
+            }
+            
+        }
+        
+        ref.observe(DataEventType.childChanged) { (data) in
+            print("Child changed")
+            completion(nil,2)
         }
     }
     
