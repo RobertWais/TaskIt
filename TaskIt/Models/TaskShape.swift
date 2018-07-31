@@ -9,13 +9,23 @@ import UIKit
 
 class TaskShape: UIView {
     var rotated = 0
-    
+    var key: String?
+    var type = 0
     //Default Creation
-    init(){
-        super.init(frame: CGRect(x: 200.0, y: 300.0, width: 100, height: 100))
+    init(shape: Int){
+        if shape == 2{
+            super.init(frame: CGRect(x: 200.0, y: 300.0, width: 100, height: 50))
+
+        }else{
+            super.init(frame: CGRect(x: 200.0, y: 300.0, width: 100, height: 100))
+        }
         self.backgroundColor = UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 0.9)
         self.initGestures()
         self.isUserInteractionEnabled = true
+        self.type = shape
+        if shape == 0 {
+            self.layer.cornerRadius = self.frame.height/2
+        }
     }
     
     //Read from Firebase
@@ -24,11 +34,17 @@ class TaskShape: UIView {
     }
     
     func disableInteraction(){
-        self.isUserInteractionEnabled = false
+        for gesture in gestureRecognizers! {
+            self.removeGestureRecognizer(gesture)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateCornerRadius(){
+        self.layer.cornerRadius = self.frame.height/2
     }
     
     func initGestures(){
@@ -47,7 +63,6 @@ class TaskShape: UIView {
     
     @objc func didRotate(recognizer: UIRotationGestureRecognizer){
         self.transform = self.transform.rotated(by: recognizer.rotation)
-        let rotation = recognizer.rotation
         recognizer.rotation = 0.0
     }
     
@@ -62,13 +77,14 @@ class TaskShape: UIView {
     }
     
     @objc func didPinch(recognizer: UIPinchGestureRecognizer){
-//        self.transform = self.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
-        
         self.bounds = CGRect(x: 0, y: 0, width: self.bounds.width*recognizer.scale, height: self.bounds.height*recognizer.scale)
-        print("Recognizer sca;e: \(recognizer.scale)")
         recognizer.scale = 1.0
+        if type == 0 {
+            updateCornerRadius()
+        }
     }
     
     @objc func didTap(recognizer: UITapGestureRecognizer){
     }
+    
 }

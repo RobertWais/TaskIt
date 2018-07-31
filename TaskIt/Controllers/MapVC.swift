@@ -8,42 +8,46 @@
 import UIKit
 import FirebaseDatabase
 
-protocol confirmDelegate: class {
+protocol ConfirmDelegate: class {
     func didConfirm(bool: Bool)
 }
 
-class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmDelegate{
+protocol CompletedDelegate: class {
+    func didComplete()
+}
+
+class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmDelegate{
     
     let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-
-//    @IBOutlet weak var imageView: UIImageView!
-//    @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var tempToolBar: UIToolbar!
     
     var freeze = 0
+    var freezeView: UIView!
     var dPadView = DirectionalPad()
     var scrollView: UIScrollView!
     var imageView: UIImageView!
     var toolbar: UIToolbar!
     var addBtn: UIButton!
     var squareButton: UIButton!
+    var circleButton: UIButton!
+    var rectangleButton: UIButton!
     var collapseButton: UIButton!
     var confirmBtn: UIButton!
     var revertBtn: UIButton!
     var slider: UISlider!
-    var buttonScaleUp: UIButton!
-    var buttonScaleDown: UIButton!
+    var freezeBtn: UIButton!
     var currentShape: TaskShape!
     var firstBarItems = [UIBarButtonItem]()
     var secondBarItems = [UIBarButtonItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         dPadView = DirectionalPad(view: self.view,toolbar:  tempToolBar)
         dPadView.isHidden = true
         setScrollView()
-        scrollView.isScrollEnabled = false
 
         view.bringSubview(toFront: tempToolBar)
         setZoomScale()
@@ -56,6 +60,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
             guard let task = Task else{
                 return
             }
+            task.delegate = self
             switch num {
             case 0:
                 DispatchQueue.main.async {
@@ -66,8 +71,6 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
                 DispatchQueue.main.async {
                     let removeTask = Constants.Data.liveTasks.removeValue(forKey: task.key)
                     removeTask?.shape.removeFromSuperview()
-                    
-                    
                 }
             case 3:
                 print("Updating")
@@ -76,17 +79,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
                 print("Eror")
                 //Error
             }
-            
-            
         }
-        
-        
-        
-        
-        
-        
-        
-        // Do any additional setup after loading the view.
     }
     
     
@@ -95,18 +88,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     override func viewWillLayoutSubviews() {
         setZoomScale()
     }
@@ -130,6 +112,8 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, confirmD
         let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
         let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
 
+        print("vertical padding: \(verticalPadding)")
+        print("horizontal paddin: \(horizontalPadding)")
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

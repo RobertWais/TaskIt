@@ -15,7 +15,7 @@ class ConfirmationVC: UIViewController {
     @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
     
-    weak var delegate: confirmDelegate?
+    weak var delegate: ConfirmDelegate?
     weak var currentShape: TaskShape?
     
     @IBOutlet weak var mainView: UIView!
@@ -25,9 +25,10 @@ class ConfirmationVC: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        mainView.backgroundColor = Constants.Colors.baseColor
         mainView.layer.cornerRadius = 8.0
         mainView.layer.masksToBounds = true
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

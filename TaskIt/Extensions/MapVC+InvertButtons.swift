@@ -21,15 +21,15 @@ extension MapVC {
         let sliderBtnItem = UIBarButtonItem(customView: slider)
         
         ////Confirm Button
-        confirmBtn = getToolBarButton(function: #selector(confirmShape), color: Constants.Colors.baseColor, cRadius: tempToolBar.frame.height/4,attrString: NSAttributedString(string: "✓", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white ,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]))
-        
+        confirmBtn = TaskButton(color: Constants.Colors.baseColor, cRadius: tempToolBar.frame.height/4, symbol: "✓")
+        confirmBtn.addTarget(self, action: #selector(confirmShape), for: .touchUpInside)
         let confirmButtonItem = UIBarButtonItem(customView: confirmBtn)
         confirmButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
         
         
         //RevertBtn
-        revertBtn = getToolBarButton(function: #selector(collapseSecondToolBar), color: Constants.Colors.safeRed, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "-", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]))
-        
+        revertBtn = TaskButton(color: Constants.Colors.safeRed, cRadius: tempToolBar.frame.height/4, symbol: "-")
+        revertBtn.addTarget(self, action: #selector(collapseSecondToolBar), for: .touchUpInside)
         let revertButtonItem = UIBarButtonItem(customView: revertBtn)
         revertButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
         
@@ -37,13 +37,11 @@ extension MapVC {
         
         
         //PLUS Minus/Button
-            let scaleDownButtonItem = UIBarButtonItem(customView: buttonScaleDown)
-            let scaleUpButtonItem = UIBarButtonItem(customView: buttonScaleUp)
-        scaleDownButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
-        scaleUpButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
+            let freezeButtonItem = UIBarButtonItem(customView: freezeBtn)
+        freezeButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
         
         //Set ToolBar
-           secondBarItems = [revertButtonItem,spacer,sliderBtnItem,spacer,scaleUpButtonItem,spacer,scaleDownButtonItem,spacer,confirmButtonItem]
+           secondBarItems = [revertButtonItem,spacer,sliderBtnItem,spacer,freezeButtonItem,spacer,confirmButtonItem]
         
         ///SET Functions
         
@@ -57,9 +55,6 @@ extension MapVC {
         dPadView.invertLeftBtn.addTarget(self, action: #selector(invertLeft), for: .touchUpInside)
         dPadView.invertRightBtn.addTarget(self, action: #selector(invertRight), for: .touchUpInside)
     }
-    
-    
-    
     
     
     //Inverted Button Actions
@@ -90,14 +85,6 @@ extension MapVC {
         currentShape.center = CGPoint(x: currentShape.center.x-tuple.1, y: currentShape.center.y-tuple.0 )
     }
     
-    @objc func scaleUp(){
-        
-    }
-    
-    @objc func scaleDown(){
-        
-    }
-    
     //Slider Actions
     @objc func draggedSlider(){
         print("Value: \(slider.value)")
@@ -122,23 +109,26 @@ extension MapVC {
         
         return (returnTuple.0*(CGFloat(slider.value)/2),returnTuple.1*(CGFloat(slider.value)/2))
     }
-    @objc func freezeZoom(){
+    @objc func freezeScoll(){
         if freeze == 0{
+            freezeView = UIView(frame: CGRect(x: 0, y: 0, width: imageView.bounds.width, height: imageView.bounds.height))
+            freezeView.backgroundColor = Constants.Colors.freezeBlueLight
+            
+            imageView.addSubview(freezeView)
+            imageView.sendSubview(toBack: freezeView)
             scrollView.isScrollEnabled = false
             freeze = 1
             return
         }
         scrollView.isScrollEnabled = true
+        freezeView.removeFromSuperview()
         freeze = 0
     }
     
     func setUpDisplayButtons(){
-        buttonScaleUp = getToolBarButton(function: #selector(scaleUp), color: UIColor.black, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "+", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]))
-        buttonScaleUp.addTarget(self, action: #selector(freezeZoom), for: .touchUpInside)
-         buttonScaleDown =  getToolBarButton(function: #selector(scaleDown), color: UIColor.black, cRadius: tempToolBar.frame.height/4, attrString: NSAttributedString(string: "-", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20.0)]))
-        
+        freezeBtn = TaskButton(color: Constants.Colors.freezeBlue, cRadius: tempToolBar.frame.height/4, symbol: "❆")
+        freezeBtn.addTarget(self, action: #selector(freezeScoll), for: .touchUpInside)        
     }
-    
 }
 
 

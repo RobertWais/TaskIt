@@ -9,7 +9,13 @@ import Foundation
 import UIKit
 import FirebaseDatabase.FIRDataSnapshot
 
+protocol ShapeDelegate: class {
+    func didTapShape(_ key: String)
+}
+
+
 class Task{
+    weak var delegate: ShapeDelegate?
     
     private var _shape: TaskShape?
     private var _title = ""
@@ -68,6 +74,7 @@ class Task{
                          "height" : shape.bounds.height,
                          "positionX" : shape.center.x,
                          "positionY" : shape.center.y,
+                         "type" : shape.type,
                          "angle" : radians,
                          "alpha" : a]
 //        let userDict = ["uid" : poster.uid,
@@ -92,6 +99,7 @@ class Task{
             let height = shapeLayout["height"] as? CGFloat,
             let positionX = shapeLayout["positionX"] as? CGFloat,
             let positionY = shapeLayout["positionY"] as? CGFloat,
+            let type = shapeLayout["type"] as? Int,
             let angle = shapeLayout["angle"] as? CGFloat,
             let alpha = shapeLayout["alpha"] as? CGFloat
             else {return nil}
@@ -101,12 +109,24 @@ class Task{
         self._description = description
         self._userPosted = userPosted
         self._completed = completed
-        self._shape = TaskShape()
+        self._shape = TaskShape(shape: type)
         self._shape?.bounds = CGRect(x: 0, y: 0, width: width, height: height)
         self._shape?.center.x = positionX
         self._shape?.center.y = positionY
         self._shape?.transform = CGAffineTransform(rotationAngle: angle)
         self._shape?.backgroundColor = UIColor(red: colorR, green: colorG, blue: colorB, alpha: alpha)
         self._key = snapshot.key
+    }
+    
+    func addTapGesture(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showDetails(recognizer:)))
+        self.shape.addGestureRecognizer(tapGesture)
+    }
+//    let modalVC = storyboard?.instantiateViewController(withIdentifier: "ConfirmationVC") as! ConfirmationVC
+//    modalVC.delegate = self
+//    modalVC.currentShape = currentShape
+//    modalVC.modalPresentationStyle = .overCurrentContext
+    @objc func showDetails(recognizer: UITapGestureRecognizer){
+        self.delegate?.didTapShape(self.key)
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseDatabase
 
-
+//△▭○
 struct DatabaseService {
     
     private static let mainRef = Database.database().reference()
@@ -74,27 +74,25 @@ struct DatabaseService {
                 return
             }
             completion(nil)
-        }
-
-        
-    }
+        }    }
     
+    func fun(){
+        print("yes")
+    }
     
     static func retrieveTasks(completion: @escaping (Task?,Int)->()){
         let ref = companyRef.child("currentTasks")
-        
-        //Watches all eventrypes
         ref.observe(DataEventType.childAdded) { (data) in
                 print("Adding ")
                 if let task = Task(snapshot: data){
                     task.shape.disableInteraction()
+                    task.addTapGesture()
                     Constants.Data.liveTasks[task.key] = task
                     completion(task,0)
                 }else{
                     completion(nil,0)
             }
         }
-        
         ref.observe(DataEventType.childRemoved) { (data) in
             print("Child removed")
             if let task = Task(snapshot: data){
@@ -104,17 +102,35 @@ struct DatabaseService {
             }
             
         }
-        
         ref.observe(DataEventType.childChanged) { (data) in
             print("Child changed")
             completion(nil,2)
         }
     }
     
+    static func deleteTask(key: String,sender: UIViewController,completion: @escaping (Bool)->()){
+        
+        let alertController = UIAlertController(title: "Confirmation", message: "Are you sure you have completed the whole task?", preferredStyle: UIAlertControllerStyle.alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) -> Void in
+            completion(false)
+        })
+        
+        let confirmAction =  UIAlertAction(title: "Confirm", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+            let ref = companyRef.child("currentTasks").child(key)
+            ref.removeValue { (error, ref) in
+                if let err = error {
+                    Alerts.simpleAlert(err: err, controller: sender)
+                    completion(false)
+                }
+                completion(true)
+            }
+        })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        sender.present(alertController, animated: true)
+    }
 }
-
-
-
 //    Database.database().reference().child("company").child(TaskUser.current.companyID)
 //    // Generate a reference to a new location and add some data using push()
 //    var newPostRef = postsRef.push({
