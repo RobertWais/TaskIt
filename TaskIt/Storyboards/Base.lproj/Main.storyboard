@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BI9-G3-Akr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BI9-G3-Akr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -199,9 +199,11 @@
                         <outlet property="createCompanyBtn" destination="PoC-Fz-N5e" id="L4w-m0-h5b"/>
                         <outlet property="imageView" destination="CIz-vb-TQF" id="pYW-iq-81k"/>
                         <outletCollection property="buttons" destination="fH0-NO-ae3" collectionClass="NSMutableArray" id="X3Z-E2-IU3"/>
+                        <segue destination="xD3-mX-Ydb" kind="unwind" identifier="unwindToStartVC" unwindAction="unwindWithSegue:" id="jXL-ao-jRl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R1V-lr-p3Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="xD3-mX-Ydb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1173.5999999999999" y="-604.04797601199402"/>
         </scene>
@@ -213,14 +215,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="A7n-0f-bcV">
-                                <rect key="frame" x="167" y="527" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="ET1-eL-WSa"/>
-                                    <constraint firstAttribute="height" constant="40" id="rk4-dv-UKo"/>
-                                </constraints>
-                            </activityIndicatorView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgr-b4-5Jj">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
@@ -302,13 +296,10 @@
                             <constraint firstItem="fgr-b4-5Jj" firstAttribute="leading" secondItem="7jM-Jz-Wbt" secondAttribute="leading" id="kbD-SJ-FRX"/>
                             <constraint firstItem="HAK-JH-1nL" firstAttribute="width" secondItem="7jM-Jz-Wbt" secondAttribute="width" id="ngj-fr-9WW"/>
                             <constraint firstItem="HAK-JH-1nL" firstAttribute="height" secondItem="7jM-Jz-Wbt" secondAttribute="height" constant="-40" id="pK2-MF-aPJ"/>
-                            <constraint firstItem="7jM-Jz-Wbt" firstAttribute="bottom" secondItem="A7n-0f-bcV" secondAttribute="bottom" constant="100" id="pYd-m2-ao9"/>
-                            <constraint firstItem="A7n-0f-bcV" firstAttribute="centerX" secondItem="7jM-Jz-Wbt" secondAttribute="centerX" id="yOq-Gl-GNf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7jM-Jz-Wbt"/>
                     </view>
                     <connections>
-                        <outlet property="activityView" destination="A7n-0f-bcV" id="bRu-9v-Ljz"/>
                         <outlet property="companyIdField" destination="sCu-0T-pw7" id="cMc-jx-BxA"/>
                         <outlet property="emailField" destination="TmD-0i-4TW" id="6Pw-Tm-8pN"/>
                         <outlet property="joinBtn" destination="hd2-IX-bVC" id="rsG-JN-yQE"/>
@@ -330,7 +321,6 @@
         <!--Navigation Controller-->
         <scene sceneID="TfU-AI-fRi">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eEe-Vs-wSB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BI9-G3-Akr" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ffy-yV-xW6">
@@ -342,6 +332,7 @@
                         <segue destination="HsZ-aK-7Ue" kind="relationship" relationship="rootViewController" id="2aN-fP-ajU"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eEe-Vs-wSB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-338" y="123"/>
         </scene>

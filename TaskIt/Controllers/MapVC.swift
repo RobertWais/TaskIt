@@ -39,51 +39,65 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
     var currentShape: TaskShape!
     var firstBarItems = [UIBarButtonItem]()
     var secondBarItems = [UIBarButtonItem]()
+    var baseImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        dPadView = DirectionalPad(view: self.view,toolbar:  tempToolBar)
-        dPadView.isHidden = true
-        setScrollView()
-
-        view.bringSubview(toFront: tempToolBar)
-        setZoomScale()
-        initialButtons()
-        view.addSubview(dPadView)
-        view.bringSubview(toFront: dPadView)
-        
-        
-        DatabaseService.retrieveTasks(){  (Task,num) in
-            guard let task = Task else{
-                return
-            }
-            task.delegate = self
-            switch num {
-            case 0:
-                DispatchQueue.main.async {
-                    self.imageView.addSubview(task.shape)
-                    self.imageView.bringSubview(toFront: task.shape)
+        let wheel = LoadWheel(view: self.view)
+        StorageService.getImage { (image) in
+            wheel.stopAnimating()
+            if image == nil {
+                print("Image nil")
+            }else{
+                self.baseImage = image
+                print("Image is there")
+                self.dPadView = DirectionalPad(view: self.view,toolbar:  self.tempToolBar)
+                self.dPadView.isHidden = true
+                self.setScrollView()
+                
+                self.view.bringSubview(toFront: self.tempToolBar)
+                self.setZoomScale()
+                self.initialButtons()
+                self.view.addSubview(self.dPadView)
+                self.view.bringSubview(toFront: self.dPadView)
+                
+                
+                DatabaseService.retrieveTasks(){  (Task,num) in
+                    guard let task = Task else{
+                        return
+                    }
+                    task.delegate = self
+                    switch num {
+                    case 0:
+                        DispatchQueue.main.async {
+                            self.imageView.addSubview(task.shape)
+                            self.imageView.bringSubview(toFront: task.shape)
+                        }
+                    case 1:
+                        DispatchQueue.main.async {
+                            let removeTask = Constants.Data.liveTasks.removeValue(forKey: task.key)
+                            removeTask?.shape.removeFromSuperview()
+                        }
+                    case 3:
+                        print("Updating")
+                    //updated
+                    default:
+                        print("Eror")
+                        //Error
+                    }
                 }
-            case 1:
-                DispatchQueue.main.async {
-                    let removeTask = Constants.Data.liveTasks.removeValue(forKey: task.key)
-                    removeTask?.shape.removeFromSuperview()
-                }
-            case 3:
-                print("Updating")
-            //updated
-            default:
-                print("Eror")
-                //Error
             }
         }
     }
+        
     
+    @IBAction func signOutBtnPressed(_ sender: Any) {
+        print("sign out")
+        Login.signOut()
+        self.performSegue(withIdentifier: "unwindToStartVCFromMap", sender: self)
+    }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -94,15 +108,17 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
     }
     
     func setZoomScale() {
-        let zoomScale = min(self.view.bounds.size.width / (self.imageView.image?.size.width)!, self.view.bounds.size.height / (self.imageView.image?.size.height)!);
-
-        if (zoomScale > 1) {
-            self.scrollView.minimumZoomScale = 1;
+        if self.imageView != nil {
+            let zoomScale = min(self.view.bounds.size.width / (self.imageView.image?.size.width)!, self.view.bounds.size.height / (self.imageView.image?.size.height)!);
+            
+            if (zoomScale > 1) {
+                self.scrollView.minimumZoomScale = 1;
+            }
+            
+            self.scrollView.minimumZoomScale = zoomScale;
+            self.scrollView.zoomScale = zoomScale;
+            self.scrollView.maximumZoomScale = 5.0
         }
-
-        self.scrollView.minimumZoomScale = zoomScale;
-        self.scrollView.zoomScale = zoomScale;
-        self.scrollView.maximumZoomScale = 5.0
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
@@ -112,8 +128,6 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
         let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
         let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
 
-        print("vertical padding: \(verticalPadding)")
-        print("horizontal paddin: \(horizontalPadding)")
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -127,7 +141,7 @@ extension MapVC {
     
     func setScrollView(){
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
-        imageView = UIImageView(image: UIImage(named: "testimage2.jpg"))
+        imageView = UIImageView(image: baseImage!)
         imageView.isUserInteractionEnabled = true
         imageView.isMultipleTouchEnabled = true
         scrollView = UIScrollView(frame: view.bounds)

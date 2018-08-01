@@ -11,7 +11,6 @@ import FirebaseAuth.FIRUser
 
 class SignUpVC: UIViewController, UIScrollViewDelegate {
 
-    @IBOutlet weak var activityView: UIActivityIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mainStackView: UIStackView!
     
@@ -33,7 +32,6 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
         registerForKeyboardNotifications()
         
         scrollView.delegate = self
-        activityView.hidesWhenStopped = true
         
         // Do any additional setup after loading the view.
     }
@@ -53,8 +51,7 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
 //SignUp User wit CompanyID
 extension SignUpVC {
     func login(){
-        activityView.startAnimating()
-        activityView.isHidden = false
+        let loading = LoadWheel(view: self.view)
         if  usernameField?.text == "" || (emailField?.text)! == ""  || (passwordField?.text)! == "" || (companyIdField?.text)! ==  ""{
             Alerts.fillOutFields(controller: self, button: joinBtn)
             self.joinBtn.isEnabled = true
@@ -67,10 +64,8 @@ extension SignUpVC {
                         self.joinBtn.isEnabled = true
                     }
                 self.joinBtn.isEnabled = true
-                self.activityView.stopAnimating()
-                
+                loading.stopAnimating()
         }
-        
     }
 }
 
@@ -163,7 +158,7 @@ extension SignUpVC {
     
     
     @objc func keyBoardWillHide(notification: NSNotification){
-        var contentInsets = UIEdgeInsets.zero
+        let contentInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
     }

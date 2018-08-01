@@ -105,6 +105,8 @@ class DirectionalPad: UIView {
     @objc func invert(){
         var currentShown = [UIButton]()
         current == 0 ? (currentShown = regularBtns) : (currentShown = invertBtns)
+        
+        
         currentShown.map {$0.isHidden=true}
         var addBtns = [UIButton]()
         addBtns = allSections[(current+1)%2]

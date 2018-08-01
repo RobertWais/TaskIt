@@ -21,7 +21,7 @@ class TaskDetailsVC: UIViewController {
         super.viewDidLoad()
         
         let task = Constants.Data.liveTasks[key!]
-        print("task title: \(task?.title)")
+        print("task title: \(String(describing: task?.title))")
         titleLbl.text = task?.title
         textView.text = task?.description
         baseView.layer.cornerRadius = 10.0

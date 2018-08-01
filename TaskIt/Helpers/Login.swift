@@ -32,5 +32,14 @@ struct Login {
         }
     }
     
+    static func signOut(){
+        do{
+           try Auth.auth().signOut()
+
+        }catch let error{
+            print("Error: \(error)")
+        }
+    }
+    
     
 }

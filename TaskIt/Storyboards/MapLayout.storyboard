@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SfR-nC-cMx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SfR-nC-cMx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,15 +38,21 @@
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="3BQ-au-6Ow">
                         <barButtonItem key="leftBarButtonItem" id="TXn-HD-td7"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="hDM-7Y-yta"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="hDM-7Y-yta">
+                            <connections>
+                                <action selector="signOutBtnPressed:" destination="4Sd-Li-8NF" id="SGi-lN-FQW"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tempToolBar" destination="9cL-bb-FvH" id="czj-vy-oXh"/>
                         <segue destination="l9f-1P-9t7" kind="presentation" identifier="presentConfirmation" modalPresentationStyle="overCurrentContext" id="y1Y-IW-WGZ"/>
                         <segue destination="bnZ-Hs-lcy" kind="presentation" identifier="presentDetails" id="SHc-tB-9jv"/>
+                        <segue destination="afn-0u-sdf" kind="unwind" identifier="unwindToStartVCFromMap" unwindAction="unwindWithSegue:" id="D9j-PV-fWc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CRl-Jy-9N0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="afn-0u-sdf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1368.8" y="908.9955022488756"/>
         </scene>

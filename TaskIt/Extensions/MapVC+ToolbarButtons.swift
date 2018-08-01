@@ -65,7 +65,6 @@ extension MapVC {
         view.bringSubview(toFront: addBtn)
     }
     
-    
     //MARK: Functions on Toolbars
     @objc func showToolBar(){
         tempToolBar.alpha = 0.0
@@ -118,7 +117,7 @@ extension MapVC {
     
     //Functions for adding shapes
     @objc func addShape(sender: UIButton){
-        var num = sender.tag
+        let num = sender.tag
         currentShape = TaskShape(shape: num)
         imageView.addSubview(currentShape)
         imageView.bringSubview(toFront: currentShape)
@@ -186,8 +185,6 @@ extension MapVC {
         button.setAttributedTitle(attrString, for: .normal)
         return button
     }
-    
-   
     
     @IBAction func unwindWithSegue(_ segue: UIStoryboardSegue){
     }

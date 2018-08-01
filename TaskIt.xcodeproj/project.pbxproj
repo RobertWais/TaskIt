@@ -14,6 +14,7 @@
 		2E1FC04C210A9BD100FBFCCB /* ConfirmationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1FC04B210A9BD100FBFCCB /* ConfirmationVC.swift */; };
 		2E1FC04F210B887700FBFCCB /* MapVC+InvertButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1FC04E210B887700FBFCCB /* MapVC+InvertButtons.swift */; };
 		2E1FC059210BBB5300FBFCCB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1FC058210BBB5300FBFCCB /* Task.swift */; };
+		2E3634BA21116AB700E42BA7 /* LoadWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3634B921116AB700E42BA7 /* LoadWheel.swift */; };
 		2E6BD8F1210D8A3A001E4A76 /* MapLayout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E6BD8F0210D8A3A001E4A76 /* MapLayout.storyboard */; };
 		2EB539A121063C1700192FDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539A021063C1700192FDA /* AppDelegate.swift */; };
 		2EB539A621063C1700192FDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB539A421063C1700192FDA /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 		2ED164E5210FAF0F008B7513 /* MapVC+TaskShapeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED164E4210FAF0F008B7513 /* MapVC+TaskShapeDelegate.swift */; };
 		2ED164E721100C44008B7513 /* ButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED164E621100C44008B7513 /* ButtonItem.swift */; };
 		2ED164E921101B74008B7513 /* TaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED164E821101B74008B7513 /* TaskButton.swift */; };
+		2EFBB5612110BC20006C097D /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFBB5602110BC20006C097D /* StorageService.swift */; };
 		409A9A22C347DD4CBAD1CE6F /* Pods_TaskIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C320EA302352420BF8CF0C7 /* Pods_TaskIt.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +48,8 @@
 		2E1FC04B210A9BD100FBFCCB /* ConfirmationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationVC.swift; sourceTree = "<group>"; };
 		2E1FC04E210B887700FBFCCB /* MapVC+InvertButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC+InvertButtons.swift"; sourceTree = "<group>"; };
 		2E1FC058210BBB5300FBFCCB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		2E3634B921116AB700E42BA7 /* LoadWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadWheel.swift; sourceTree = "<group>"; };
+		2E3634BB2111807A00E42BA7 /* TaskIt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaskIt.entitlements; sourceTree = "<group>"; };
 		2E6BD8F0210D8A3A001E4A76 /* MapLayout.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapLayout.storyboard; sourceTree = "<group>"; };
 		2EB5399D21063C1700192FDA /* TaskIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB539A021063C1700192FDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 		2ED164E4210FAF0F008B7513 /* MapVC+TaskShapeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC+TaskShapeDelegate.swift"; sourceTree = "<group>"; };
 		2ED164E621100C44008B7513 /* ButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonItem.swift; sourceTree = "<group>"; };
 		2ED164E821101B74008B7513 /* TaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskButton.swift; sourceTree = "<group>"; };
+		2EFBB5602110BC20006C097D /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		528CF6BC0CF32CC4F47A8F51 /* Pods-TaskIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaskIt/Pods-TaskIt.release.xcconfig"; sourceTree = "<group>"; };
 		6C320EA302352420BF8CF0C7 /* Pods_TaskIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8996872739D1DDD925576CD /* Pods-TaskIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaskIt/Pods-TaskIt.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +131,7 @@
 		2EB5399F21063C1700192FDA /* TaskIt */ = {
 			isa = PBXGroup;
 			children = (
+				2E3634BB2111807A00E42BA7 /* TaskIt.entitlements */,
 				2E1FC05B210D71DC00FBFCCB /* Storyboards */,
 				2E1FC04D210B882700FBFCCB /* Extensions */,
 				2EB539BB2106424600192FDA /* Supporting Files */,
@@ -165,6 +171,7 @@
 				2E1FC058210BBB5300FBFCCB /* Task.swift */,
 				2ED164E621100C44008B7513 /* ButtonItem.swift */,
 				2ED164E821101B74008B7513 /* TaskButton.swift */,
+				2E3634B921116AB700E42BA7 /* LoadWheel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,6 +182,7 @@
 				2EB539C02106EBED00192FDA /* AuthService.swift */,
 				2EB539C42106F4F400192FDA /* UserService.swift */,
 				2EB539D02107CC8900192FDA /* DatabaseService.swift */,
+				2EFBB5602110BC20006C097D /* StorageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -247,6 +255,14 @@
 					2EB5399C21063C1700192FDA = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -311,6 +327,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TaskIt/Pods-TaskIt-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -318,6 +335,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -346,6 +364,7 @@
 				2E1FC04C210A9BD100FBFCCB /* ConfirmationVC.swift in Sources */,
 				2E1FC0402108ED8100FBFCCB /* MapVC+ToolbarButtons.swift in Sources */,
 				2EB539D12107CC8900192FDA /* DatabaseService.swift in Sources */,
+				2EFBB5612110BC20006C097D /* StorageService.swift in Sources */,
 				2EB539CD21079CB500192FDA /* MapVC.swift in Sources */,
 				2ED164E5210FAF0F008B7513 /* MapVC+TaskShapeDelegate.swift in Sources */,
 				2EB539C72106F87700192FDA /* TaskUser.swift in Sources */,
@@ -353,6 +372,7 @@
 				2EB539A121063C1700192FDA /* AppDelegate.swift in Sources */,
 				2E1FC04F210B887700FBFCCB /* MapVC+InvertButtons.swift in Sources */,
 				2ED164E921101B74008B7513 /* TaskButton.swift in Sources */,
+				2E3634BA21116AB700E42BA7 /* LoadWheel.swift in Sources */,
 				2E1FC0422109172700FBFCCB /* TaskShape.swift in Sources */,
 				2ED164E721100C44008B7513 /* ButtonItem.swift in Sources */,
 				2EB539BD2106439600192FDA /* StartVC.swift in Sources */,
@@ -493,6 +513,7 @@
 			baseConfigurationReference = B8996872739D1DDD925576CD /* Pods-TaskIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TaskIt/TaskIt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6V78FR972C;
 				INFOPLIST_FILE = TaskIt/Info.plist;
@@ -509,6 +530,7 @@
 			baseConfigurationReference = 528CF6BC0CF32CC4F47A8F51 /* Pods-TaskIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TaskIt/TaskIt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6V78FR972C;
 				INFOPLIST_FILE = TaskIt/Info.plist;

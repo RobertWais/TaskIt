@@ -22,9 +22,6 @@ class ConfirmationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         enableBtns()
-
-        // Do any additional setup after loading the view.
-        
         mainView.layer.cornerRadius = 8.0
         mainView.layer.masksToBounds = true
         
@@ -67,17 +64,6 @@ class ConfirmationVC: UIViewController {
         confirmBtn.isUserInteractionEnabled = true
         cancelBtn.isUserInteractionEnabled = true
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension ConfirmationVC: UITextFieldDelegate {

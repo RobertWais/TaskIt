@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class StartCompanyVC: UIViewController {
 
@@ -27,22 +28,62 @@ class StartCompanyVC: UIViewController {
     }
 
     @IBAction func createCompanyPressed(_ sender: Any) {
-        createCompanyBtn.isEnabled = false
+        darkenView()
+        let wheel = LoadWheel(view: view)
         
-        //Add company ID
         if companyNameField.text! == "" {
             Alerts.fillOutFields(controller: self, button: createCompanyBtn)
             return
         }
-        DatabaseService.createCompany(uniqueId: "1234", name: companyNameField.text!, sender: self){ (success) in
-            if success{
-                print("Success")
-                //SEGUE
+        DatabaseService.createCompany(name: companyNameField.text!, sender: self){ (key) in
+            defer {
+                self.createCompanyBtn.isEnabled = true
+                wheel.stopAnimating()
             }
-            self.createCompanyBtn.isEnabled = true
+            guard let key = key else {
+                self.createCompanyBtn.isEnabled = true
+                return
+            }
+            let imageRef = Storage.storage().reference().child("companyImages/\(key).jpg")
+            StorageService.uploadImage(self.imageView.image!, reference: imageRef) { (url) in
+                guard let url = url else {
+                    return
+                }
+                DatabaseService.setCompanyURL(id: key, url: String(describing: url), completion: { (error) in
+                    if let error = error{
+                        Alerts.simpleAlert(err: error, controller: sender as! UIViewController)
+                    }else{
+                        wheel.stopAnimating()
+                        Alerts.displayKey(uniqueID: "\(key)", sender: self, finished: {
+                            self.performSegue(withIdentifier: "unwindToStartVC", sender: self)
+                        })
+                    }
+                })
+            }
         }
     }
+    
+    
+    func darkenView(){
+        let darkView = UIView(frame: self.view.bounds)
+        self.view.addSubview(darkView)
+        darkView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+    }
+    
+    func removeView(){
+        let darkenView = self.view.subviews[self.view.subviews.count-1]
+        UIView.animate(withDuration: 0.3, animations: {
+            darkenView.alpha = 0.0
+        }) { (success) in
+            darkenView.removeFromSuperview()
+        }
+        UIView.animate(withDuration: 1.0) {
+        }
+    }
+    
 }
+
+
 
 //UPDATE UI
 extension StartCompanyVC {
@@ -105,20 +146,18 @@ extension StartCompanyVC: UIImagePickerControllerDelegate,UINavigationController
         dismiss(animated: true, completion: nil)
          let shownImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         if shownImage != nil {
-            print("happeings")
             imageView.image = shownImage
+            
         }
-        
     }
     
     
     @IBAction func addImagePressed(_ sender: Any){
-//        print("aha")
-//        let imagePicker = UIImagePickerController()
-//        imagePicker.delegate = self
-//        imagePicker.allowsEditing = false
-//        imagePicker.sourceType = .photoLibrary
-//        self.present(imagePicker, animated: true)
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        self.present(imagePicker, animated: true)
     }
     
 }
