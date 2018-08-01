@@ -14,15 +14,18 @@ struct Login {
     
     static func signUp(email: String, password: String, username: String, companyId: String, controller: UIViewController,completion: @escaping
         (Bool)->()){
+        print("CompanyID: \(companyId)")
         AuthService.createUser(email: email, password: password) { (error, user) in
             if let error = error {
                 Alerts.simpleAlert(err: error, controller: controller)
                 completion(false)
+                print("Error: createUser")
                 return
             }
             UserService.create(user: user!, username: username, companyID: companyId, completion: { (error, user) in
                 if let error = error {
                     Alerts.simpleAlert(err: error, controller: controller)
+                    print("Error: createUser")
                     completion(false)
                     return
                 }
