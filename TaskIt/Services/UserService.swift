@@ -8,25 +8,48 @@
 import Foundation
 import FirebaseDatabase
 import FirebaseAuth.FIRUser
+import FirebaseMessaging
 
 struct UserService {
     
-    
+//    let key = ref.child("posts").childByAutoId().key
+//    let post = ["uid": userID,
+//                "author": username,
+//                "title": title,
+//                "body": body]
+//    let childUpdates = ["/posts/\(key)": post,
+//                        "/user-posts/\(userID)/\(key)/": post]
+//    ref.updateChildValues(childUpdates)
     //Create the user in the database
-    static func create(user: User, username: String, companyID: String,completion: @escaping (Error?,TaskUser?)->()){
-        
-        let userAttribute = ["username" : username,
+    
+    
+//    self.uid = dict["uid"] as? String
+//    self.username = dict["username"] as? String
+//    self.companyID = dict["companyId"] as? String
+    
+    
+    static func create(user: User, username: String, companyID: String,completion: @escaping (Error?, TaskUser?, String?)->()){
+        let ref = Database.database().reference()
+        var userAttribute = ["username" : username,
                              "companyId" : companyID]
-        let ref = Database.database().reference().child("users").child(user.uid)
-        ref.setValue(userAttribute) { (error, ref) in
+        let userToken = Messaging.messaging().fcmToken
+        let userUpdate = "/users/\(user.uid)"
+        let tokenUpdate = "/company/\(companyID)/tokens/\(user.uid)"
+        let baseImage = Database.database().reference().child("company").child(companyID).child("imageURL")
+        
+        ref.updateChildValues([userUpdate: userAttribute,
+                               tokenUpdate: userToken
+        ]) { (error, databaseReference) in
             if let error = error {
-                completion(error,nil)
+                completion(error,nil,nil)
                 return
             }
-            
-            ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                let user = TaskUser(snapshot: snapshot)
-                completion(nil,user)
+            baseImage.observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let imageURL = snapshot.value as? String else{
+                    return completion(nil,nil,nil)
+                }
+                userAttribute["uid"] = user.uid
+                completion(nil, TaskUser(userAttribute),imageURL)
             })
         }
     }

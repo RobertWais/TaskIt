@@ -52,7 +52,11 @@ class ConfirmationVC: UIViewController {
     }
     @IBAction func cancelBtnPressed(_ sender: Any) {
         delegate?.didConfirm(bool: false)
-        self.performSegue(withIdentifier: "unwindToMap", sender: self)
+        UIView.animate(withDuration: 0.4, animations: {
+            self.mainView.center = CGPoint(x: self.view.center.x, y: self.view.bounds.height+self.view.bounds.height)
+        }) { (success) in
+            self.performSegue(withIdentifier: "unwindToMap", sender: self)
+        }
     }
     
     func disableBtns(){

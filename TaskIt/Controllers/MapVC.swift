@@ -43,6 +43,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tempToolBar.layer.masksToBounds = true
         
         let wheel = LoadWheel(view: self.view)
         StorageService.getImage { (image) in
@@ -51,7 +52,6 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
                 print("Image nil")
             }else{
                 self.baseImage = image
-                print("Image is there")
                 self.dPadView = DirectionalPad(view: self.view,toolbar:  self.tempToolBar)
                 self.dPadView.isHidden = true
                 self.setScrollView()
@@ -93,7 +93,6 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
         
     
     @IBAction func signOutBtnPressed(_ sender: Any) {
-        print("sign out")
         Login.signOut()
         self.performSegue(withIdentifier: "unwindToStartVCFromMap", sender: self)
     }
@@ -128,6 +127,9 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
         let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
         let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
 
+        print("Vertical Padding: \(verticalPadding)")
+        print("Horizontal Padding: \(horizontalPadding)")
+        
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

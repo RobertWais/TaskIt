@@ -17,9 +17,7 @@ exports.request = functions.database.ref('/company/{companyId}/currentTasks/{tas
 
     const username = admin.database()
         .ref(`/users/${uid}/username`).once('value');
-
     const tokens =  admin.database().ref(`/company/${companyId}/tokens`).once('value');
-
 
 	return Promise.all([username,tokens]).then(function (result){
         let allTokens = Object.keys(result[1].val()).map(function(key) {
@@ -36,8 +34,8 @@ exports.request = functions.database.ref('/company/{companyId}/currentTasks/{tas
                 body: `${title}`
             }
         };
-
         admin.messaging().sendToDevice(allTokens, payload);
-
     });
 });
+
+

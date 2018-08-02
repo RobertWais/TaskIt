@@ -26,6 +26,14 @@ class TaskDetailsVC: UIViewController {
         textView.text = task?.description
         baseView.layer.cornerRadius = 10.0
         baseView.layer.masksToBounds = true
+        textView.layer.cornerRadius = 5.0
+        textView.backgroundColor = baseView.backgroundColor
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.layer.borderWidth = 1.0
+        print("Color \(textView.backgroundColor)")
+        print("Color Normal: \(baseView.backgroundColor)")
+        
+        completedBtn.setTitleColor(Constants.Colors.baseColor, for: .normal)
         
         // Do any additional setup after loading the view.
     }
@@ -40,10 +48,8 @@ class TaskDetailsVC: UIViewController {
         UIView.animate(withDuration: 0.4, animations: {
             self.view.center = CGPoint(x: self.view.center.x, y: self.view.bounds.height+self.view.bounds.height)
             
-            
         }) { (success) in
             self.performSegue(withIdentifier: "unwindToMapFromDetails", sender: self)
-            
         }
     }
     @IBAction func completedBtnPressed(_ sender: Any) {
@@ -53,7 +59,7 @@ class TaskDetailsVC: UIViewController {
                 Constants.Data.liveTasks.removeValue(forKey: self.key!)
                 self.delegate?.didComplete()
                 UIView.animate(withDuration: 0.4, animations: {
-                    self.view.center = CGPoint(x: self.view.center.x, y: self.view.bounds.height+self.view.bounds.height)
+                    self.baseView.center = CGPoint(x: self.view.center.x, y: self.view.bounds.height+self.view.bounds.height)
                 }) { (success) in
                     self.performSegue(withIdentifier: "unwindToMapFromDetails", sender: self)
                     

@@ -34,9 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate{
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        // TODO: Handle data of notification
         
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
@@ -52,12 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate{
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        // TODO: Handle data of notification
-        
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
         
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
@@ -70,6 +61,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate{
         completionHandler(UIBackgroundFetchResult.newData)
     }
 
+    
+    
+    ///***
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -93,12 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate{
         
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
-        
-        
-        
-        
-        
-        
         
         configureInitialViewController(for: window)
         
@@ -227,14 +215,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
-        
-        // Print full message.
         print(userInfo)
-        
         completionHandler()
     }
 }

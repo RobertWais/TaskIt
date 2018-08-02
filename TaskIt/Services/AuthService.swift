@@ -13,13 +13,12 @@ struct AuthService{
     
     static func createUser(email: String,password: String, completion: @escaping (Error?,User?)->()){
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
-            
+        
             //If there is an error return it to caller
             if let err = error {
                 completion(err,nil)
                 return
             }
-            
             //Set Current User to the user that is now signed in
             completion(nil,authResult?.user)
         }

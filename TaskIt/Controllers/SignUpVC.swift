@@ -27,6 +27,7 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setDelegate()
         updateAllUI()
         registerForKeyboardNotifications()
@@ -57,14 +58,15 @@ extension SignUpVC {
             self.joinBtn.isEnabled = true
             return
         }
-            Login.signUp(email: self.emailField.text!, password: self.passwordField.text!, username: self.usernameField.text!,companyId: companyIdField.text!, controller: self) {  (success) in
-                print("Success: \(success)")
-                    if success {
-                        self.performSegue(withIdentifier: "toMapVC", sender: self)
-                        self.joinBtn.isEnabled = true
-                    }
-                self.joinBtn.isEnabled = true
-                loading.stopAnimating()
+            Login.signUp(email: self.emailField.text!, password: self.passwordField.text!, username: self.usernameField.text!,companyId: companyIdField.text!, controller: self) {  (url) in
+                defer {
+                    self.joinBtn.isEnabled = true
+                    loading.stopAnimating()
+                }
+                guard let url = url else{
+                    return
+                }
+                self.performSegue(withIdentifier: "toMapVC", sender: self)
         }
     }
 }

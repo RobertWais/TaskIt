@@ -112,7 +112,6 @@ struct DatabaseService {
     }
     
     static func deleteTask(key: String,sender: UIViewController,completion: @escaping (Bool)->()){
-        
         let alertController = UIAlertController(title: "Confirmation", message: "Are you sure you have completed the whole task?", preferredStyle: UIAlertControllerStyle.alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) -> Void in
             completion(false)
@@ -128,9 +127,9 @@ struct DatabaseService {
                 completion(true)
             }
         })
-        
         alertController.addAction(cancelAction)
         alertController.addAction(confirmAction)
         sender.present(alertController, animated: true)
     }
+
 }

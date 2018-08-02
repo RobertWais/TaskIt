@@ -39,7 +39,7 @@ class DirectionalPad: UIView {
         super.init(frame: CGRect(x: view.frame.width - (100+10), y: (view.frame.height-(toolbar.frame.height+5+100)), width: 100, height: 100))
         self.toolBar = toolbar
         self.baseView = view
-        self.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        self.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
         self.layer.cornerRadius = self.frame.width/6
         self.layer.masksToBounds = true
         invertBtn = makeButton(symbol: "◉", x: (self.frame.height/3), y:(self.frame.height/3), width: self.frame.width/3, height: self.frame.height/3)

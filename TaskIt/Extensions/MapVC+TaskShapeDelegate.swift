@@ -42,19 +42,21 @@ extension MapVC: ShapeDelegate,CompletedDelegate {
         }) { (success) in
             darkenView.removeFromSuperview()
         }
-        UIView.animate(withDuration: 1.0) {
-        }
     }
     
     func didConfirm(bool: Bool){
         let darkenView = self.view.subviews[self.view.subviews.count-1]
-        darkenView.removeFromSuperview()
         if bool {
             currentShape.isUserInteractionEnabled = false
             currentShape.removeFromSuperview()
             collapseEditBar()
         }else{
             currentShape.isUserInteractionEnabled = true
+        }
+        UIView.animate(withDuration: 1.0, animations: {
+            darkenView.alpha = 0.0
+        }) { (success) in
+            darkenView.removeFromSuperview()
         }
     }
 }

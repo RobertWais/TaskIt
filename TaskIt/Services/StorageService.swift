@@ -44,12 +44,13 @@ struct StorageService {
         print("Current id: \(TaskUser.current.companyID)")
         db.observeSingleEvent(of: .value) { (snapshot) in
             if snapshot.value != nil{
-                let imageURL = snapshot.value as? String
-                print("Image: \(String(describing: imageURL))")
-                let ref = storage.reference(forURL: imageURL!)
+                guard let imageURL = snapshot.value as? String else {
+                    print("Huge error")
+                    return completion(nil)
+                }
+                let ref = storage.reference(forURL: imageURL)
                 ref.getData(maxSize: 10 * 1024 * 1024) { data, error in
                     if error != nil {
-                        print("Error \(error)")
                         completion(nil)
                     }else{
                         let image = UIImage(data: data!)

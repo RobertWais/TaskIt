@@ -100,17 +100,25 @@ extension MapVC {
         UIView.animate(withDuration: 0.3, animations: {
             self.confirmBtn.center.y = self.confirmBtn.center.y+100
             self.revertBtn.center.y = self.revertBtn.center.y+100
+            self.slider.center.y = self.slider.center.y+100
+            self.freezeBtn.center.y = self.freezeBtn.center.y+100
             self.dPadView.isHidden = true
         }) { (success) in
             print("Yes")
             self.tempToolBar.setItems(self.firstBarItems, animated: true)
-            let collapsePos =  self.collapseButton.center.x
-            let squarePos = self.squareButton.center.x
-            self.collapseButton.center.x = self.collapseButton.center.x + 100
-            self.squareButton.center.x = self.squareButton.center.x - 100
-            UIView.animate(withDuration: 0.3, animations: {
-                self.collapseButton.center.x = collapsePos
-                self.squareButton.center.x = squarePos
+            let collapsePos =  self.collapseButton.center.y
+            let squarePos = self.squareButton.center.y
+            let rectanglePos = self.rectangleButton.center.y
+            let circlePos = self.circleButton.center.y
+            self.circleButton.center.y = self.circleButton.center.y - 100
+            self.rectangleButton.center.y = self.collapseButton.center.y - 100
+            self.collapseButton.center.y = self.collapseButton.center.y - 100
+            self.squareButton.center.y = self.squareButton.center.y - 100
+            UIView.animate(withDuration: 0.5, animations: {
+                self.collapseButton.center.y = collapsePos
+                self.squareButton.center.y = squarePos
+                self.rectangleButton.center.y = rectanglePos
+                self.circleButton.center.y = circlePos
             })
         }
     }
@@ -124,16 +132,28 @@ extension MapVC {
         UIView.animate(withDuration: 0.3, animations: {
             self.collapseButton.center.y = self.collapseButton.center.y+100
             self.squareButton.center.y = self.squareButton.center.y+100
+            self.rectangleButton.center.y = self.rectangleButton.center.y+100
+            self.circleButton.center.y = self.circleButton.center.y+100
         }) { (success) in
             self.tempToolBar.setItems(self.secondBarItems, animated: true)
-            let confirmPos =  self.confirmBtn.center.x
-            let revertPos = self.revertBtn.center.x
-            self.confirmBtn.center.x = self.confirmBtn.center.x + 100
-            self.revertBtn.center.x = self.revertBtn.center.x - 100
-            UIView.animate(withDuration: 0.3, animations: {
-                self.confirmBtn.center.x = confirmPos
-                self.revertBtn.center.x = revertPos
+            let confirmPos =  self.confirmBtn.center.y
+            let revertPos = self.revertBtn.center.y
+            let freezePos = self.freezeBtn.center.y
+            let sliderPos = self.slider.center.y
+            let dPadFrame = self.dPadView.frame
+            
+            self.dPadView.frame = CGRect(x: dPadFrame.minX, y: dPadFrame.minY, width: 0, height: 0)
+            self.freezeBtn.center.y = self.freezeBtn.center.y - 100
+            self.confirmBtn.center.y = self.confirmBtn.center.y - 100
+            self.revertBtn.center.y = self.revertBtn.center.y - 100
+            self.slider.center.y = self.slider.center.y - 100
+            UIView.animate(withDuration: 0.4, animations: {
+                self.slider.center.y = sliderPos
+                self.freezeBtn.center.y = freezePos
+                self.confirmBtn.center.y = confirmPos
+                self.revertBtn.center.y = revertPos
                 self.dPadView.isHidden = false
+                self.dPadView.frame = dPadFrame
             })
         }
     }

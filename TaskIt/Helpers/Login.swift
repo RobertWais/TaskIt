@@ -13,24 +13,26 @@ import FirebaseAuth.FIRUser
 struct Login {
     
     static func signUp(email: String, password: String, username: String, companyId: String, controller: UIViewController,completion: @escaping
-        (Bool)->()){
+        (String?)->()){
         print("CompanyID: \(companyId)")
         AuthService.createUser(email: email, password: password) { (error, user) in
             if let error = error {
                 Alerts.simpleAlert(err: error, controller: controller)
-                completion(false)
-                print("Error: createUser")
-                return
+                return completion(nil)
             }
-            UserService.create(user: user!, username: username, companyID: companyId, completion: { (error, user) in
+            guard let user = user else{
+                return completion(nil)
+            }
+            UserService.create(user: user, username: username, companyID: companyId, completion: { (error, user, url) in
                 if let error = error {
                     Alerts.simpleAlert(err: error, controller: controller)
-                    print("Error: createUser")
-                    completion(false)
-                    return
+                   return  completion(nil)
                 }
-                TaskUser.setCurrent(user!)
-                completion(true)
+                guard let user = user else{
+                    return completion(nil)
+                }
+                TaskUser.setCurrent(user)
+                completion(url)
             })
         }
     }
@@ -38,9 +40,8 @@ struct Login {
     static func signOut(){
         do{
            try Auth.auth().signOut()
-
         }catch let error{
-            print("Error: \(error)")
+            print("Error: \(error.localizedDescription)")
         }
     }
     

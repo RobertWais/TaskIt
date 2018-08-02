@@ -60,4 +60,14 @@ class TaskUser: Codable {
         self.companyID = compID
     }
     
+    init?(_ dict: [String: Any?]){
+        guard let username = dict["username"] as? String,
+            let uid = dict["uid"] as? String,
+            let companyId = dict["companyId"] as? String else {return nil}
+        
+        self.uid = uid
+        self.username = username
+        self.companyID = companyId
+    }
+    
 }
