@@ -30,8 +30,9 @@ struct UserService {
     
     static func create(user: User, username: String, companyID: String,completion: @escaping (Error?, TaskUser?, String?)->()){
         let ref = Database.database().reference()
+        var initiateCompany = [companyID : companyID]
         var userAttribute = ["username" : username,
-                             "companyId" : companyID]
+                             "companyIds" : initiateCompany] as [String : Any]
         let userToken = Messaging.messaging().fcmToken
         let userUpdate = "/users/\(user.uid)"
         let tokenUpdate = "/company/\(companyID)/tokens/\(user.uid)"
@@ -44,6 +45,7 @@ struct UserService {
                 completion(error,nil,nil)
                 return
             }
+            ///////////////////////////
             baseImage.observeSingleEvent(of: .value, with: { (snapshot) in
                 guard let imageURL = snapshot.value as? String else{
                     return completion(nil,nil,nil)
