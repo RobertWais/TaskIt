@@ -44,6 +44,8 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
     override func viewDidLoad() {
         super.viewDidLoad()
         tempToolBar.layer.masksToBounds = true
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+        setUpAddBtn()
         
         let wheel = LoadWheel(view: self.view)
         StorageService.getImage { (image) in
@@ -61,7 +63,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
                 self.initialButtons()
                 self.view.addSubview(self.dPadView)
                 self.view.bringSubview(toFront: self.dPadView)
-                
+                self.view.bringSubview(toFront: self.addBtn)
                 
                 DatabaseService.retrieveTasks(){  (Task,num) in
                     guard let task = Task else{
@@ -142,7 +144,6 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
 extension MapVC {
     
     func setScrollView(){
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
         imageView = UIImageView(image: baseImage!)
         imageView.isUserInteractionEnabled = true
         imageView.isMultipleTouchEnabled = true

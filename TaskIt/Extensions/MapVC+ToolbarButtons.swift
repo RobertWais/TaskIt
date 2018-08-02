@@ -15,7 +15,6 @@ extension MapVC {
     func initialButtons(){
         initialSet()
         secondSet()
-        setUpAddBtn()
     }
     
     func initialSet(){
@@ -61,6 +60,7 @@ extension MapVC {
         addBtn.layer.cornerRadius = addBtn.layer.frame.width/2
         addBtn.layer.masksToBounds = true
         addBtn.backgroundColor = Constants.Colors.baseColor
+        print("Add btn background Color \(addBtn.backgroundColor)")
         view.addSubview(addBtn)
         view.bringSubview(toFront: addBtn)
     }
@@ -83,7 +83,7 @@ extension MapVC {
     @objc func collapseBar(){
         addBtn.isHidden = false
         UIView.animate(withDuration: 0.6, animations: {
-            self.addBtn.alpha = 0.9
+            self.addBtn.alpha = 1.0
             self.tempToolBar.alpha = 0.0
             self.addBtn.center.x = (self.view.frame.width - 50)
         }) { (success) in
