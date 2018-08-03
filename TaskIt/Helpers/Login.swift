@@ -32,10 +32,6 @@ struct Login {
                     return completion(nil)
                 }
                 TaskUser.setCurrent(user)
-                let newId = CoreDataHelper.newCompanyId()
-                newId.id = TaskUser.current.uid
-                newId.name = ""
-                CoreDataHelper.saveId()
                 completion(url)
             })
         }

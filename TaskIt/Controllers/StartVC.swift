@@ -9,7 +9,37 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
-class StartVC: UIViewController {
+
+protocol SignInDelegate: class {
+    func attemptSignIn(username: String, password: String, companyId: String)
+}
+
+protocol DarkViewDelegate: class {
+    func removeDarkView()
+}
+
+class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
+    func removeDarkView() {
+        let darkenView = self.view.subviews[self.view.subviews.count-1]
+        UIView.animate(withDuration: 0.3, animations: {
+            darkenView.alpha = 0.0
+        }, completion: { (success) in
+            darkenView.removeFromSuperview()
+        })
+    }
+    
+    
+    func attemptSignIn(username: String, password: String, companyId: String) {
+        let darkenView = self.view.subviews[self.view.subviews.count-1]
+        print("username: \(username)")
+        print("password: \(password)")
+        darkenView.removeFromSuperview()
+        signInModal(username: username, password: password, completion: { (success) in
+            if success {
+                self.performSegue(withIdentifier: "fromStartToMap", sender: self)
+            }
+        })
+    }
 
     //Buttons
     @IBOutlet var displayBtns: [UIButton]!
@@ -30,8 +60,6 @@ class StartVC: UIViewController {
         setViewLogin()
         // Do any additional setup after loading the view.
     }
-
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,12 +67,27 @@ class StartVC: UIViewController {
     }
     
     //MARK: Button Listeners
-    let mapVC = MapVC()
+//    let mapVC = MapVC()
     @IBAction func loginBtnPressed(_ sender: Any) {
         
+        let darkView = UIView(frame: self.view.bounds)
+        self.view.addSubview(darkView)
+        darkView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+
         let modalVC = storyboard?.instantiateViewController(withIdentifier: "ChooseId") as! ChooseIdVC
         modalVC.modalPresentationStyle = .overCurrentContext
+        modalVC.delegate = self
+        modalVC.darkdelegate = self 
+
         present(modalVC, animated: true, completion: nil)
+        
+        
+//        let darkenView = self.view.subviews[self.view.subviews.count-1]
+//        UIView.animate(withDuration: 1.0, animations: {
+//            darkenView.alpha = 0.0
+//        }) { (success) in
+//            darkenView.removeFromSuperview()
+//        }
         
 //        signIn(){ (success) in
 //            if success {
@@ -83,6 +126,24 @@ extension StartVC {
                     return
                 })
             }
+    }
+    func signInModal(username: String , password: String, completion: @escaping (Bool)->()){
+        Auth.auth().signIn(withEmail: username, password: password) { (user, error) in
+            if let error = error {
+                Alerts.simpleAlert(err: error, controller: self)
+                completion(false)
+                return
+            }
+            let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
+            
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                let currUser = TaskUser(snapshot: snapshot)
+                TaskUser.setCurrent(currUser!)
+                print("current user: \(TaskUser.current.username)")
+                completion(true)
+                return
+            })
+        }
     }
 }
 
