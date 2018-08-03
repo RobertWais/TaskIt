@@ -18,7 +18,6 @@ class StartVC: UIViewController {
     @IBOutlet weak var loginBtn: UIButton!
     
     //Login Credentials
-    @IBOutlet weak var loginCredentialsView: UIView!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet var textFields: [UITextField]!
@@ -38,18 +37,6 @@ class StartVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     
     //MARK: Button Listeners
     let mapVC = MapVC()
@@ -123,17 +110,18 @@ extension StartVC {
     //LOGIN CREDENTIALS
     
     func updateTextFields(){
+        
         for field in textFields {
             field.layer.borderWidth = 2.0
-            field.layer.borderColor = UIColor.white.cgColor
-            field.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+            field.layer.borderColor = Constants.Colors.baseColor.cgColor
+            field.backgroundColor = UIColor.white
             field.layer.cornerRadius = field.frame.height/2
             field.layer.masksToBounds = true
-            field.tintColor = UIColor.white
-            field.textColor = UIColor.white
+            field.tintColor = Constants.Colors.baseColor
+            field.textColor = Constants.Colors.baseColor
             
             
-            let placeholder = NSAttributedString(string: field.placeholder!, attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
+            let placeholder = NSAttributedString(string: field.placeholder!, attributes: [NSAttributedStringKey.foregroundColor : Constants.Colors.baseColor])
             field.attributedPlaceholder = placeholder
             
         }
@@ -141,8 +129,6 @@ extension StartVC {
     
     func setViewLogin(){
        self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
-        loginCredentialsView.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
-        loginCredentialsView.layer.cornerRadius = 25
         updateTextFields()
     }
     

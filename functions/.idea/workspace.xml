@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1eca40c8-bf37-4b5b-8a70-ad47fb52bf08" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../TaskIt/Helpers/CoreDataHelper.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskIt.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskIt.xcodeproj/project.pbxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TaskIt.xcworkspace/xcuserdata/robertwais.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskIt.xcworkspace/xcuserdata/robertwais.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TaskIt/AppDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskIt/AppDelegate.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TaskIt/Controllers/SignUpVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskIt/Controllers/SignUpVC.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TaskIt/Controllers/StartVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskIt/Controllers/StartVC.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskIt/Helpers/Alerts.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskIt/Helpers/Alerts.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskIt/Storyboards/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskIt/Storyboards/Base.lproj/Main.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskIt/Supporting Files/Constants.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskIt/Supporting Files/Constants.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskIt/TaskIt.xcdatamodeld/TaskIt.xcdatamodel/contents" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskIt/TaskIt.xcdatamodeld/TaskIt.xcdatamodel/contents" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,6 +25,7 @@
     <session id="-973075276">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
@@ -129,12 +133,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533146480935</updated>
-      <workItem from="1533146484830" duration="6546000" />
+      <workItem from="1533146484830" duration="6710000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6546000" />
+    <option name="totallyTimeSpent" value="6710000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="43" width="1260" height="737" extended-state="0" />

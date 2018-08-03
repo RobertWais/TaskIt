@@ -15,6 +15,7 @@
 		2E1FC04F210B887700FBFCCB /* MapVC+InvertButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1FC04E210B887700FBFCCB /* MapVC+InvertButtons.swift */; };
 		2E1FC059210BBB5300FBFCCB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1FC058210BBB5300FBFCCB /* Task.swift */; };
 		2E3634BA21116AB700E42BA7 /* LoadWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3634B921116AB700E42BA7 /* LoadWheel.swift */; };
+		2E6907D921142E0A00EC6088 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6907D821142E0A00EC6088 /* CoreDataHelper.swift */; };
 		2E6BD8F1210D8A3A001E4A76 /* MapLayout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E6BD8F0210D8A3A001E4A76 /* MapLayout.storyboard */; };
 		2EB539A121063C1700192FDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539A021063C1700192FDA /* AppDelegate.swift */; };
 		2EB539A621063C1700192FDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB539A421063C1700192FDA /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 		2E1FC058210BBB5300FBFCCB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		2E3634B921116AB700E42BA7 /* LoadWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadWheel.swift; sourceTree = "<group>"; };
 		2E3634BB2111807A00E42BA7 /* TaskIt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaskIt.entitlements; sourceTree = "<group>"; };
+		2E6907D821142E0A00EC6088 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		2E6BD8F0210D8A3A001E4A76 /* MapLayout.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapLayout.storyboard; sourceTree = "<group>"; };
 		2EB5399D21063C1700192FDA /* TaskIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB539A021063C1700192FDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				2EB539C82106FBFF00192FDA /* Alerts.swift */,
 				2EB539CA2107879C00192FDA /* Login.swift */,
+				2E6907D821142E0A00EC6088 /* CoreDataHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				2EB539CF2107B77100192FDA /* StartCompanyVC.swift in Sources */,
 				2EB539C52106F4F400192FDA /* UserService.swift in Sources */,
 				2E1FC044210953FD00FBFCCB /* Constants.swift in Sources */,
+				2E6907D921142E0A00EC6088 /* CoreDataHelper.swift in Sources */,
 				2E1FC059210BBB5300FBFCCB /* Task.swift in Sources */,
 				2EB539C12106EBED00192FDA /* AuthService.swift in Sources */,
 				2E1FC04C210A9BD100FBFCCB /* ConfirmationVC.swift in Sources */,

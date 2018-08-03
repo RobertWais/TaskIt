@@ -21,10 +21,6 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var joinBtn: UIButton!
     
-    
-  
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,10 +48,12 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
 //SignUp User wit CompanyID
 extension SignUpVC {
     func login(){
+        self.resignFirstResponder()
         let loading = LoadWheel(view: self.view)
         if  usernameField?.text == "" || (emailField?.text)! == ""  || (passwordField?.text)! == "" || (companyIdField?.text)! ==  ""{
             Alerts.fillOutFields(controller: self, button: joinBtn)
             self.joinBtn.isEnabled = true
+            loading.stopAnimating()
             return
         }
             Login.signUp(email: self.emailField.text!, password: self.passwordField.text!, username: self.usernameField.text!,companyId: companyIdField.text!, controller: self) {  (url) in
@@ -64,6 +62,8 @@ extension SignUpVC {
                     loading.stopAnimating()
                 }
                 guard let url = url else{
+                    Alerts.companyDoesNotExist(sender: self)
+                    print("Company does not exist")
                     return
                 }
                 self.performSegue(withIdentifier: "toMapVC", sender: self)

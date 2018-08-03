@@ -51,8 +51,6 @@ struct Alerts{
     }
     
     static func displayKey(uniqueID: String,sender: UIViewController, finished: @escaping ()->()){
-        
-        
         let alert = UIAlertController(title: "Unique ID",
                                       message: "All employees must present this unqiue id \n \n There is no way to retrieve this ID after this message\n You will not be able to continue until you copy the identifier",
                                       preferredStyle: .alert)
@@ -67,6 +65,18 @@ struct Alerts{
             textField.isUserInteractionEnabled = true
             
         }
+        
+        alert.addAction(cancel)
+        sender.present(alert, animated: true)
+    }
+    
+    static func companyDoesNotExist(sender: UIViewController){
+        let alert = UIAlertController(title: "No Such Company",
+                                      message: "Please enter in a valid company",
+                                      preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
+        })
         
         alert.addAction(cancel)
         sender.present(alert, animated: true)
