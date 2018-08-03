@@ -66,6 +66,10 @@ extension SignUpVC {
                     print("Company does not exist")
                     return
                 }
+                let temp = CoreDataHelper.newCompanyId()
+                temp.name = ""
+                temp.id = TaskUser.current.companyID
+                CoreDataHelper.saveId()
                 self.performSegue(withIdentifier: "toMapVC", sender: self)
         }
     }

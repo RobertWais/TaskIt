@@ -41,11 +41,16 @@ class StartVC: UIViewController {
     //MARK: Button Listeners
     let mapVC = MapVC()
     @IBAction func loginBtnPressed(_ sender: Any) {
-        signIn(){ (success) in
-            if success {
-              self.performSegue(withIdentifier: "fromStartToMap", sender: self)
-            }
-        }
+        
+        let modalVC = storyboard?.instantiateViewController(withIdentifier: "ChooseId") as! ChooseIdVC
+        modalVC.modalPresentationStyle = .overCurrentContext
+        present(modalVC, animated: true, completion: nil)
+        
+//        signIn(){ (success) in
+//            if success {
+//              self.performSegue(withIdentifier: "fromStartToMap", sender: self)
+//            }
+//        }
     }
     @IBAction func signUpBtnPressed(_ sender: Any) {
     }

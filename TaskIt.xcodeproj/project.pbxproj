@@ -37,6 +37,8 @@
 		2ED164E5210FAF0F008B7513 /* MapVC+TaskShapeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED164E4210FAF0F008B7513 /* MapVC+TaskShapeDelegate.swift */; };
 		2ED164E721100C44008B7513 /* ButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED164E621100C44008B7513 /* ButtonItem.swift */; };
 		2ED164E921101B74008B7513 /* TaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED164E821101B74008B7513 /* TaskButton.swift */; };
+		2EF477412114B37D00290E9A /* ChooseIdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF477402114B37D00290E9A /* ChooseIdVC.swift */; };
+		2EF477432114B3F800290E9A /* IdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF477422114B3F800290E9A /* IdTableViewCell.swift */; };
 		2EFBB5612110BC20006C097D /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFBB5602110BC20006C097D /* StorageService.swift */; };
 		409A9A22C347DD4CBAD1CE6F /* Pods_TaskIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C320EA302352420BF8CF0C7 /* Pods_TaskIt.framework */; };
 /* End PBXBuildFile section */
@@ -75,6 +77,8 @@
 		2ED164E4210FAF0F008B7513 /* MapVC+TaskShapeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC+TaskShapeDelegate.swift"; sourceTree = "<group>"; };
 		2ED164E621100C44008B7513 /* ButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonItem.swift; sourceTree = "<group>"; };
 		2ED164E821101B74008B7513 /* TaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskButton.swift; sourceTree = "<group>"; };
+		2EF477402114B37D00290E9A /* ChooseIdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseIdVC.swift; sourceTree = "<group>"; };
+		2EF477422114B3F800290E9A /* IdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTableViewCell.swift; sourceTree = "<group>"; };
 		2EFBB5602110BC20006C097D /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		528CF6BC0CF32CC4F47A8F51 /* Pods-TaskIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaskIt/Pods-TaskIt.release.xcconfig"; sourceTree = "<group>"; };
 		6C320EA302352420BF8CF0C7 /* Pods_TaskIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +137,7 @@
 		2EB5399F21063C1700192FDA /* TaskIt */ = {
 			isa = PBXGroup;
 			children = (
+				2EF477442114B3FF00290E9A /* Views */,
 				2E3634BB2111807A00E42BA7 /* TaskIt.entitlements */,
 				2E1FC05B210D71DC00FBFCCB /* Storyboards */,
 				2E1FC04D210B882700FBFCCB /* Extensions */,
@@ -160,6 +165,7 @@
 				2EB539CE2107B77100192FDA /* StartCompanyVC.swift */,
 				2E1FC04B210A9BD100FBFCCB /* ConfirmationVC.swift */,
 				2ED164E2210F805C008B7513 /* TaskDetailsVC.swift */,
+				2EF477402114B37D00290E9A /* ChooseIdVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -205,6 +211,14 @@
 				2E1FC043210953FD00FBFCCB /* Constants.swift */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2EF477442114B3FF00290E9A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2EF477422114B3F800290E9A /* IdTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		42FE8EB047D6E6BF6EF8D33A /* Frameworks */ = {
@@ -362,6 +376,7 @@
 				2EB539CF2107B77100192FDA /* StartCompanyVC.swift in Sources */,
 				2EB539C52106F4F400192FDA /* UserService.swift in Sources */,
 				2E1FC044210953FD00FBFCCB /* Constants.swift in Sources */,
+				2EF477432114B3F800290E9A /* IdTableViewCell.swift in Sources */,
 				2E6907D921142E0A00EC6088 /* CoreDataHelper.swift in Sources */,
 				2E1FC059210BBB5300FBFCCB /* Task.swift in Sources */,
 				2EB539C12106EBED00192FDA /* AuthService.swift in Sources */,
@@ -372,6 +387,7 @@
 				2EB539CD21079CB500192FDA /* MapVC.swift in Sources */,
 				2ED164E5210FAF0F008B7513 /* MapVC+TaskShapeDelegate.swift in Sources */,
 				2EB539C72106F87700192FDA /* TaskUser.swift in Sources */,
+				2EF477412114B37D00290E9A /* ChooseIdVC.swift in Sources */,
 				2EB539CB2107879C00192FDA /* Login.swift in Sources */,
 				2EB539A121063C1700192FDA /* AppDelegate.swift in Sources */,
 				2E1FC04F210B887700FBFCCB /* MapVC+InvertButtons.swift in Sources */,

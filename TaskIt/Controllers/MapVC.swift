@@ -126,13 +126,15 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
         let imageViewSize = imageView.frame.size
         let scrollViewSize = scrollView.bounds.size
 
-        let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
+        let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - (navigationController?.navigationBar.frame.height)! - imageViewSize.height) / 2 : 0
         let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
 
         print("Vertical Padding: \(verticalPadding)")
         print("Horizontal Padding: \(horizontalPadding)")
+        print("Scrollview minx: \(scrollView.frame.minX)")
+        print("Scrollview minx: \(scrollView.frame.minY)")
         
-        scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
+        scrollView.contentInset = UIEdgeInsets(top: verticalPadding + (navigationController?.navigationBar.frame.height)!, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
