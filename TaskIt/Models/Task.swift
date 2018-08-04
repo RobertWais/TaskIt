@@ -17,6 +17,7 @@ protocol ShapeDelegate: class {
 class Task{
     weak var delegate: ShapeDelegate?
     
+    
     private var _shape: TaskShape?
     private var _title = ""
     private var _description = ""
@@ -114,7 +115,9 @@ class Task{
         self._shape?.center.x = positionX
         self._shape?.center.y = positionY
         self._shape?.transform = CGAffineTransform(rotationAngle: angle)
-        self._shape?.backgroundColor = UIColor(red: colorR, green: colorG, blue: colorB, alpha: alpha)
+        //Change when adding new features of colors
+//        self._shape?.backgroundColor = UIColor(red: colorR, green: colorG, blue: colorB, alpha: alpha)
+        self.shape.backgroundColor = Constants.Colors.safeRed
         self._key = snapshot.key
     }
     

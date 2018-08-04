@@ -16,6 +16,7 @@ class StartVC: UIViewController {
     @IBOutlet weak var startComapnyBtn: UIButton!
     @IBOutlet weak var signUpBtn: UIButton!
     @IBOutlet weak var loginBtn: UIButton!
+    var tempField: UITextField!
     
     //Login Credentials
     @IBOutlet weak var usernameField: UITextField!
@@ -41,10 +42,24 @@ class StartVC: UIViewController {
     //MARK: Button Listeners
     let mapVC = MapVC()
     @IBAction func loginBtnPressed(_ sender: Any) {
+        self.tempField.resignFirstResponder()
         signIn(){ (success) in
             if success {
-              self.performSegue(withIdentifier: "fromStartToMap", sender: self)
+                if self.isBeingPresented == true{
+                    print("was being pressented")
+                    self.dismiss(animated: false, completion: nil)
+                }else{
+                    print("fresh")
+                    let storyboard = UIStoryboard(name: "MapLayout", bundle: .main)
+                    let mainVC = storyboard.instantiateInitialViewController()!
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.window?.rootViewController = mainVC
+                    appDelegate.window?.makeKeyAndVisible()
+                }
+            }else{
+                //disable load screen
             }
+            
         }
     }
     @IBAction func signUpBtnPressed(_ sender: Any) {
@@ -146,6 +161,10 @@ extension StartVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        tempField = textField
     }
     
     func setDelegate(){

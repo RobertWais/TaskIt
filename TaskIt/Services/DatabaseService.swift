@@ -86,7 +86,6 @@ struct DatabaseService {
     static func retrieveTasks(completion: @escaping (Task?,Int)->()){
         let ref = companyRef.child("currentTasks")
         ref.observe(DataEventType.childAdded) { (data) in
-                print("Adding ")
                 if let task = Task(snapshot: data){
                     task.shape.disableInteraction()
                     task.addTapGesture()
@@ -97,7 +96,6 @@ struct DatabaseService {
             }
         }
         ref.observe(DataEventType.childRemoved) { (data) in
-            print("Child removed")
             if let task = Task(snapshot: data){
                 completion(task,1)
             }else{
@@ -106,7 +104,6 @@ struct DatabaseService {
             
         }
         ref.observe(DataEventType.childChanged) { (data) in
-            print("Child changed")
             completion(nil,2)
         }
     }

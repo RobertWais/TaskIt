@@ -11,11 +11,12 @@ class TaskShape: UIView {
     var rotated = 0
     var key: String?
     var type = 0
+    var previous: CGFloat = 0
+    weak var turnDelegate: TurnDelegate?
     //Default Creation
     init(shape: Int){
         if shape == 2{
             super.init(frame: CGRect(x: 200.0, y: 300.0, width: 100, height: 50))
-
         }else{
             super.init(frame: CGRect(x: 200.0, y: 300.0, width: 100, height: 100))
         }
@@ -26,6 +27,8 @@ class TaskShape: UIView {
         if shape == 0 {
             self.layer.cornerRadius = self.frame.height/2
         }
+        
+        self.backgroundColor = UIColor(red: 255/255, green: 220/255, blue: 51/255, alpha: 0.9)
     }
     
     //Read from Firebase
@@ -63,6 +66,9 @@ class TaskShape: UIView {
     
     @objc func didRotate(recognizer: UIRotationGestureRecognizer){
         self.transform = self.transform.rotated(by: recognizer.rotation)
+        
+        let turn = atan2((self.transform.b), (self.transform.a))
+        turnDelegate?.didTurn(turn: turn)
         recognizer.rotation = 0.0
     }
     
