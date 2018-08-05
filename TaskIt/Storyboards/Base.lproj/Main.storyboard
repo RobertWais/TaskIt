@@ -23,51 +23,29 @@
                             <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="zjy-fg-If5">
                                 <rect key="frame" x="40" y="94" width="295" height="473"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="IlX-Wg-3d9">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNL-lx-8U1">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="150.5"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ue5-YJ-m3S">
-                                                <rect key="frame" x="0.0" y="0.0" width="295" height="72"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2yx-3A-0l6">
-                                                <rect key="frame" x="0.0" y="78" width="295" height="72.5"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="XLT-fE-1Hc">
+                                        <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" name="tcWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginBtnPressed:" destination="HsZ-aK-7Ue" eventType="touchUpInside" id="Tuy-7g-EEj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPq-lw-JjD">
                                         <rect key="frame" x="0.0" y="161.5" width="295" height="150"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNL-lx-8U1">
-                                                <rect key="frame" x="0.0" y="0.0" width="295" height="68.5"/>
-                                                <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                <state key="normal" title="Login">
-                                                    <color key="titleColor" name="tcWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="loginBtnPressed:" destination="HsZ-aK-7Ue" eventType="touchUpInside" id="Tuy-7g-EEj"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPq-lw-JjD">
-                                                <rect key="frame" x="0.0" y="81.5" width="295" height="68.5"/>
-                                                <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                <state key="normal" title="Sign Up">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="signUpBtnPressed:" destination="HsZ-aK-7Ue" eventType="touchUpInside" id="Za4-T3-eAJ"/>
-                                                    <segue destination="uTG-u7-iFc" kind="show" identifier="showSignUp" id="4uN-7E-SdO"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <state key="normal" title="Sign Up">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signUpBtnPressed:" destination="HsZ-aK-7Ue" eventType="touchUpInside" id="Za4-T3-eAJ"/>
+                                            <segue destination="uTG-u7-iFc" kind="show" identifier="showSignUp" id="4uN-7E-SdO"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRb-hB-MCb">
                                         <rect key="frame" x="0.0" y="322.5" width="295" height="150.5"/>
                                         <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
@@ -82,12 +60,12 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="IlX-Wg-3d9" secondAttribute="trailing" id="NlQ-rJ-cuv"/>
-                                    <constraint firstItem="XLT-fE-1Hc" firstAttribute="leading" secondItem="zjy-fg-If5" secondAttribute="leading" id="T8F-Gb-SL0"/>
-                                    <constraint firstItem="IlX-Wg-3d9" firstAttribute="leading" secondItem="zjy-fg-If5" secondAttribute="leading" id="azc-zG-q1u"/>
-                                    <constraint firstItem="QRb-hB-MCb" firstAttribute="leading" secondItem="zjy-fg-If5" secondAttribute="leading" id="gDv-Jn-YZC"/>
-                                    <constraint firstAttribute="trailing" secondItem="QRb-hB-MCb" secondAttribute="trailing" id="nJh-cG-xad"/>
-                                    <constraint firstAttribute="trailing" secondItem="XLT-fE-1Hc" secondAttribute="trailing" id="yUU-nB-9eB"/>
+                                    <constraint firstItem="QRb-hB-MCb" firstAttribute="leading" secondItem="zjy-fg-If5" secondAttribute="leading" id="JUn-Qa-bWP"/>
+                                    <constraint firstItem="yPq-lw-JjD" firstAttribute="leading" secondItem="zjy-fg-If5" secondAttribute="leading" id="NH9-ST-Knz"/>
+                                    <constraint firstAttribute="trailing" secondItem="bNL-lx-8U1" secondAttribute="trailing" id="g4N-vx-KaC"/>
+                                    <constraint firstItem="bNL-lx-8U1" firstAttribute="leading" secondItem="zjy-fg-If5" secondAttribute="leading" id="hUK-zo-Fy4"/>
+                                    <constraint firstAttribute="trailing" secondItem="QRb-hB-MCb" secondAttribute="trailing" id="yEe-dd-bev"/>
+                                    <constraint firstAttribute="trailing" secondItem="yPq-lw-JjD" secondAttribute="trailing" id="z7J-SN-wrj"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -103,12 +81,8 @@
                     <navigationItem key="navigationItem" id="zPZ-yg-9BM"/>
                     <connections>
                         <outlet property="loginBtn" destination="bNL-lx-8U1" id="dyK-aX-61Q"/>
-                        <outlet property="passwordField" destination="2yx-3A-0l6" id="Aoj-B7-rrY"/>
                         <outlet property="signUpBtn" destination="yPq-lw-JjD" id="Kb1-7f-DUZ"/>
-                        <outlet property="startComapnyBtn" destination="QRb-hB-MCb" id="Bhp-cZ-b3K"/>
-                        <outlet property="usernameField" destination="ue5-YJ-m3S" id="16N-nL-1zU"/>
-                        <outletCollection property="textFields" destination="ue5-YJ-m3S" collectionClass="NSMutableArray" id="TDm-ad-RFZ"/>
-                        <outletCollection property="textFields" destination="2yx-3A-0l6" collectionClass="NSMutableArray" id="kjs-GV-GCp"/>
+                        <outlet property="startCompanyBtn" destination="QRb-hB-MCb" id="c5d-0w-yLt"/>
                         <outletCollection property="displayBtns" destination="bNL-lx-8U1" collectionClass="NSMutableArray" id="wME-fJ-XxP"/>
                         <outletCollection property="displayBtns" destination="yPq-lw-JjD" collectionClass="NSMutableArray" id="Fz6-Dr-iV3"/>
                         <outletCollection property="displayBtns" destination="QRb-hB-MCb" collectionClass="NSMutableArray" id="gZn-7G-Nlw"/>
@@ -194,7 +168,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company Id" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dip-DT-ipw">
-                                                                    <rect key="frame" x="15" y="11" width="245" height="35"/>
+                                                                    <rect key="frame" x="15" y="11" width="225" height="35"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -511,6 +485,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xpl-Ci-dmw"/>
+        <segue reference="D5q-bJ-ZDb"/>
     </inferredMetricsTieBreakers>
 </document>

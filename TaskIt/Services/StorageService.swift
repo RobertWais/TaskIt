@@ -51,6 +51,7 @@ struct StorageService {
                 let ref = storage.reference(forURL: imageURL)
                 ref.getData(maxSize: 10 * 1024 * 1024) { data, error in
                     if error != nil {
+                        print("Error: \(error)")
                         completion(nil)
                     }else{
                         let image = UIImage(data: data!)
