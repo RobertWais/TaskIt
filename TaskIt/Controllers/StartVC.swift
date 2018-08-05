@@ -31,14 +31,18 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
     
     func attemptSignIn(username: String, password: String, companyId: String) {
         let darkenView = self.view.subviews[self.view.subviews.count-1]
-        print("username: \(username)")
-        print("password: \(password)")
         darkenView.removeFromSuperview()
-        signInModal(username: username, password: password, completion: { (success) in
-            if success {
-                self.performSegue(withIdentifier: "fromStartToMap", sender: self)
-            }
-        })
+        if self.isBeingPresented == true{
+                    print("was being pressented")
+                    self.dismiss(animated: false, completion: nil)
+                }else{
+                    print("fresh")
+                    let storyboard = UIStoryboard(name: "MapLayout", bundle: .main)
+                    let mainVC = storyboard.instantiateInitialViewController()!
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.window?.rootViewController = mainVC
+                    appDelegate.window?.makeKeyAndVisible()
+                }
     }
 
     //Buttons
@@ -46,6 +50,7 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
     @IBOutlet weak var startComapnyBtn: UIButton!
     @IBOutlet weak var signUpBtn: UIButton!
     @IBOutlet weak var loginBtn: UIButton!
+    var tempField: UITextField!
     
     //Login Credentials
     @IBOutlet weak var usernameField: UITextField!
@@ -69,6 +74,7 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
     //MARK: Button Listeners
 //    let mapVC = MapVC()
     @IBAction func loginBtnPressed(_ sender: Any) {
+
         
         let darkView = UIView(frame: self.view.bounds)
         self.view.addSubview(darkView)
@@ -94,6 +100,7 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
 //              self.performSegue(withIdentifier: "fromStartToMap", sender: self)
 //            }
 //        }
+
     }
     @IBAction func signUpBtnPressed(_ sender: Any) {
     }
@@ -212,6 +219,10 @@ extension StartVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        tempField = textField
     }
     
     func setDelegate(){

@@ -15,7 +15,7 @@
         <!--StartVC-->
         <scene sceneID="dc0-9I-Lah">
             <objects>
-                <viewController id="HsZ-aK-7Ue" customClass="StartVC" customModule="TaskIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartVC" id="HsZ-aK-7Ue" customClass="StartVC" customModule="TaskIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OhA-4s-mVk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

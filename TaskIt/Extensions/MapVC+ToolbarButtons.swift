@@ -100,7 +100,6 @@ extension MapVC {
         UIView.animate(withDuration: 0.3, animations: {
             self.confirmBtn.center.y = self.confirmBtn.center.y+100
             self.revertBtn.center.y = self.revertBtn.center.y+100
-            self.slider.center.y = self.slider.center.y+100
             self.freezeBtn.center.y = self.freezeBtn.center.y+100
             self.dPadView.isHidden = true
         }) { (success) in
@@ -127,6 +126,9 @@ extension MapVC {
     @objc func addShape(sender: UIButton){
         let num = sender.tag
         currentShape = TaskShape(shape: num)
+        self.dPadView.reset()
+        self.dPadView.transform = CGAffineTransform(rotationAngle: 0.0)
+        currentShape.turnDelegate = dPadView
         imageView.addSubview(currentShape)
         imageView.bringSubview(toFront: currentShape)
         UIView.animate(withDuration: 0.3, animations: {
@@ -139,16 +141,13 @@ extension MapVC {
             let confirmPos =  self.confirmBtn.center.y
             let revertPos = self.revertBtn.center.y
             let freezePos = self.freezeBtn.center.y
-            let sliderPos = self.slider.center.y
             let dPadFrame = self.dPadView.frame
             
             self.dPadView.frame = CGRect(x: dPadFrame.minX, y: dPadFrame.minY, width: 0, height: 0)
             self.freezeBtn.center.y = self.freezeBtn.center.y - 100
             self.confirmBtn.center.y = self.confirmBtn.center.y - 100
             self.revertBtn.center.y = self.revertBtn.center.y - 100
-            self.slider.center.y = self.slider.center.y - 100
             UIView.animate(withDuration: 0.4, animations: {
-                self.slider.center.y = sliderPos
                 self.freezeBtn.center.y = freezePos
                 self.confirmBtn.center.y = confirmPos
                 self.revertBtn.center.y = revertPos
@@ -160,14 +159,14 @@ extension MapVC {
     
     
     @objc func extendRight(){
-        currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width+CGFloat(slider.value), height: currentShape.bounds.height)
+        currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width+2, height: currentShape.bounds.height)
         let radians:CGFloat = atan2((currentShape.transform.b), (currentShape.transform.a))
         let tuple = getRadians(code: 3, radians: radians)
         currentShape.center = CGPoint(x: currentShape.center.x-tuple.1, y: currentShape.center.y-tuple.0 )
     }
     
     @objc func extendUp(){
-        currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width, height: currentShape.bounds.height+CGFloat(slider.value))
+        currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width, height: currentShape.bounds.height+2)
         let radians:CGFloat = atan2((currentShape.transform.b), (currentShape.transform.a))
         let tuple = getRadians(code: 0, radians: radians)
         currentShape.center = CGPoint(x: currentShape.center.x-tuple.0, y: currentShape.center.y-tuple.1 )
@@ -175,14 +174,14 @@ extension MapVC {
     
     
     @objc func extendDown(){
-        currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width, height: currentShape.bounds.height+CGFloat(slider.value))
+        currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width, height: currentShape.bounds.height+2)
         let radians:CGFloat = atan2((currentShape.transform.b), (currentShape.transform.a))
         let tuple = getRadians(code: 1, radians: radians)
         currentShape.center = CGPoint(x: currentShape.center.x-tuple.0, y: currentShape.center.y-tuple.1 )
         
     }
     @objc func extendLeft(){
-        currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width+CGFloat(slider.value), height: currentShape.bounds.height)
+        currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width+2, height: currentShape.bounds.height)
         let radians:CGFloat = atan2((currentShape.transform.b), (currentShape.transform.a))
         let tuple = getRadians(code: 2, radians: radians)
         currentShape.center = CGPoint(x: currentShape.center.x-tuple.1, y: currentShape.center.y-tuple.0 )

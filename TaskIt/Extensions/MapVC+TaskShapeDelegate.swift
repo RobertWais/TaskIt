@@ -46,6 +46,11 @@ extension MapVC: ShapeDelegate,CompletedDelegate {
     
     func didConfirm(bool: Bool){
         let darkenView = self.view.subviews[self.view.subviews.count-1]
+        if freeze == 1{
+            scrollView.isScrollEnabled = true
+            freezeView.removeFromSuperview()
+            freeze = 0
+        }
         if bool {
             currentShape.isUserInteractionEnabled = false
             currentShape.removeFromSuperview()

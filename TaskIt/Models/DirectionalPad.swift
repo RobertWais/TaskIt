@@ -7,7 +7,16 @@
 
 import UIKit
 
-class DirectionalPad: UIView {
+
+protocol TurnDelegate: class {
+    func didTurn(turn: CGFloat)
+}
+
+class DirectionalPad: UIView, TurnDelegate {
+    func didTurn(turn: CGFloat) {
+        self.transform = CGAffineTransform(rotationAngle: turn)
+    }
+    
     
     var  baseView: UIView!
     var toolBar: UIToolbar!
@@ -28,19 +37,28 @@ class DirectionalPad: UIView {
     var regularBtns = [UIButton]()
     var invertBtns = [UIButton]()
     var allSections = [[UIButton]]()
+    private var x: CGFloat = 0.0
+    private var y: CGFloat = 0.0
+    private var padding: CGFloat = 0
     
     var current = 0
+    
+    func reset(){
+        self.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
+    }
     
     init(){
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
     init(view: UIView, toolbar: UIToolbar){
-        
         super.init(frame: CGRect(x: view.frame.width - (100+10), y: (view.frame.height-(toolbar.frame.height+5+100)), width: 100, height: 100))
+        x = self.center.x
+        y = self.center.y
+        padding = view.frame.width - x
         self.toolBar = toolbar
         self.baseView = view
         self.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
-        self.layer.cornerRadius = self.frame.width/6
+        self.layer.cornerRadius = self.frame.width/2
         self.layer.masksToBounds = true
         invertBtn = makeButton(symbol: "◉", x: (self.frame.height/3), y:(self.frame.height/3), width: self.frame.width/3, height: self.frame.height/3)
         invertBtn.addTarget(self, action: #selector(invert), for: .touchUpInside)
@@ -60,13 +78,16 @@ class DirectionalPad: UIView {
     
     @objc func swipeLeft(recognizer: UISwipeGestureRecognizer){
         UIView.animate(withDuration: 0.2 , animations: {
-            self.frame = CGRect(x: 10, y: self.frame.minY, width: 100, height: 100)
+            self.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
+            self.center = CGPoint(x: self.padding,y: self.y)
+//            self.frame = CGRect(x: 10, y: self.frame.minY, width: 100, height: 100)
         })
     }
     
     @objc func swipeRight(recognizer: UISwipeGestureRecognizer){
         UIView.animate(withDuration: 0.2 , animations: {
-            self.frame = CGRect(x: self.baseView.frame.width - (100+10), y: (self.baseView.frame.height-(self.toolBar.frame.height+5+100)), width: 100, height: 100)
+            self.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
+            self.center = CGPoint(x: self.x,y: self.y)
         })
     }
     

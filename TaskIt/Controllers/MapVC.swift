@@ -34,7 +34,6 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
     var collapseButton: UIButton!
     var confirmBtn: UIButton!
     var revertBtn: UIButton!
-    var slider: UISlider!
     var freezeBtn: UIButton!
     var currentShape: TaskShape!
     var firstBarItems = [UIBarButtonItem]()
@@ -43,6 +42,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Controller being pressented: \(self.isBeingPresented)")
         tempToolBar.layer.masksToBounds = true
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
         setUpAddBtn()
@@ -96,7 +96,9 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
     
     @IBAction func signOutBtnPressed(_ sender: Any) {
         Login.signOut()
-        self.performSegue(withIdentifier: "unwindToStartVCFromMap", sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let mainVC = storyboard.instantiateInitialViewController()!
+        self.present(mainVC, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -129,7 +131,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
         let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - (navigationController?.navigationBar.frame.height)! - imageViewSize.height) / 2 : 0
         let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
 
-        
+
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding + (navigationController?.navigationBar.frame.height)!, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
