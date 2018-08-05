@@ -27,6 +27,39 @@ struct UserService {
 //    self.username = dict["username"] as? String
 //    self.companyID = dict["companyId"] as? String
     
+    static func switchCurrentCompany(newId: String, email: String, password: String,sender: UIViewController, completion: @escaping (Bool)->()){
+        let ref = Database.database().reference()
+        //assume logged in
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if let error = error {
+                print("Error: error logging in")
+                Alerts.simpleAlert(err: error, controller: sender)
+                return completion(false)
+            }
+            let userRef = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
+            userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let currUser = TaskUser(snapshot: snapshot) else {
+                    return completion(false)
+                }
+                TaskUser.setCurrent(currUser)
+                let userUpdate = "/users/\(TaskUser.current.uid)/companyId"
+                ref.updateChildValues([userUpdate: newId]){ (error, ref) in
+                    if let error = error {
+                        return completion(false)
+                    }
+                        //Check if company id is valid
+                        let checkLegitimateCompany = Database.database().reference().child("company").child(newId)
+                    
+                        checkLegitimateCompany.observeSingleEvent(of: .value, with: { (snapshot) in
+                            if snapshot.hasChildren(){
+                                return completion(true)
+                            }
+                           return completion(false)
+                        })
+                }
+            })
+        }
+    }
     
     static func create(user: User, username: String, companyID: String,completion: @escaping (Error?, TaskUser?, String?)->()){
         let ref = Database.database().reference()

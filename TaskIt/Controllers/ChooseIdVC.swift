@@ -12,7 +12,8 @@ import UIKit
 
 class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-   
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     
     @IBOutlet weak var mainView: UIView!
     weak var delegate: SignInDelegate?
@@ -30,15 +31,32 @@ class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         })
     }
     @IBAction func confirmBtnPressed(_ sender: Any) {
+        
+        //Enter Id in companies in iD
+            //Check if company id matches,
+                // if so update userDefaults,
+                    //check if exists and if not update coredat company ids
+                // if not
+                    //Company does not exist
+                    //return
         guard let username = self.usernameField.text,
             let password = self.passwordField.text,
             let companyId = self.newCompanyField.text else{
                 //Alert Error
                 return
         }
-        dismiss(animated: true) {
-            self.delegate?.attemptSignIn(username: username, password: password, companyId: companyId)
+        
+        UserService.switchCurrentCompany(newId: companyId, email: username, password: password, sender: self) { (success) in
+            if success{
+                self.dismiss(animated: true) {
+                    self.delegate?.attemptSignIn(username: username, password: password, companyId: companyId)
+                }
+            }else{
+                
+            }
         }
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,6 +81,9 @@ class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerForKeyboardNotifications()
+        setDelegate()
+        scrollView.delegate = self
         Constants.Data.liveCompanyIds = CoreDataHelper.retrieveIds()
         tableView.dataSource = self
         tableView.delegate = self
@@ -88,10 +109,12 @@ class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 extension ChooseIdVC: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Touches began")
         self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("Return")
         textField.resignFirstResponder()
         return true
     }
@@ -102,6 +125,34 @@ extension ChooseIdVC: UITextFieldDelegate {
         newCompanyField.delegate = self
     }
     
+}
+
+extension ChooseIdVC {
+    func registerForKeyboardNotifications(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func keyBoardWasShown(notification: NSNotification){
+        print("Yes")
+        if let userInfo = notification.userInfo {
+            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height +
+                    50, right: 0)
+                scrollView.contentInset = contentInsets
+                scrollView.scrollIndicatorInsets = contentInsets
+            }
+        }
+    }
+    
+    
+    
+    @objc func keyBoardWillHide(notification: NSNotification){
+        let contentInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
 }
 
 

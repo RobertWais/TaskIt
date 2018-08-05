@@ -54,7 +54,7 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         setDelegate()
         updateButtonUI()
         setViewLogin()
