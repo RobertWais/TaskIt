@@ -66,6 +66,10 @@ extension SignUpVC {
                     print("Company does not exist")
                     return
                 }
+                let temp = CoreDataHelper.newCompanyId()
+                temp.name = ""
+                temp.id = TaskUser.current.companyID
+                CoreDataHelper.saveId()
                 self.performSegue(withIdentifier: "toMapVC", sender: self)
         }
     }
@@ -150,7 +154,8 @@ extension SignUpVC {
     @objc func keyBoardWasShown(notification: NSNotification){
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-                let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 50, right: 0)
+                let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height +
+                    50, right: 0)
                 scrollView.contentInset = contentInsets
                 scrollView.scrollIndicatorInsets = contentInsets
             }
