@@ -37,7 +37,7 @@ struct Alerts{
         }
     }
     
-    static func noCompanyId(sender: UIViewController, button: UIButton){
+    static func noCompanyId(sender: UIViewController){
         let alert = UIAlertController(title: "Company Doesn't exist",
                                       message: "The company id you entered doesn't exist",
                                       preferredStyle: .alert)
@@ -46,7 +46,6 @@ struct Alerts{
         })
         alert.addAction(cancel)
         sender.present(alert, animated: true){
-            button.isEnabled = true
         }
     }
     
@@ -82,6 +81,17 @@ struct Alerts{
         sender.present(alert, animated: true)
     }
     
+    static func successButFailure(sender: UIViewController){
+        let alert = UIAlertController(title: "Sign Up Successful",
+                                      message: "Invalid comapany id. Log in with a correct company id",
+                                      preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
+        })
+        
+        alert.addAction(cancel)
+        sender.present(alert, animated: true)
+    }
    
     
     

@@ -17,7 +17,6 @@ struct UserService {
         //assume logged in
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if let error = error {
-                print("Error: error logging in")
                 Alerts.simpleAlert(err: error, controller: sender)
                 return completion(false)
             }
@@ -25,7 +24,6 @@ struct UserService {
                 return
             }
             let userUpdate = "/users/\(id)/companyId"
-            print("User : \(userUpdate)")
             ref.updateChildValues([userUpdate: newId]){ (error, ref) in
                 if let error = error {
                     print("Error updating values: \(error)")
@@ -36,16 +34,17 @@ struct UserService {
                     guard let currUser = TaskUser(snapshot: snapshot) else {
                         return completion(false)
                     }
-                    TaskUser.setCurrent(currUser)
                     //Check if company id is valid
                     let checkLegitimateCompany = Database.database().reference().child("company").child(newId)
-                    
                     checkLegitimateCompany.observeSingleEvent(of: .value, with: { (snapshot) in
                         if snapshot.hasChildren(){
-                            let tempId = CoreDataHelper.newCompanyId()
-                            tempId.id = newId
-                            tempId.name = ""
-                            CoreDataHelper.saveId()
+                            TaskUser.setCurrent(currUser)
+                            if Constants.Data.liveCompanyIds.contains(newId){
+                            }else{
+                                let tempId = CoreDataHelper.newCompanyId()
+                                tempId.id = newId
+                                CoreDataHelper.saveId()
+                            }
                             return completion(true)
                         }
                         return completion(false)

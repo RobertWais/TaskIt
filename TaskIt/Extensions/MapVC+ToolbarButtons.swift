@@ -125,6 +125,13 @@ extension MapVC {
     //Functions for adding shapes
     @objc func addShape(sender: UIButton){
         let num = sender.tag
+        
+        if num == 0{
+            dPadView.isUserInteractionEnabled = false
+        }else{
+            dPadView.isUserInteractionEnabled = true
+        }
+        
         currentShape = TaskShape(shape: num)
         self.dPadView.reset()
         self.dPadView.transform = CGAffineTransform(rotationAngle: 0.0)

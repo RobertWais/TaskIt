@@ -115,6 +115,9 @@ class Task{
         self._shape?.center.x = positionX
         self._shape?.center.y = positionY
         self._shape?.transform = CGAffineTransform(rotationAngle: angle)
+        if type == 0{
+            self._shape?.layer.cornerRadius = (self._shape?.layer.frame.width)!/2
+        }
         //Change when adding new features of colors
 //        self._shape?.backgroundColor = UIColor(red: colorR, green: colorG, blue: colorB, alpha: alpha)
         self.shape.backgroundColor = Constants.Colors.safeRed

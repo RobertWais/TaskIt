@@ -10,7 +10,6 @@ import UIKit
 class IdTableViewCell: UITableViewCell {
     
     @IBOutlet weak var companyId: UILabel!
-    var name = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,16 +22,8 @@ class IdTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configurecell(companyId: CompanyId){
-        guard let id = companyId.id,
-        let name = companyId.name
-        else{
-            self.name = ""
-            self.companyId.text = ""
-            return
-        }
-        self.name = name
-        self.companyId.text = id
+    func configurecell(companyId: String){
+        self.companyId.text = companyId
     }
 
 }

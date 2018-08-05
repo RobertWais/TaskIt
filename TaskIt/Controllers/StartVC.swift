@@ -9,6 +9,9 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
+protocol  SignUpDelegate: class {
+    func attemptSignUp(success: Bool)
+}
 
 protocol SignInDelegate: class {
     func attemptSignIn(username: String, password: String, companyId: String)
@@ -18,7 +21,25 @@ protocol DarkViewDelegate: class {
     func removeDarkView()
 }
 
-class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
+class StartVC: UIViewController, SignInDelegate,DarkViewDelegate,SignUpDelegate {
+    
+    func attemptSignUp(success: Bool) {
+        if success {
+            if self.isBeingPresented == true{
+                self.dismiss(animated: false, completion: nil)
+            }else{
+                let storyboard = UIStoryboard(name: "MapLayout", bundle: .main)
+                let mainVC = storyboard.instantiateInitialViewController()!
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = mainVC
+                appDelegate.window?.makeKeyAndVisible()
+            }
+        }else{
+            Alerts.successButFailure(sender: self)
+        }
+    }
+    
+    
     //Buttons
     @IBOutlet var displayBtns: [UIButton]!
     @IBOutlet weak var startCompanyBtn: UIButton!
@@ -29,7 +50,6 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
     //Login Credentials
     
     override func viewDidLayoutSubviews() {
-        print("-------------------------")
         signUpBtn.layer.cornerRadius = signUpBtn.bounds.size.height/2
         loginBtn.layer.cornerRadius = loginBtn.bounds.size.height/2
         startCompanyBtn.layer.cornerRadius = startCompanyBtn.bounds.size.height/2
@@ -49,10 +69,8 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
         let darkenView = self.view.subviews[self.view.subviews.count-1]
         darkenView.removeFromSuperview()
         if self.isBeingPresented == true{
-                    print("was being pressented")
                     self.dismiss(animated: false, completion: nil)
                 }else{
-                    print("fresh")
                     let storyboard = UIStoryboard(name: "MapLayout", bundle: .main)
                     let mainVC = storyboard.instantiateInitialViewController()!
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -91,23 +109,11 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
         modalVC.darkdelegate = self 
 
         present(modalVC, animated: true, completion: nil)
-        
-        
-//        let darkenView = self.view.subviews[self.view.subviews.count-1]
-//        UIView.animate(withDuration: 1.0, animations: {
-//            darkenView.alpha = 0.0
-//        }) { (success) in
-//            darkenView.removeFromSuperview()
-//        }
-        
-//        signIn(){ (success) in
-//            if success {
-//              self.performSegue(withIdentifier: "fromStartToMap", sender: self)
-//            }
-//        }
-
     }
     @IBAction func signUpBtnPressed(_ sender: Any) {
+        let VC = storyboard?.instantiateViewController(withIdentifier: "SignUpVC") as! SignUpVC
+        VC.delegate = self
+        navigationController?.pushViewController(VC, animated: true)
     }
     
     @IBAction func startCompanyBtnPressed(_ sender: Any) {

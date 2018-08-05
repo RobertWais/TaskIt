@@ -93,4 +93,8 @@ class TaskShape: UIView {
     @objc func didTap(recognizer: UITapGestureRecognizer){
     }
     
+    
+    
+    
+    
 }

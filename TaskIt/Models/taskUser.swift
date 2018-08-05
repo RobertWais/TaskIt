@@ -36,6 +36,10 @@ class TaskUser: Codable {
         return currentUser
     }
     
+    static func setNil(){
+            UserDefaults.standard.removeObject(forKey: "currentUser")
+    }
+    
     static func setCurrent(_ user: TaskUser){
         if let data = try? JSONEncoder().encode(user){
             UserDefaults.standard.set(data,forKey: "currentUser")

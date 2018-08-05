@@ -43,7 +43,6 @@
                                         </state>
                                         <connections>
                                             <action selector="signUpBtnPressed:" destination="HsZ-aK-7Ue" eventType="touchUpInside" id="Za4-T3-eAJ"/>
-                                            <segue destination="uTG-u7-iFc" kind="show" identifier="showSignUp" id="4uN-7E-SdO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRb-hB-MCb">
@@ -121,13 +120,13 @@
                                                 <rect key="frame" x="10" y="60" width="255" height="75.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Icb-KQ-zvw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="255" height="32"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="255" height="31.5"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xXu-FA-7G1">
-                                                        <rect key="frame" x="0.0" y="44" width="255" height="31.5"/>
+                                                        <rect key="frame" x="0.0" y="43.5" width="255" height="32"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -335,43 +334,43 @@
         <!--Sign UpVC-->
         <scene sceneID="44z-2B-zWD">
             <objects>
-                <viewController id="uTG-u7-iFc" customClass="SignUpVC" customModule="TaskIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpVC" id="uTG-u7-iFc" customClass="SignUpVC" customModule="TaskIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sjd-C8-xPg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgr-b4-5Jj">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="HAK-JH-1nL">
-                                        <rect key="frame" x="0.0" y="20" width="375" height="563"/>
+                                        <rect key="frame" x="0.0" y="20" width="375" height="607"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="QTH-yB-VDL">
-                                                <rect key="frame" x="60" y="0.0" width="255" height="388"/>
+                                                <rect key="frame" x="60" y="0.0" width="255" height="432"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TmD-0i-4TW">
-                                                        <rect key="frame" x="0.0" y="0.0" width="255" height="87.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="255" height="98.5"/>
                                                         <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRq-wJ-66K">
-                                                        <rect key="frame" x="0.0" y="100.5" width="255" height="87"/>
+                                                        <rect key="frame" x="0.0" y="111.5" width="255" height="98"/>
                                                         <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Bg-dY-wbC">
-                                                        <rect key="frame" x="0.0" y="200.5" width="255" height="87.5"/>
+                                                        <rect key="frame" x="0.0" y="222.5" width="255" height="98.5"/>
                                                         <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sCu-0T-pw7">
-                                                        <rect key="frame" x="0.0" y="301" width="255" height="87"/>
+                                                        <rect key="frame" x="0.0" y="334" width="255" height="98"/>
                                                         <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
@@ -383,7 +382,7 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hd2-IX-bVC">
-                                                <rect key="frame" x="15" y="488" width="345" height="75"/>
+                                                <rect key="frame" x="15" y="532" width="345" height="75"/>
                                                 <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="75" id="BSE-3W-oSi"/>

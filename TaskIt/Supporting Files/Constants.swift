@@ -22,7 +22,7 @@ struct Constants {
     
     struct Data {
         static var liveTasks = [String: Task]()
-        static var liveCompanyIds = [CompanyId]()
+        static var liveCompanyIds = [String]()
     }
 }
 

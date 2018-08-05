@@ -20,6 +20,8 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var joinBtn: UIButton!
+
+    weak var delegate: SignUpDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,36 +43,49 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
     @IBAction func joinBtnPressed(_ sender: Any) {
         print("hit")
         joinBtn.isEnabled = false
-        login()
+        login(){ (number) in
+            switch number{
+            case 0 :
+                Alerts.fillOutFields(controller: self, button: self.joinBtn)
+            case 1:
+                self.navigationController?.popViewController(animated: true)
+                self.delegate?.attemptSignUp(success: false)
+            case 2:
+                self.navigationController?.popViewController(animated: true)
+                self.delegate?.attemptSignUp(success: true)
+            default:
+                Alerts.fillOutFields(controller: self, button: self.joinBtn)
+            }
+        }
     }
 }
 
 //SignUp User wit CompanyID
 extension SignUpVC {
-    func login(){
-        self.resignFirstResponder()
+    func login(completion: @escaping (Int)->()){
         let loading = LoadWheel(view: self.view)
         if  usernameField?.text == "" || (emailField?.text)! == ""  || (passwordField?.text)! == "" || (companyIdField?.text)! ==  ""{
-            Alerts.fillOutFields(controller: self, button: joinBtn)
             self.joinBtn.isEnabled = true
             loading.stopAnimating()
-            return
+            return completion(0)
         }
             Login.signUp(email: self.emailField.text!, password: self.passwordField.text!, username: self.usernameField.text!,companyId: companyIdField.text!, controller: self) {  (url) in
                 defer {
                     self.joinBtn.isEnabled = true
                     loading.stopAnimating()
                 }
+                
+                
+                ////
                 guard let url = url else{
-                    Alerts.companyDoesNotExist(sender: self)
                     print("Company does not exist")
-                    return
+                    TaskUser.setNil()
+                    return completion(1)
                 }
                 let temp = CoreDataHelper.newCompanyId()
-                temp.name = ""
                 temp.id = TaskUser.current.companyID
                 CoreDataHelper.saveId()
-                self.performSegue(withIdentifier: "toMapVC", sender: self)
+                return completion(2)
         }
     }
 }
