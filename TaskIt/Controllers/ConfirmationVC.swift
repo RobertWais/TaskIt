@@ -55,7 +55,6 @@ class ConfirmationVC: UIViewController {
         }
         let task = Task(shape: shape, title: (titleField?.text)!, description: textView.text, userPosted: TaskUser.current.uid, completed: "")
         DatabaseService.makeAPost(task: task.dictValue, sender: self) { (success) in
-            print("Success: \(success)")
             if success {
                 self.delegate?.didConfirm(bool: true)
                 self.performSegue(withIdentifier: "unwindToMap", sender: self)

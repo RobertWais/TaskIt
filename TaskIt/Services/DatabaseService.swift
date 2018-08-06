@@ -44,7 +44,6 @@ struct DatabaseService {
                 return
             }
             updateUser(key: key, title: task["title"] as! String, completion: { (error) in
-                print("Error: \(String(describing: error))")
                 if let err=error {
                     Alerts.simpleAlert(err: err, controller: sender)
                     completion(false)
@@ -68,7 +67,6 @@ struct DatabaseService {
     
     static func updateUser(key: String, title: String ,completion: @escaping (Error?)->()){
         //Tasks that are being worked on
-        print("key: \(key)")
         let indyRef = mainRef.child("users").child(TaskUser.current.uid).child("current").child(key)
         
         indyRef.setValue(title) { (error, dbRef) in
@@ -77,11 +75,9 @@ struct DatabaseService {
                 return
             }
             completion(nil)
-        }    }
-    
-    func fun(){
-        print("yes")
+        }
     }
+    
     
     static func retrieveTasks(completion: @escaping (Task?,Int)->()){
         let ref = companyRef.child("currentTasks")

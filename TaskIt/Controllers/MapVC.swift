@@ -43,7 +43,6 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Controller being pressented: \(self.isBeingPresented)")
         tempToolBar.layer.masksToBounds = true
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
         setUpAddBtn()
@@ -52,7 +51,6 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
         StorageService.getImage { (image) in
             wheel.stopAnimating()
             if image == nil {
-                print("Image nil")
             }else{
                 self.addBtn.isUserInteractionEnabled = true
                 self.baseImage = image
@@ -83,12 +81,8 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
                             let removeTask = Constants.Data.liveTasks.removeValue(forKey: task.key)
                             removeTask?.shape.removeFromSuperview()
                         }
-                    case 3:
-                        print("Updating")
-                    //updated
                     default:
-                        print("Eror")
-                        //Error
+                        return
                     }
                 }
             }

@@ -33,7 +33,6 @@ struct CoreDataHelper {
         do{
             try context.save()
         } catch let error {
-            print("Error: \(error.localizedDescription)")
         }
     }
     
@@ -55,7 +54,6 @@ struct CoreDataHelper {
             }
             return  ids
         }catch let error {
-            print("Error: can not retrieve portfolios")
             return []
         }
     }

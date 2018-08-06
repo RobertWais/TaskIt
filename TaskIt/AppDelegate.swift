@@ -24,15 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate{
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("Firebase registration token: \(fcmToken)")
-        
         let dataDict:[String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            //print("Message ID: \(messageID)")
         }
         // Print full message.
         //print(userInfo)
@@ -43,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate{
         
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            //print("Message ID: \(messageID)")
         }
         
         // Print full message.
@@ -188,11 +186,11 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            //print("Message ID: \(messageID)")
         }
         
         // Print full message.
-//        print(userInfo)
+        //print(userInfo)
         
         // Change this to your preferred presentation option
         completionHandler([])
@@ -202,7 +200,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        print(userInfo)
+        //print(userInfo)
         completionHandler()
     }
 }

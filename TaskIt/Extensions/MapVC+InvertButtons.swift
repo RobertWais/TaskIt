@@ -94,7 +94,6 @@ extension MapVC {
         case 3 :
             returnTuple = (-sin(radians),-cos(radians))
         default :
-            print("Error: retrieving radions")
             return (0,0)
             
         }

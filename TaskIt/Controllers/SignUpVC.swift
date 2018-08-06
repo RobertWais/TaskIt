@@ -25,14 +25,10 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setDelegate()
         updateAllUI()
         registerForKeyboardNotifications()
-        
         scrollView.delegate = self
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,7 +43,6 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func joinBtnPressed(_ sender: Any) {
-        print("hit")
         joinBtn.isEnabled = false
         login(){ (number) in
             switch number{
@@ -81,10 +76,7 @@ extension SignUpVC {
                     loading.stopAnimating()
                 }
                 
-                
-                ////
-                guard let url = url else{
-                    print("Company does not exist")
+                guard let _ = url else{
                     TaskUser.setNil()
                     return completion(1)
                 }
@@ -129,12 +121,9 @@ extension SignUpVC {
     }
 }
 
-
 extension SignUpVC: UITextFieldDelegate {
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-        print("Yas")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -29,7 +29,6 @@ struct Alerts{
                                       preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
-            print("Alert color: \(String(describing: alert.view.backgroundColor))")
         })
         alert.addAction(cancel)
         controller.present(alert, animated: true){

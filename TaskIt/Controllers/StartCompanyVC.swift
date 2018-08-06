@@ -140,7 +140,6 @@ extension StartCompanyVC: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("yes")
         textField.resignFirstResponder()
         return true
     }

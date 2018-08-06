@@ -23,6 +23,14 @@ protocol DarkViewDelegate: class {
 
 class StartVC: UIViewController, SignInDelegate,DarkViewDelegate,SignUpDelegate {
     
+    //Buttons
+    @IBOutlet var displayBtns: [UIButton]!
+    @IBOutlet weak var startCompanyBtn: UIButton!
+    @IBOutlet weak var signUpBtn: UIButton!
+    @IBOutlet weak var loginBtn: UIButton!
+    var tempField: UITextField!
+    
+    
     func attemptSignUp(success: Bool) {
         if success {
             if self.isBeingPresented == true{
@@ -38,15 +46,6 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate,SignUpDelegate 
             Alerts.successButFailure(sender: self)
         }
     }
-    
-    
-    //Buttons
-    @IBOutlet var displayBtns: [UIButton]!
-    @IBOutlet weak var startCompanyBtn: UIButton!
-    @IBOutlet weak var signUpBtn: UIButton!
-    @IBOutlet weak var loginBtn: UIButton!
-    var tempField: UITextField!
-    
     //Login Credentials
     
     override func viewDidLayoutSubviews() {
@@ -127,7 +126,6 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate,SignUpDelegate 
 
 //Login user
 extension StartVC {
-    
     func signInModal(username: String , password: String, completion: @escaping (Bool)->()){
         Auth.auth().signIn(withEmail: username, password: password) { (user, error) in
             if let error = error {
@@ -140,7 +138,6 @@ extension StartVC {
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 let currUser = TaskUser(snapshot: snapshot)
                 TaskUser.setCurrent(currUser!)
-                print("current user: \(TaskUser.current.username)")
                 completion(true)
                 return
             })

@@ -98,7 +98,6 @@ class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
-        print("array \(Constants.Data.liveCompanyIds)")
         // Do any additional setup after loading the view.
         
         mainView.backgroundColor = Constants.Colors.baseColor
@@ -134,11 +133,9 @@ extension ChooseIdVC: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-        print("ues")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("Return")
         textField.resignFirstResponder()
         return true
     }
@@ -159,7 +156,6 @@ extension ChooseIdVC {
     }
     
     @objc func keyBoardWasShown(notification: NSNotification){
-        print("Yes")
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                 let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height +

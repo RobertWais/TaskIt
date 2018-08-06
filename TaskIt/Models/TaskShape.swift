@@ -14,11 +14,11 @@ class TaskShape: UIView {
     var previous: CGFloat = 0
     weak var turnDelegate: TurnDelegate?
     //Default Creation
-    init(shape: Int){
+    init(shape: Int, view: UIView?){
         if shape == 2{
-            super.init(frame: CGRect(x: 200.0, y: 300.0, width: 100, height: 50))
+            super.init(frame: CGRect(x: 0.0, y: 0.0, width: 100, height: 50))
         }else{
-            super.init(frame: CGRect(x: 200.0, y: 300.0, width: 100, height: 100))
+           super.init(frame: CGRect(x: 0.0, y: 0.0, width: 100, height: 100))
         }
         self.backgroundColor = UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 0.9)
         self.initGestures()
@@ -27,7 +27,6 @@ class TaskShape: UIView {
         if shape == 0 {
             self.layer.cornerRadius = self.frame.height/2
         }
-        
         self.backgroundColor = UIColor(red: 255/255, green: 220/255, blue: 51/255, alpha: 0.9)
     }
     

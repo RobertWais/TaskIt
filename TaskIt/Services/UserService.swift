@@ -26,7 +26,6 @@ struct UserService {
             let userUpdate = "/users/\(id)/companyId"
             ref.updateChildValues([userUpdate: newId]){ (error, ref) in
                 if let error = error {
-                    print("Error updating values: \(error)")
                     return completion(false)
                 }
                 let userRef = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)

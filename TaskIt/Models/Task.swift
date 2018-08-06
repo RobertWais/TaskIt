@@ -110,7 +110,7 @@ class Task{
         self._description = description
         self._userPosted = userPosted
         self._completed = completed
-        self._shape = TaskShape(shape: type)
+        self._shape = TaskShape(shape: type, view: nil)
         self._shape?.bounds = CGRect(x: 0, y: 0, width: width, height: height)
         self._shape?.center.x = positionX
         self._shape?.center.y = positionY
