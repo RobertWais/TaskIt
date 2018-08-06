@@ -33,12 +33,14 @@ class StartCompanyVC: UIViewController {
         
         if companyNameField.text! == "" {
             Alerts.fillOutFields(controller: self, button: createCompanyBtn)
+            removeView()
             return
         }
         DatabaseService.createCompany(name: companyNameField.text!, sender: self){ (key) in
             defer {
                 self.createCompanyBtn.isEnabled = true
                 wheel.stopAnimating()
+                self.removeView()
             }
             guard let key = key else {
                 self.createCompanyBtn.isEnabled = true
@@ -47,6 +49,8 @@ class StartCompanyVC: UIViewController {
             let imageRef = Storage.storage().reference().child("companyImages/\(key).jpg")
             StorageService.uploadImage(self.imageView.image!, reference: imageRef) { (url) in
                 guard let url = url else {
+                    Alerts.couldNotCreate(sender: self)
+                    self.removeView()
                     return
                 }
                 DatabaseService.setCompanyURL(id: key, url: String(describing: url), completion: { (error) in
@@ -54,6 +58,9 @@ class StartCompanyVC: UIViewController {
                         Alerts.simpleAlert(err: error, controller: sender as! UIViewController)
                     }else{
                         wheel.stopAnimating()
+                        var newId = CoreDataHelper.newCompanyId()
+                        newId.id = key
+                        CoreDataHelper.saveId()
                         Alerts.displayKey(uniqueID: "\(key)", sender: self, finished: {
                             self.performSegue(withIdentifier: "unwindToStartVC", sender: self)
                         })

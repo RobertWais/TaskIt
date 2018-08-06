@@ -53,8 +53,11 @@ class TaskDetailsVC: UIViewController {
         }
     }
     @IBAction func completedBtnPressed(_ sender: Any) {
-        
+        completedBtn.isUserInteractionEnabled = false
         DatabaseService.deleteTask(key: key!, sender: self) { (success) in
+            defer{
+                self.completedBtn.isUserInteractionEnabled = true
+            }
             if success{
                 Constants.Data.liveTasks.removeValue(forKey: self.key!)
                 self.delegate?.didComplete()
@@ -64,6 +67,8 @@ class TaskDetailsVC: UIViewController {
                     self.performSegue(withIdentifier: "unwindToMapFromDetails", sender: self)
                     
                 }
+            }else{
+                Alerts.couldNotDelete(sender: self)
             }
         }
         

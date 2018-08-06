@@ -62,6 +62,12 @@ class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Choose Group Id"
+        }
+        return ""
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.Data.liveCompanyIds.count
     }
@@ -127,8 +133,8 @@ extension ChooseIdVC: UITextFieldDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touches began")
         self.view.endEditing(true)
+        print("ues")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

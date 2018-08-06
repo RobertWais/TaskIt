@@ -21,6 +21,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
     let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     @IBOutlet weak var tempToolBar: UIToolbar!
     
+    var keepGoing = 0
     var freeze = 0
     var freezeView: UIView!
     var dPadView = DirectionalPad()
@@ -46,13 +47,14 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
         tempToolBar.layer.masksToBounds = true
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
         setUpAddBtn()
-        
+        addBtn.isUserInteractionEnabled = false
         let wheel = LoadWheel(view: self.view)
         StorageService.getImage { (image) in
             wheel.stopAnimating()
             if image == nil {
                 print("Image nil")
             }else{
+                self.addBtn.isUserInteractionEnabled = true
                 self.baseImage = image
                 self.dPadView = DirectionalPad(view: self.view,toolbar:  self.tempToolBar)
                 self.dPadView.isHidden = true

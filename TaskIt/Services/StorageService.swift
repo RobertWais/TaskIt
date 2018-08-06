@@ -22,12 +22,10 @@ struct StorageService {
         
         reference.putData(imageData, metadata: nil) { (metaData, error) in
             if error != nil {
-                print("Error: \(error?.localizedDescription)")
                return completion(nil)
             }
             reference.downloadURL(completion: { (url, error) in
                 if error != nil {
-                    print("Error: downloading URL")
                   return completion(nil)
                 }
                 completion(url)

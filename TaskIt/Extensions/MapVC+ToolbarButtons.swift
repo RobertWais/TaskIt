@@ -30,19 +30,19 @@ extension MapVC {
         squareButton.addTarget(self, action: #selector(addShape(sender:)), for: .touchUpInside)
         let squareButtonItem = UIBarButtonItem(customView: squareButton)
         squareButton.tag = 1
-        squareButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
+        squareButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/5, height: tempToolBar.frame.height/2)
         
         circleButton =  TaskButton(color: UIColor.black, cRadius: tempToolBar.frame.height/4, symbol: "○")
         circleButton.addTarget(self, action: #selector(addShape(sender:)), for: .touchUpInside)
         let circleButtonItem = UIBarButtonItem(customView: circleButton)
         circleButton.tag = 0
-        circleButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
+        circleButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/5, height: tempToolBar.frame.height/2)
         
         rectangleButton =  TaskButton(color: UIColor.black, cRadius: tempToolBar.frame.height/4, symbol: "▭")
         rectangleButton.addTarget(self, action: #selector(addShape(sender:)), for: .touchUpInside)
         let rectangleButtonItem = UIBarButtonItem(customView: rectangleButton)
         rectangleButton.tag = 2
-        rectangleButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
+        rectangleButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/5, height: tempToolBar.frame.height/2)
         
         
         firstBarItems = [collapseButtonItem,spacer,spacer,spacer,rectangleButtonItem,spacer,squareButtonItem,spacer,circleButtonItem]
@@ -94,6 +94,11 @@ extension MapVC {
     }
     
     func collapseEditBar(){
+        if freeze == 1{
+            scrollView.isScrollEnabled = true
+            freezeView.removeFromSuperview()
+            freeze = 0
+        }
         if currentShape.isUserInteractionEnabled == true {
             currentShape.removeFromSuperview()
         }
@@ -170,6 +175,15 @@ extension MapVC {
         let radians:CGFloat = atan2((currentShape.transform.b), (currentShape.transform.a))
         let tuple = getRadians(code: 3, radians: radians)
         currentShape.center = CGPoint(x: currentShape.center.x-tuple.1, y: currentShape.center.y-tuple.0 )
+    }
+    
+    @objc func extendUp2(recognizer: UILongPressGestureRecognizer){
+        keepGoing += 1
+        print(keepGoing)
+                currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width, height: currentShape.bounds.height+2)
+                let radians:CGFloat = atan2((currentShape.transform.b), (currentShape.transform.a))
+                let tuple = getRadians(code: 0, radians: radians)
+                currentShape.center = CGPoint(x: currentShape.center.x-tuple.0, y: currentShape.center.y-tuple.1 )
     }
     
     @objc func extendUp(){

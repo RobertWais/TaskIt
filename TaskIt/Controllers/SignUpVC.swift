@@ -34,6 +34,12 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
         
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidLayoutSubviews() {
+        for field in textFields {
+            field.layer.cornerRadius = field.bounds.size.height/2
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -93,9 +99,8 @@ extension SignUpVC {
 extension SignUpVC {
     func updateTextFields(){
         for field in textFields {
-           field.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+           field.backgroundColor = Constants.Colors.baseColor
             field.layer.borderColor = UIColor.white.cgColor
-            field.layer.borderWidth = 5.0
             field.tintColor = UIColor.white
             field.textColor = UIColor.white
             field.layer.cornerRadius = field.frame.height/2
@@ -106,34 +111,21 @@ extension SignUpVC {
             
         }
     }
-    func updateCompanyField(){
-       
-        companyIdField.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
-        companyIdField.layer.cornerRadius = companyIdField.frame.height/2
-        companyIdField.layer.masksToBounds = true
-        companyIdField.tintColor = UIColor.white
-        companyIdField.textColor = UIColor.white
-        companyIdField.layer.borderColor = UIColor.white.cgColor
-        companyIdField.layer.borderWidth = 5.0
-        
-        
-        let placeholder = NSAttributedString(string: companyIdField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
-        companyIdField.attributedPlaceholder = placeholder
-        
-    }
+    
     func updateJoinBtn(){
-        joinBtn.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+        joinBtn.backgroundColor = UIColor.white
         joinBtn.layer.cornerRadius = joinBtn.frame.height/2
         joinBtn.layer.masksToBounds = true
-        joinBtn.layer.borderColor = UIColor.white.cgColor
-        joinBtn.layer.borderWidth = 5.0
+        joinBtn.tintColor = Constants.Colors.baseColor
+        joinBtn.setTitleColor(Constants.Colors.baseColor, for: .normal)
+        joinBtn.layer.borderColor = Constants.Colors.baseColor.cgColor
+        joinBtn.layer.borderWidth = 2.0
     }
     
     func updateAllUI(){
-        self.view.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+        self.view.backgroundColor = UIColor.white
         updateTextFields()
         updateJoinBtn()
-        updateCompanyField()
     }
 }
 

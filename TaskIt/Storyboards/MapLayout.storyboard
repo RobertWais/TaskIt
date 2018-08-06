@@ -38,7 +38,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="3BQ-au-6Ow">
                         <barButtonItem key="leftBarButtonItem" id="TXn-HD-td7"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="hDM-7Y-yta">
+                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="hDM-7Y-yta">
                             <connections>
                                 <action selector="signOutBtnPressed:" destination="4Sd-Li-8NF" id="SGi-lN-FQW"/>
                             </connections>

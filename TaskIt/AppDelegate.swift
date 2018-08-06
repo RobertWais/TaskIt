@@ -20,9 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate{
     
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        // Let FCM know about the message for analytics etc.
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        // handle your message
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
@@ -30,21 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate{
         
         let dataDict:[String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-        // TODO: If necessary send token to application server.
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
-        
-        // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
-        
         // Print full message.
-        print(userInfo)
+        //print(userInfo)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
@@ -56,8 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate{
         }
         
         // Print full message.
-        print(userInfo)
-        
+//        print(userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
     }
 
@@ -157,7 +147,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate{
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
@@ -182,8 +171,6 @@ extension AppDelegate {
         }
         window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
-        
-        
     }
 }
 
@@ -205,7 +192,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
         
         // Print full message.
-        print(userInfo)
+//        print(userInfo)
         
         // Change this to your preferred presentation option
         completionHandler([])
