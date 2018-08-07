@@ -58,7 +58,7 @@ class StartCompanyVC: UIViewController {
                         Alerts.simpleAlert(err: error, controller: sender as! UIViewController)
                     }else{
                         wheel.stopAnimating()
-                        var newId = CoreDataHelper.newCompanyId()
+                        let newId = CoreDataHelper.newCompanyId()
                         newId.id = key
                         CoreDataHelper.saveId()
                         Alerts.displayKey(uniqueID: "\(key)", sender: self, finished: {

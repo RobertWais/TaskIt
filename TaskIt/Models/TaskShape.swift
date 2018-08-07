@@ -88,12 +88,6 @@ class TaskShape: UIView {
             updateCornerRadius()
         }
     }
-    
     @objc func didTap(recognizer: UITapGestureRecognizer){
     }
-    
-    
-    
-    
-    
 }

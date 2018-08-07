@@ -25,7 +25,7 @@ struct UserService {
             }
             let userUpdate = "/users/\(id)/companyId"
             ref.updateChildValues([userUpdate: newId]){ (error, ref) in
-                if let error = error {
+                if let _ = error {
                     return completion(false)
                 }
                 let userRef = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
@@ -61,7 +61,7 @@ struct UserService {
         let userUpdate = "/users/\(user.uid)"
         let tokenUpdate = "/company/\(companyID)/tokens/\(user.uid)"
         let baseImage = Database.database().reference().child("company").child(companyID).child("imageURL")
-        
+    
         ref.updateChildValues([userUpdate: userAttribute,
                                tokenUpdate: userToken
         ]) { (error, databaseReference) in

@@ -93,16 +93,16 @@ class Task{
         let userPosted = dict["userPosted"] as? String,
         let completed = dict["completed"] as? String,
         let shapeLayout = dict["shape"] as? [String : Any],
-            let colorR = shapeLayout["colorR"] as? CGFloat,
-            let colorG = shapeLayout["colorG"] as? CGFloat,
-            let colorB = shapeLayout["colorB"] as? CGFloat,
+            let _ = shapeLayout["colorR"] as? CGFloat,
+            let _ = shapeLayout["colorG"] as? CGFloat,
+            let _ = shapeLayout["colorB"] as? CGFloat,
             let width = shapeLayout["width"] as? CGFloat,
             let height = shapeLayout["height"] as? CGFloat,
             let positionX = shapeLayout["positionX"] as? CGFloat,
             let positionY = shapeLayout["positionY"] as? CGFloat,
             let type = shapeLayout["type"] as? Int,
             let angle = shapeLayout["angle"] as? CGFloat,
-            let alpha = shapeLayout["alpha"] as? CGFloat
+            let _ = shapeLayout["alpha"] as? CGFloat
             else {return nil}
         
         

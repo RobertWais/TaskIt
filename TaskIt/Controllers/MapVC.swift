@@ -91,10 +91,21 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
         
     
     @IBAction func signOutBtnPressed(_ sender: Any) {
-        Login.signOut()
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        let mainVC = storyboard.instantiateInitialViewController()!
-        self.present(mainVC, animated: true, completion: nil)
+        let alertVC = UIAlertController(title: "Sign Out", message: "Are you sure you wish to sign out", preferredStyle: .alert)
+        let signOut = UIAlertAction(title: "Sign Out", style: .default) { _ in
+            Login.signOut()
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let mainVC = storyboard.instantiateInitialViewController()!
+            self.present(mainVC, animated: true, completion: nil)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            
+        }
+        alertVC.addAction(signOut)
+        alertVC.addAction(cancel)
+        self.present(alertVC, animated: true, completion: nil)
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
