@@ -33,7 +33,6 @@ struct CoreDataHelper {
         do{
             try context.save()
         } catch let error {
-            print("Error: \(error.localizedDescription)")
         }
     }
     
@@ -42,18 +41,19 @@ struct CoreDataHelper {
         saveId()
     }
     
-    static func retrieveIds()->[CompanyId]{
+    static func retrieveIds()->[String]{
         do{
             let fetchRequest = NSFetchRequest<CompanyId>(entityName:"CompanyId")
             var results = try context.fetch(fetchRequest)
-            var ids = [CompanyId]()
+            var ids = [String]()
             
             for res in results{
-                ids.append(res)
+                if let id = res.id {
+                    ids.append(id)
+                }
             }
             return  ids
         }catch let error {
-            print("Error: can not retrieve portfolios")
             return []
         }
     }

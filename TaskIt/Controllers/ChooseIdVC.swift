@@ -13,17 +13,17 @@ import UIKit
 class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var scrollView: UIScrollView!
-    
-    
     @IBOutlet weak var mainView: UIView!
-    weak var delegate: SignInDelegate?
-    weak var darkdelegate: DarkViewDelegate?
-     @IBOutlet weak var newCompanyField: UITextField!
+    @IBOutlet weak var newCompanyField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var confirmBtn: UIButton!
+    
+    var tempField: UITextField?
+    weak var delegate: SignInDelegate?
+    weak var darkdelegate: DarkViewDelegate?
     
     @IBAction func cancelBtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: {
@@ -31,34 +31,43 @@ class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         })
     }
     @IBAction func confirmBtnPressed(_ sender: Any) {
-        
-        //Enter Id in companies in iD
-            //Check if company id matches,
-                // if so update userDefaults,
-                    //check if exists and if not update coredat company ids
-                // if not
-                    //Company does not exist
-                    //return
-        guard let username = self.usernameField.text,
-            let password = self.passwordField.text,
-            let companyId = self.newCompanyField.text else{
-                //Alert Error
-                return
+        guard let field = self.tempField else{
+            return
         }
-        
-        UserService.switchCurrentCompany(newId: companyId, email: username, password: password, sender: self) { (success) in
-            if success{
-                self.dismiss(animated: true) {
-                    self.delegate?.attemptSignIn(username: username, password: password, companyId: companyId)
-                }
-            }else{
-                
+        field.resignFirstResponder()
+        if checkFields() == true {
+            guard let username = self.usernameField.text,
+                let password = self.passwordField.text,
+                let companyId = self.newCompanyField.text else{
+                    return
             }
+            let darkView = UIView(frame: self.view.bounds)
+            self.view.addSubview(darkView)
+            darkView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+            let loadWheel = LoadWheel(view: darkView)
+            UserService.switchCurrentCompany(newId: companyId, email: username, password: password, sender: self) { (success) in
+                if success{
+                    darkView.removeFromSuperview()
+                    self.dismiss(animated: true) {
+                        self.delegate?.attemptSignIn(username: username, password: password, companyId: companyId)
+                    }
+                }else{
+                    Alerts.companyDoesNotExist(sender: self)
+                    TaskUser.setNil()
+                    darkView.removeFromSuperview()
+                }
+            }
+        }else{
+            Alerts.fillOutFields(controller: self, button: confirmBtn)
         }
-        
-        
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Choose Group Id"
+        }
+        return ""
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.Data.liveCompanyIds.count
     }
@@ -66,6 +75,7 @@ class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCell", for: indexPath) as! IdTableViewCell
+        
         cell.configurecell(companyId: Constants.Data.liveCompanyIds[indexPath.row])
         return cell
     }
@@ -83,11 +93,11 @@ class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         super.viewDidLoad()
         registerForKeyboardNotifications()
         setDelegate()
-        scrollView.delegate = self
         Constants.Data.liveCompanyIds = CoreDataHelper.retrieveIds()
+        scrollView.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        print("array \(Constants.Data.liveCompanyIds)")
+        tableView.separatorStyle = .none
         // Do any additional setup after loading the view.
         
         mainView.backgroundColor = Constants.Colors.baseColor
@@ -97,6 +107,15 @@ class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
         confirmBtn.setTitleColor(UIColor.white, for: .normal)
         cancelBtn.setTitleColor(UIColor.white, for: .normal)
+    }
+    
+    
+    func checkFields()->Bool{
+        if usernameField.text == "" || passwordField.text == "" || newCompanyField.text == "" {
+            return false
+        }else{
+            return true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,13 +127,15 @@ class ChooseIdVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
 extension ChooseIdVC: UITextFieldDelegate {
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        tempField = textField
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touches began")
         self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("Return")
         textField.resignFirstResponder()
         return true
     }
@@ -135,7 +156,6 @@ extension ChooseIdVC {
     }
     
     @objc func keyBoardWasShown(notification: NSNotification){
-        print("Yes")
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                 let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height +

@@ -21,7 +21,6 @@ class TaskDetailsVC: UIViewController {
         super.viewDidLoad()
         
         let task = Constants.Data.liveTasks[key!]
-        print("task title: \(String(describing: task?.title))")
         titleLbl.text = task?.title
         textView.text = task?.description
         baseView.layer.cornerRadius = 10.0
@@ -29,10 +28,7 @@ class TaskDetailsVC: UIViewController {
         textView.layer.cornerRadius = 5.0
         textView.backgroundColor = baseView.backgroundColor
         textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.layer.borderWidth = 1.0
-        print("Color \(textView.backgroundColor)")
-        print("Color Normal: \(baseView.backgroundColor)")
-        
+        textView.layer.borderWidth = 1.0        
         completedBtn.setTitleColor(Constants.Colors.baseColor, for: .normal)
         
         // Do any additional setup after loading the view.
@@ -53,8 +49,11 @@ class TaskDetailsVC: UIViewController {
         }
     }
     @IBAction func completedBtnPressed(_ sender: Any) {
-        
+        completedBtn.isUserInteractionEnabled = false
         DatabaseService.deleteTask(key: key!, sender: self) { (success) in
+            defer{
+                self.completedBtn.isUserInteractionEnabled = true
+            }
             if success{
                 Constants.Data.liveTasks.removeValue(forKey: self.key!)
                 self.delegate?.didComplete()
@@ -64,6 +63,8 @@ class TaskDetailsVC: UIViewController {
                     self.performSegue(withIdentifier: "unwindToMapFromDetails", sender: self)
                     
                 }
+            }else{
+                Alerts.couldNotDelete(sender: self)
             }
         }
         

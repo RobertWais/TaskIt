@@ -29,7 +29,6 @@ struct Alerts{
                                       preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
-            print("Alert color: \(String(describing: alert.view.backgroundColor))")
         })
         alert.addAction(cancel)
         controller.present(alert, animated: true){
@@ -37,7 +36,7 @@ struct Alerts{
         }
     }
     
-    static func noCompanyId(sender: UIViewController, button: UIButton){
+    static func noCompanyId(sender: UIViewController){
         let alert = UIAlertController(title: "Company Doesn't exist",
                                       message: "The company id you entered doesn't exist",
                                       preferredStyle: .alert)
@@ -46,13 +45,12 @@ struct Alerts{
         })
         alert.addAction(cancel)
         sender.present(alert, animated: true){
-            button.isEnabled = true
         }
     }
     
     static func displayKey(uniqueID: String,sender: UIViewController, finished: @escaping ()->()){
         let alert = UIAlertController(title: "Unique ID",
-                                      message: "All employees must present this unqiue id \n \n There is no way to retrieve this ID after this message\n You will not be able to continue until you copy the identifier",
+                                      message: "All group members must present this unqiue id when creating an account \n We suggest recording this id down now",
                                       preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
@@ -71,8 +69,8 @@ struct Alerts{
     }
     
     static func companyDoesNotExist(sender: UIViewController){
-        let alert = UIAlertController(title: "No Such Company",
-                                      message: "Please enter in a valid company",
+        let alert = UIAlertController(title: "No Such Group",
+                                      message: "Please enter in a valid group id",
                                       preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
@@ -82,7 +80,42 @@ struct Alerts{
         sender.present(alert, animated: true)
     }
     
+    static func successButFailure(sender: UIViewController){
+        let alert = UIAlertController(title: "Sign Up Successful",
+                                      message: "Invalid group id. Log in with a valid group id",
+                                      preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
+        })
+        
+        alert.addAction(cancel)
+        sender.present(alert, animated: true)
+    }
+    
+    static func couldNotDelete(sender: UIViewController){
+        let alert = UIAlertController(title: "Delete Unsuccessful",
+                                      message: "Could not set this task as completed \n Please try again",
+                                      preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
+        })
+        
+        alert.addAction(cancel)
+        sender.present(alert, animated: true)
+    }
    
+    static func couldNotCreate(sender: UIViewController){
+        let alert = UIAlertController(title: "Could Not Create Company",
+                                      message: "Please try again",
+                                      preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
+        })
+        
+        alert.addAction(cancel)
+        sender.present(alert, animated: true)
+    }
+    
     
     
 }

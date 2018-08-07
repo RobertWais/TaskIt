@@ -30,19 +30,19 @@ extension MapVC {
         squareButton.addTarget(self, action: #selector(addShape(sender:)), for: .touchUpInside)
         let squareButtonItem = UIBarButtonItem(customView: squareButton)
         squareButton.tag = 1
-        squareButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
+        squareButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/5, height: tempToolBar.frame.height/2)
         
         circleButton =  TaskButton(color: UIColor.black, cRadius: tempToolBar.frame.height/4, symbol: "○")
         circleButton.addTarget(self, action: #selector(addShape(sender:)), for: .touchUpInside)
         let circleButtonItem = UIBarButtonItem(customView: circleButton)
         circleButton.tag = 0
-        circleButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
+        circleButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/5, height: tempToolBar.frame.height/2)
         
         rectangleButton =  TaskButton(color: UIColor.black, cRadius: tempToolBar.frame.height/4, symbol: "▭")
         rectangleButton.addTarget(self, action: #selector(addShape(sender:)), for: .touchUpInside)
         let rectangleButtonItem = UIBarButtonItem(customView: rectangleButton)
         rectangleButton.tag = 2
-        rectangleButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
+        rectangleButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/5, height: tempToolBar.frame.height/2)
         
         
         firstBarItems = [collapseButtonItem,spacer,spacer,spacer,rectangleButtonItem,spacer,squareButtonItem,spacer,circleButtonItem]
@@ -60,7 +60,6 @@ extension MapVC {
         addBtn.layer.cornerRadius = addBtn.layer.frame.width/2
         addBtn.layer.masksToBounds = true
         addBtn.backgroundColor = Constants.Colors.baseColor
-        print("Add btn background Color \(addBtn.backgroundColor)")
         view.addSubview(addBtn)
         view.bringSubview(toFront: addBtn)
     }
@@ -94,6 +93,11 @@ extension MapVC {
     }
     
     func collapseEditBar(){
+        if freeze == 1{
+            scrollView.isScrollEnabled = true
+            freezeView.removeFromSuperview()
+            freeze = 0
+        }
         if currentShape.isUserInteractionEnabled == true {
             currentShape.removeFromSuperview()
         }
@@ -103,7 +107,6 @@ extension MapVC {
             self.freezeBtn.center.y = self.freezeBtn.center.y+100
             self.dPadView.isHidden = true
         }) { (success) in
-            print("Yes")
             self.tempToolBar.setItems(self.firstBarItems, animated: true)
             let collapsePos =  self.collapseButton.center.y
             let squarePos = self.squareButton.center.y
@@ -125,11 +128,20 @@ extension MapVC {
     //Functions for adding shapes
     @objc func addShape(sender: UIButton){
         let num = sender.tag
-        currentShape = TaskShape(shape: num)
+        
+        if num == 0{
+            dPadView.isUserInteractionEnabled = false
+        }else{
+            dPadView.isUserInteractionEnabled = true
+        }
+        
+        currentShape = TaskShape(shape: num, view: imageView)
         self.dPadView.reset()
         self.dPadView.transform = CGAffineTransform(rotationAngle: 0.0)
         currentShape.turnDelegate = dPadView
+        
         imageView.addSubview(currentShape)
+        currentShape.center = imageView.convert(imageView.center, from:imageView.superview)
         imageView.bringSubview(toFront: currentShape)
         UIView.animate(withDuration: 0.3, animations: {
             self.collapseButton.center.y = self.collapseButton.center.y+100
@@ -163,6 +175,14 @@ extension MapVC {
         let radians:CGFloat = atan2((currentShape.transform.b), (currentShape.transform.a))
         let tuple = getRadians(code: 3, radians: radians)
         currentShape.center = CGPoint(x: currentShape.center.x-tuple.1, y: currentShape.center.y-tuple.0 )
+    }
+    
+    @objc func extendUp2(recognizer: UILongPressGestureRecognizer){
+        keepGoing += 1
+                currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width, height: currentShape.bounds.height+2)
+                let radians:CGFloat = atan2((currentShape.transform.b), (currentShape.transform.a))
+                let tuple = getRadians(code: 0, radians: radians)
+                currentShape.center = CGPoint(x: currentShape.center.x-tuple.0, y: currentShape.center.y-tuple.1 )
     }
     
     @objc func extendUp(){

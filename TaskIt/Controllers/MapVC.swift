@@ -21,6 +21,7 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
     let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     @IBOutlet weak var tempToolBar: UIToolbar!
     
+    var keepGoing = 0
     var freeze = 0
     var freezeView: UIView!
     var dPadView = DirectionalPad()
@@ -42,17 +43,16 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Controller being pressented: \(self.isBeingPresented)")
         tempToolBar.layer.masksToBounds = true
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
         setUpAddBtn()
-        
+        addBtn.isUserInteractionEnabled = false
         let wheel = LoadWheel(view: self.view)
         StorageService.getImage { (image) in
             wheel.stopAnimating()
             if image == nil {
-                print("Image nil")
             }else{
+                self.addBtn.isUserInteractionEnabled = true
                 self.baseImage = image
                 self.dPadView = DirectionalPad(view: self.view,toolbar:  self.tempToolBar)
                 self.dPadView.isHidden = true
@@ -81,12 +81,8 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
                             let removeTask = Constants.Data.liveTasks.removeValue(forKey: task.key)
                             removeTask?.shape.removeFromSuperview()
                         }
-                    case 3:
-                        print("Updating")
-                    //updated
                     default:
-                        print("Eror")
-                        //Error
+                        return
                     }
                 }
             }
@@ -95,10 +91,21 @@ class MapVC: UIViewController, UIScrollViewDelegate, UIToolbarDelegate, ConfirmD
         
     
     @IBAction func signOutBtnPressed(_ sender: Any) {
-        Login.signOut()
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        let mainVC = storyboard.instantiateInitialViewController()!
-        self.present(mainVC, animated: true, completion: nil)
+        let alertVC = UIAlertController(title: "Sign Out", message: "Are you sure you wish to sign out", preferredStyle: .alert)
+        let signOut = UIAlertAction(title: "Sign Out", style: .default) { _ in
+            Login.signOut()
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let mainVC = storyboard.instantiateInitialViewController()!
+            self.present(mainVC, animated: true, completion: nil)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            
+        }
+        alertVC.addAction(signOut)
+        alertVC.addAction(cancel)
+        self.present(alertVC, animated: true, completion: nil)
+        
+        
     }
     
     override func didReceiveMemoryWarning() {

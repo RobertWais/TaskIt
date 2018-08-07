@@ -14,7 +14,6 @@ struct Login {
     
     static func signUp(email: String, password: String, username: String, companyId: String, controller: UIViewController,completion: @escaping
         (String?)->()){
-        print("CompanyID: \(companyId)")
         AuthService.createUser(email: email, password: password) { (error, user) in
             if let error = error {
                 Alerts.simpleAlert(err: error, controller: controller)
@@ -41,7 +40,6 @@ struct Login {
         do{
            try Auth.auth().signOut()
         }catch let error{
-            print("Error: \(error.localizedDescription)")
         }
     }
     

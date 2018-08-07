@@ -18,7 +18,7 @@ extension MapVC {
         confirmBtn = TaskButton(color: Constants.Colors.baseColor, cRadius: tempToolBar.frame.height/4, symbol: "✓")
         confirmBtn.addTarget(self, action: #selector(confirmShape), for: .touchUpInside)
         let confirmButtonItem = UIBarButtonItem(customView: confirmBtn)
-        confirmButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
+        confirmButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/5, height: tempToolBar.frame.height/2)
         
         
         //RevertBtn
@@ -32,13 +32,15 @@ extension MapVC {
         
         //PLUS Minus/Button
             let freezeButtonItem = UIBarButtonItem(customView: freezeBtn)
-        freezeButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
+        freezeButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.width/4, height: tempToolBar.frame.height/2)
         
         secondBarItems = [revertButtonItem,spacer,spacer,freezeButtonItem,spacer,confirmButtonItem]
         //Set ToolBar
         ///SET Functions
         
-        dPadView.upBtn.addTarget(self, action: #selector(extendUp), for: [.touchUpInside,.touchDragInside])
+        dPadView.upBtn.addTarget(self, action: #selector(extendUp), for: [.touchUpInside])
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(extendUp2(recognizer:)))
+        dPadView.upBtn.addGestureRecognizer(gestureRecognizer)
         dPadView.downBtn.addTarget(self, action: #selector(extendDown), for: [.touchUpInside,.touchDragInside])
         dPadView.leftBtn.addTarget(self, action: #selector(extendLeft), for: [.touchUpInside,.touchDragInside])
         dPadView.rightBtn.addTarget(self, action: #selector(extendRight), for: [.touchUpInside,.touchDragInside])
@@ -92,7 +94,6 @@ extension MapVC {
         case 3 :
             returnTuple = (-sin(radians),-cos(radians))
         default :
-            print("Error: retrieving radions")
             return (0,0)
             
         }
@@ -116,7 +117,7 @@ extension MapVC {
     }
     
     func setUpDisplayButtons(){
-        freezeBtn = TaskButton(color: Constants.Colors.freezeBlue, cRadius: tempToolBar.frame.height/4, symbol: "❆")
+        freezeBtn = TaskButton(color: UIColor.black, cRadius: tempToolBar.frame.height/4, symbol: "❆")
         freezeBtn.addTarget(self, action: #selector(freezeScoll), for: .touchUpInside)        
     }
 }

@@ -22,10 +22,25 @@ class ConfirmationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         enableBtns()
+        setDelegate()
         mainView.layer.cornerRadius = 8.0
         mainView.layer.masksToBounds = true
         
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44))
+        customView.backgroundColor = UIColor(red: 87/255, green: 86/255, blue: 86/255, alpha: 0.8)
+        let btn = UIButton(frame: CGRect(x: customView.frame.width-(customView.frame.width/5), y: 0, width: customView.frame.width/5, height: customView.frame.height))
+        btn.setTitle("Done", for: .normal)
+        btn.setTitleColor(UIColor.white, for: .normal)
+        btn.addTarget(self, action: #selector(resignKeyboard), for: .touchUpInside)
+        customView.addSubview(btn)
+        textView.inputAccessoryView = customView
         
+        
+        
+    }
+    
+    @objc func resignKeyboard(){
+        textView.resignFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,7 +55,6 @@ class ConfirmationVC: UIViewController {
         }
         let task = Task(shape: shape, title: (titleField?.text)!, description: textView.text, userPosted: TaskUser.current.uid, completed: "")
         DatabaseService.makeAPost(task: task.dictValue, sender: self) { (success) in
-            print("Success: \(success)")
             if success {
                 self.delegate?.didConfirm(bool: true)
                 self.performSegue(withIdentifier: "unwindToMap", sender: self)
@@ -74,11 +88,15 @@ extension ConfirmationVC: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-        print("Yas")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
+    
+    func setDelegate(){
+        titleField.delegate = self
+    }
 }
+

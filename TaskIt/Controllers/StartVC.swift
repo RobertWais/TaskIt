@@ -9,6 +9,9 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
+protocol  SignUpDelegate: class {
+    func attemptSignUp(success: Bool)
+}
 
 protocol SignInDelegate: class {
     func attemptSignIn(username: String, password: String, companyId: String)
@@ -18,7 +21,39 @@ protocol DarkViewDelegate: class {
     func removeDarkView()
 }
 
-class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
+class StartVC: UIViewController, SignInDelegate,DarkViewDelegate,SignUpDelegate {
+    
+    //Buttons
+    @IBOutlet var displayBtns: [UIButton]!
+    @IBOutlet weak var startCompanyBtn: UIButton!
+    @IBOutlet weak var signUpBtn: UIButton!
+    @IBOutlet weak var loginBtn: UIButton!
+    var tempField: UITextField!
+    
+    
+    func attemptSignUp(success: Bool) {
+        if success {
+            if self.isBeingPresented == true{
+                self.dismiss(animated: false, completion: nil)
+            }else{
+                let storyboard = UIStoryboard(name: "MapLayout", bundle: .main)
+                let mainVC = storyboard.instantiateInitialViewController()!
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = mainVC
+                appDelegate.window?.makeKeyAndVisible()
+            }
+        }else{
+            Alerts.successButFailure(sender: self)
+        }
+    }
+    //Login Credentials
+    
+    override func viewDidLayoutSubviews() {
+        signUpBtn.layer.cornerRadius = signUpBtn.bounds.size.height/2
+        loginBtn.layer.cornerRadius = loginBtn.bounds.size.height/2
+        startCompanyBtn.layer.cornerRadius = startCompanyBtn.bounds.size.height/2
+    }
+    
     func removeDarkView() {
         let darkenView = self.view.subviews[self.view.subviews.count-1]
         UIView.animate(withDuration: 0.3, animations: {
@@ -33,10 +68,8 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
         let darkenView = self.view.subviews[self.view.subviews.count-1]
         darkenView.removeFromSuperview()
         if self.isBeingPresented == true{
-                    print("was being pressented")
                     self.dismiss(animated: false, completion: nil)
                 }else{
-                    print("fresh")
                     let storyboard = UIStoryboard(name: "MapLayout", bundle: .main)
                     let mainVC = storyboard.instantiateInitialViewController()!
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -45,22 +78,11 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
                 }
     }
 
-    //Buttons
-    @IBOutlet var displayBtns: [UIButton]!
-    @IBOutlet weak var startComapnyBtn: UIButton!
-    @IBOutlet weak var signUpBtn: UIButton!
-    @IBOutlet weak var loginBtn: UIButton!
-    var tempField: UITextField!
-    
-    //Login Credentials
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet var textFields: [UITextField]!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setDelegate()
         updateButtonUI()
         setViewLogin()
         // Do any additional setup after loading the view.
@@ -86,23 +108,11 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
         modalVC.darkdelegate = self 
 
         present(modalVC, animated: true, completion: nil)
-        
-        
-//        let darkenView = self.view.subviews[self.view.subviews.count-1]
-//        UIView.animate(withDuration: 1.0, animations: {
-//            darkenView.alpha = 0.0
-//        }) { (success) in
-//            darkenView.removeFromSuperview()
-//        }
-        
-//        signIn(){ (success) in
-//            if success {
-//              self.performSegue(withIdentifier: "fromStartToMap", sender: self)
-//            }
-//        }
-
     }
     @IBAction func signUpBtnPressed(_ sender: Any) {
+        let VC = storyboard?.instantiateViewController(withIdentifier: "SignUpVC") as! SignUpVC
+        VC.delegate = self
+        navigationController?.pushViewController(VC, animated: true)
     }
     
     @IBAction func startCompanyBtnPressed(_ sender: Any) {
@@ -116,24 +126,6 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate {
 
 //Login user
 extension StartVC {
-    func signIn(completion: @escaping (Bool)->()){
-        Auth.auth().signIn(withEmail: usernameField.text!, password: passwordField.text!) { (user, error) in
-            if let error = error {
-                Alerts.simpleAlert(err: error, controller: self)
-                completion(false)
-                return
-            }
-            let ref = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
-                
-                ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                    let currUser = TaskUser(snapshot: snapshot)
-                    TaskUser.setCurrent(currUser!)
-                    print("current user: \(TaskUser.current.username)")
-                    completion(true)
-                    return
-                })
-            }
-    }
     func signInModal(username: String , password: String, completion: @escaping (Bool)->()){
         Auth.auth().signIn(withEmail: username, password: password) { (user, error) in
             if let error = error {
@@ -146,7 +138,6 @@ extension StartVC {
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 let currUser = TaskUser(snapshot: snapshot)
                 TaskUser.setCurrent(currUser!)
-                print("current user: \(TaskUser.current.username)")
                 completion(true)
                 return
             })
@@ -161,18 +152,20 @@ extension StartVC {
     //BUTTON ELEMENTS
     private func updateAllButtonDisplay(){
         for btn in displayBtns {
-            btn.layer.cornerRadius = btn.frame.height/2
+        
+            btn.layer.cornerRadius = btn.bounds.size.height/2;
             btn.layer.masksToBounds = true
+            
             btn.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
             //            btn.backgroundColor = UIColor(red: 76, green: 217, blue: 100, alpha: 1.0)
         }
     }
     
     private func updateStartCompanyBtn(){
-        startComapnyBtn.backgroundColor = UIColor.white
-        startComapnyBtn.layer.borderColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0).cgColor
-        startComapnyBtn.layer.borderWidth = 2.0
-        startComapnyBtn.setTitleColor(UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0), for: UIControlState.normal)
+        startCompanyBtn.backgroundColor = UIColor.white
+        startCompanyBtn.layer.borderColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0).cgColor
+        startCompanyBtn.layer.borderWidth = 2.0
+        startCompanyBtn.setTitleColor(UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0), for: UIControlState.normal)
     }
     
     func updateButtonUI(){
@@ -182,27 +175,8 @@ extension StartVC {
     
     //LOGIN CREDENTIALS
     
-    func updateTextFields(){
-        
-        for field in textFields {
-            field.layer.borderWidth = 2.0
-            field.layer.borderColor = Constants.Colors.baseColor.cgColor
-            field.backgroundColor = UIColor.white
-            field.layer.cornerRadius = field.frame.height/2
-            field.layer.masksToBounds = true
-            field.tintColor = Constants.Colors.baseColor
-            field.textColor = Constants.Colors.baseColor
-            
-            
-            let placeholder = NSAttributedString(string: field.placeholder!, attributes: [NSAttributedStringKey.foregroundColor : Constants.Colors.baseColor])
-            field.attributedPlaceholder = placeholder
-            
-        }
-    }
-    
     func setViewLogin(){
        self.navigationController?.navigationBar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
-        updateTextFields()
     }
     
     @IBAction func unwindWithSegue(_ segue: UIStoryboardSegue){
@@ -219,15 +193,6 @@ extension StartVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        tempField = textField
-    }
-    
-    func setDelegate(){
-        self.passwordField.delegate = self
-        self.usernameField.delegate = self
     }
     
 }

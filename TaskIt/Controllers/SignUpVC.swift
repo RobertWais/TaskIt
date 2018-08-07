@@ -20,17 +20,21 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var joinBtn: UIButton!
+
+    weak var delegate: SignUpDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setDelegate()
         updateAllUI()
         registerForKeyboardNotifications()
-        
         scrollView.delegate = self
-        
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        for field in textFields {
+            field.layer.cornerRadius = field.bounds.size.height/2
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,38 +43,47 @@ class SignUpVC: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func joinBtnPressed(_ sender: Any) {
-        print("hit")
         joinBtn.isEnabled = false
-        login()
+        login(){ (number) in
+            switch number{
+            case 0 :
+                Alerts.fillOutFields(controller: self, button: self.joinBtn)
+            case 1:
+                self.navigationController?.popViewController(animated: true)
+                self.delegate?.attemptSignUp(success: false)
+            case 2:
+                self.navigationController?.popViewController(animated: true)
+                self.delegate?.attemptSignUp(success: true)
+            default:
+                Alerts.fillOutFields(controller: self, button: self.joinBtn)
+            }
+        }
     }
 }
 
 //SignUp User wit CompanyID
 extension SignUpVC {
-    func login(){
-        self.resignFirstResponder()
+    func login(completion: @escaping (Int)->()){
         let loading = LoadWheel(view: self.view)
         if  usernameField?.text == "" || (emailField?.text)! == ""  || (passwordField?.text)! == "" || (companyIdField?.text)! ==  ""{
-            Alerts.fillOutFields(controller: self, button: joinBtn)
             self.joinBtn.isEnabled = true
             loading.stopAnimating()
-            return
+            return completion(0)
         }
             Login.signUp(email: self.emailField.text!, password: self.passwordField.text!, username: self.usernameField.text!,companyId: companyIdField.text!, controller: self) {  (url) in
                 defer {
                     self.joinBtn.isEnabled = true
                     loading.stopAnimating()
                 }
-                guard let url = url else{
-                    Alerts.companyDoesNotExist(sender: self)
-                    print("Company does not exist")
-                    return
+                
+                guard let _ = url else{
+                    TaskUser.setNil()
+                    return completion(1)
                 }
                 let temp = CoreDataHelper.newCompanyId()
-                temp.name = ""
                 temp.id = TaskUser.current.companyID
                 CoreDataHelper.saveId()
-                self.performSegue(withIdentifier: "toMapVC", sender: self)
+                return completion(2)
         }
     }
 }
@@ -78,9 +91,8 @@ extension SignUpVC {
 extension SignUpVC {
     func updateTextFields(){
         for field in textFields {
-           field.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+           field.backgroundColor = Constants.Colors.baseColor
             field.layer.borderColor = UIColor.white.cgColor
-            field.layer.borderWidth = 5.0
             field.tintColor = UIColor.white
             field.textColor = UIColor.white
             field.layer.cornerRadius = field.frame.height/2
@@ -91,43 +103,27 @@ extension SignUpVC {
             
         }
     }
-    func updateCompanyField(){
-       
-        companyIdField.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
-        companyIdField.layer.cornerRadius = companyIdField.frame.height/2
-        companyIdField.layer.masksToBounds = true
-        companyIdField.tintColor = UIColor.white
-        companyIdField.textColor = UIColor.white
-        companyIdField.layer.borderColor = UIColor.white.cgColor
-        companyIdField.layer.borderWidth = 5.0
-        
-        
-        let placeholder = NSAttributedString(string: companyIdField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
-        companyIdField.attributedPlaceholder = placeholder
-        
-    }
+    
     func updateJoinBtn(){
-        joinBtn.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+        joinBtn.backgroundColor = UIColor.white
         joinBtn.layer.cornerRadius = joinBtn.frame.height/2
         joinBtn.layer.masksToBounds = true
-        joinBtn.layer.borderColor = UIColor.white.cgColor
-        joinBtn.layer.borderWidth = 5.0
+        joinBtn.tintColor = Constants.Colors.baseColor
+        joinBtn.setTitleColor(Constants.Colors.baseColor, for: .normal)
+        joinBtn.layer.borderColor = Constants.Colors.baseColor.cgColor
+        joinBtn.layer.borderWidth = 2.0
     }
     
     func updateAllUI(){
-        self.view.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+        self.view.backgroundColor = UIColor.white
         updateTextFields()
         updateJoinBtn()
-        updateCompanyField()
     }
 }
 
-
 extension SignUpVC: UITextFieldDelegate {
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-        print("Yas")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

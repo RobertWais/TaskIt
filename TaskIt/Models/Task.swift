@@ -93,16 +93,16 @@ class Task{
         let userPosted = dict["userPosted"] as? String,
         let completed = dict["completed"] as? String,
         let shapeLayout = dict["shape"] as? [String : Any],
-            let colorR = shapeLayout["colorR"] as? CGFloat,
-            let colorG = shapeLayout["colorG"] as? CGFloat,
-            let colorB = shapeLayout["colorB"] as? CGFloat,
+            let _ = shapeLayout["colorR"] as? CGFloat,
+            let _ = shapeLayout["colorG"] as? CGFloat,
+            let _ = shapeLayout["colorB"] as? CGFloat,
             let width = shapeLayout["width"] as? CGFloat,
             let height = shapeLayout["height"] as? CGFloat,
             let positionX = shapeLayout["positionX"] as? CGFloat,
             let positionY = shapeLayout["positionY"] as? CGFloat,
             let type = shapeLayout["type"] as? Int,
             let angle = shapeLayout["angle"] as? CGFloat,
-            let alpha = shapeLayout["alpha"] as? CGFloat
+            let _ = shapeLayout["alpha"] as? CGFloat
             else {return nil}
         
         
@@ -110,11 +110,14 @@ class Task{
         self._description = description
         self._userPosted = userPosted
         self._completed = completed
-        self._shape = TaskShape(shape: type)
+        self._shape = TaskShape(shape: type, view: nil)
         self._shape?.bounds = CGRect(x: 0, y: 0, width: width, height: height)
         self._shape?.center.x = positionX
         self._shape?.center.y = positionY
         self._shape?.transform = CGAffineTransform(rotationAngle: angle)
+        if type == 0{
+            self._shape?.layer.cornerRadius = (self._shape?.layer.frame.width)!/2
+        }
         //Change when adding new features of colors
 //        self._shape?.backgroundColor = UIColor(red: colorR, green: colorG, blue: colorB, alpha: alpha)
         self.shape.backgroundColor = Constants.Colors.safeRed
