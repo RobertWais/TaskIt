@@ -49,22 +49,30 @@ class TaskDetailsVC: UIViewController {
         }
     }
     @IBAction func completedBtnPressed(_ sender: Any) {
+        let darkView = UIView(frame: self.view.bounds)
+        darkView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        let loadWheel = LoadWheel(view: darkView)
+        self.view.addSubview(darkView)
+        
         completedBtn.isUserInteractionEnabled = false
         DatabaseService.deleteTask(key: key!, sender: self) { (success) in
+            
             defer{
                 self.completedBtn.isUserInteractionEnabled = true
             }
             if success{
+                loadWheel.removeFromSuperview()
                 Constants.Data.liveTasks.removeValue(forKey: self.key!)
                 self.delegate?.didComplete()
                 UIView.animate(withDuration: 0.4, animations: {
                     self.baseView.center = CGPoint(x: self.view.center.x, y: self.view.bounds.height+self.view.bounds.height)
+                    darkView.alpha = 0.0
                 }) { (success) in
                     self.performSegue(withIdentifier: "unwindToMapFromDetails", sender: self)
-                    
                 }
             }else{
                 Alerts.couldNotDelete(sender: self)
+                darkView.removeFromSuperview()
             }
         }
         
