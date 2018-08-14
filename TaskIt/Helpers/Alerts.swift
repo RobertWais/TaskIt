@@ -50,7 +50,7 @@ struct Alerts{
     
     static func displayKey(uniqueID: String,sender: UIViewController, finished: @escaping ()->()){
         let alert = UIAlertController(title: "Unique ID",
-                                      message: "All group members must present this unqiue id when creating an account \n We suggest recording this id down now",
+                                      message: "All group members must present this unqiue id when creating an account, \n We suggest recording this id down for future use.",
                                       preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in

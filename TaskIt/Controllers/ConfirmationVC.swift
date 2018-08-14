@@ -48,13 +48,20 @@ class ConfirmationVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func confirmBtnPressed(_ sender: Any) {
+        //View
+        let darkView = UIView(frame: self.view.bounds)
+        let loadWheel = LoadWheel(view: darkView)
+        self.view.addSubview(darkView)
         disableBtns()
         guard let shape = currentShape else {
             enableBtns()
+            darkView.removeFromSuperview()
             return
         }
         let task = Task(shape: shape, title: (titleField?.text)!, description: textView.text, userPosted: TaskUser.current.uid, completed: "")
         DatabaseService.makeAPost(task: task.dictValue, sender: self) { (success) in
+            //Remove views
+            darkView.removeFromSuperview()
             if success {
                 self.delegate?.didConfirm(bool: true)
                 self.performSegue(withIdentifier: "unwindToMap", sender: self)
