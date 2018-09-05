@@ -124,5 +124,4 @@ struct DatabaseService {
         alertController.addAction(confirmAction)
         sender.present(alertController, animated: true)
     }
-
 }

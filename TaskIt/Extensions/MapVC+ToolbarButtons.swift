@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-//▲▼✔
-
 extension MapVC {
     //UI For Buttons
     func initialButtons(){
@@ -169,7 +167,7 @@ extension MapVC {
         }
     }
     
-    
+    //Functions to extend the Shape that is currently being displayed
     @objc func extendRight(){
         currentShape.bounds =  CGRect(x: currentShape.bounds.minX, y: currentShape.bounds.minY, width: currentShape.bounds.width+2, height: currentShape.bounds.height)
         let radians:CGFloat = atan2((currentShape.transform.b), (currentShape.transform.a))
@@ -207,10 +205,6 @@ extension MapVC {
         currentShape.center = CGPoint(x: currentShape.center.x-tuple.1, y: currentShape.center.y-tuple.0 )
     }
     
-   
-    
-    //Collapse toolbar and if currentShape is already confirmed, dont move it
-    //Will change later
     @objc func collapseSecondToolBar(){
         collapseEditBar()
     }

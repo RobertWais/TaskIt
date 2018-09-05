@@ -10,10 +10,6 @@ import UIKit
 
 extension MapVC {
     func secondSet(){
-        
-        ////Slider Button
-        
-        
         ////Confirm Button
         confirmBtn = TaskButton(color: Constants.Colors.baseColor, cRadius: tempToolBar.frame.height/4, symbol: "✓")
         confirmBtn.addTarget(self, action: #selector(confirmShape), for: .touchUpInside)
@@ -27,8 +23,7 @@ extension MapVC {
         let revertButtonItem = UIBarButtonItem(customView: revertBtn)
         revertButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
         
-        setUpDisplayButtons()
-        
+        setUpDisplayButton()
         
         //PLUS Minus/Button
             let freezeButtonItem = UIBarButtonItem(customView: freezeBtn)

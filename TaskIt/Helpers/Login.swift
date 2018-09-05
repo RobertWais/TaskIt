@@ -9,9 +9,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseAuth.FIRUser
 
-
 struct Login {
-    
     static func signUp(email: String, password: String, username: String, companyId: String, controller: UIViewController,completion: @escaping
         (String?)->()){
         AuthService.createUser(email: email, password: password) { (error, user) in

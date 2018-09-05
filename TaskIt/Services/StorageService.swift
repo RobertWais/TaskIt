@@ -10,8 +10,6 @@ import FirebaseStorage
 import FirebaseDatabase
 
 struct StorageService {
-    
-    
     static func uploadImage(_ image: UIImage, reference: StorageReference,completion: @escaping (URL?)->()){
         
         guard let imageData = UIImageJPEGRepresentation(image, 0.1) else {

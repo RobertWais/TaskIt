@@ -46,7 +46,6 @@ class StartVC: UIViewController, SignInDelegate,DarkViewDelegate,SignUpDelegate 
             Alerts.successButFailure(sender: self)
         }
     }
-    //Login Credentials
     
     override func viewDidLayoutSubviews() {
         signUpBtn.layer.cornerRadius = signUpBtn.bounds.size.height/2

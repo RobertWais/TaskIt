@@ -57,6 +57,4 @@ struct CoreDataHelper {
             return []
         }
     }
-    
-    
 }

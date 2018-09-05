@@ -23,8 +23,4 @@ struct AuthService{
             completion(nil,authResult?.user)
         }
     }
-    
-    
-    
-    
 }
