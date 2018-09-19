@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AD96E899DA7CAEE91005DE2F4F49C118"
+               BlueprintIdentifier = "44823993441BC5198DD854DB76C25B9E"
                BuildableName = "Pods_TaskIt.framework"
                BlueprintName = "Pods-TaskIt"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,7 +26,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -37,7 +36,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -47,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AD96E899DA7CAEE91005DE2F4F49C118"
+            BlueprintIdentifier = "44823993441BC5198DD854DB76C25B9E"
             BuildableName = "Pods_TaskIt.framework"
             BlueprintName = "Pods-TaskIt"
             ReferencedContainer = "container:Pods.xcodeproj">

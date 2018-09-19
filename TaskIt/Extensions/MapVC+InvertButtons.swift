@@ -23,7 +23,7 @@ extension MapVC {
         let revertButtonItem = UIBarButtonItem(customView: revertBtn)
         revertButtonItem.customView?.frame = CGRect(x: 0, y: 0, width:  tempToolBar.frame.height/2, height: tempToolBar.frame.height/2)
         
-        setUpDisplayButton()
+        setUpDisplayButtons()
         
         //PLUS Minus/Button
             let freezeButtonItem = UIBarButtonItem(customView: freezeBtn)

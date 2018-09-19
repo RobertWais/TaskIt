@@ -17,6 +17,8 @@
 		2E3634BA21116AB700E42BA7 /* LoadWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3634B921116AB700E42BA7 /* LoadWheel.swift */; };
 		2E6907D921142E0A00EC6088 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6907D821142E0A00EC6088 /* CoreDataHelper.swift */; };
 		2E6BD8F1210D8A3A001E4A76 /* MapLayout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E6BD8F0210D8A3A001E4A76 /* MapLayout.storyboard */; };
+		2E8569552151A3AF00E7A8AA /* Onboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E8569542151A3AF00E7A8AA /* Onboard.storyboard */; };
+		2E85695E2151A78600E7A8AA /* OnboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E85695D2151A78600E7A8AA /* OnboardVC.swift */; };
 		2EB539A121063C1700192FDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539A021063C1700192FDA /* AppDelegate.swift */; };
 		2EB539A621063C1700192FDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB539A421063C1700192FDA /* Main.storyboard */; };
 		2EB539A921063C1700192FDA /* TaskIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EB539A721063C1700192FDA /* TaskIt.xcdatamodeld */; };
@@ -55,6 +57,8 @@
 		2E3634BB2111807A00E42BA7 /* TaskIt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaskIt.entitlements; sourceTree = "<group>"; };
 		2E6907D821142E0A00EC6088 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		2E6BD8F0210D8A3A001E4A76 /* MapLayout.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapLayout.storyboard; sourceTree = "<group>"; };
+		2E8569542151A3AF00E7A8AA /* Onboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboard.storyboard; sourceTree = "<group>"; };
+		2E85695D2151A78600E7A8AA /* OnboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardVC.swift; sourceTree = "<group>"; };
 		2EB5399D21063C1700192FDA /* TaskIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB539A021063C1700192FDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EB539A521063C1700192FDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -112,15 +116,9 @@
 			children = (
 				2E6BD8F0210D8A3A001E4A76 /* MapLayout.storyboard */,
 				2EB539A421063C1700192FDA /* Main.storyboard */,
+				2E8569542151A3AF00E7A8AA /* Onboard.storyboard */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		2E821047211A08A900CCF02B /* PageViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PageViewControllers;
 			sourceTree = "<group>";
 		};
 		2EB5399421063C1700192FDA = {
@@ -144,7 +142,6 @@
 		2EB5399F21063C1700192FDA /* TaskIt */ = {
 			isa = PBXGroup;
 			children = (
-				2E821047211A08A900CCF02B /* PageViewControllers */,
 				2EF477442114B3FF00290E9A /* Views */,
 				2E3634BB2111807A00E42BA7 /* TaskIt.entitlements */,
 				2E1FC05B210D71DC00FBFCCB /* Storyboards */,
@@ -174,6 +171,7 @@
 				2E1FC04B210A9BD100FBFCCB /* ConfirmationVC.swift */,
 				2ED164E2210F805C008B7513 /* TaskDetailsVC.swift */,
 				2EF477402114B37D00290E9A /* ChooseIdVC.swift */,
+				2E85695D2151A78600E7A8AA /* OnboardVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -279,6 +277,7 @@
 				TargetAttributes = {
 					2EB5399C21063C1700192FDA = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -318,6 +317,7 @@
 				2EB539AB21063C1700192FDA /* Assets.xcassets in Resources */,
 				2EB539B621063EF400192FDA /* GoogleService-Info.plist in Resources */,
 				2E6BD8F1210D8A3A001E4A76 /* MapLayout.storyboard in Resources */,
+				2E8569552151A3AF00E7A8AA /* Onboard.storyboard in Resources */,
 				2EB539A621063C1700192FDA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,7 +351,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TaskIt/Pods-TaskIt-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Onboard/Onboard.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -359,7 +360,8 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Onboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -392,6 +394,7 @@
 				2E1FC0402108ED8100FBFCCB /* MapVC+ToolbarButtons.swift in Sources */,
 				2EB539D12107CC8900192FDA /* DatabaseService.swift in Sources */,
 				2EFBB5612110BC20006C097D /* StorageService.swift in Sources */,
+				2E85695E2151A78600E7A8AA /* OnboardVC.swift in Sources */,
 				2EB539CD21079CB500192FDA /* MapVC.swift in Sources */,
 				2ED164E5210FAF0F008B7513 /* MapVC+TaskShapeDelegate.swift in Sources */,
 				2EB539C72106F87700192FDA /* TaskUser.swift in Sources */,
@@ -541,6 +544,7 @@
 			baseConfigurationReference = B8996872739D1DDD925576CD /* Pods-TaskIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TaskIt/TaskIt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6V78FR972C;
@@ -549,6 +553,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Bob.TaskIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TaskIt/Controllers/TaskIt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -559,6 +565,7 @@
 			baseConfigurationReference = 528CF6BC0CF32CC4F47A8F51 /* Pods-TaskIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TaskIt/TaskIt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6V78FR972C;
@@ -567,6 +574,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Bob.TaskIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TaskIt/Controllers/TaskIt-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

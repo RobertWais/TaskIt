@@ -153,20 +153,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate{
 
 extension AppDelegate {
     func configureInitialViewController(for window: UIWindow?){
-        let defaults = UserDefaults.standard
+//        let defaults = UserDefaults.standard
         let initialViewController: UIViewController
+//
+//        if let _ = Auth.auth().currentUser,
+//        let userData = defaults.object(forKey: "currentUser") as? Data,
+//            let user = try? JSONDecoder().decode(TaskUser.self, from: userData){
+//            TaskUser.setCurrent(user)
+//            let storyboard = UIStoryboard(name: "MapLayout", bundle: .main)
+//            initialViewController = storyboard.instantiateInitialViewController()!
+//        }else{
+//            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+//            initialViewController = storyboard.instantiateInitialViewController()!
+//
+//        }
         
-        if let _ = Auth.auth().currentUser,
-        let userData = defaults.object(forKey: "currentUser") as? Data,
-            let user = try? JSONDecoder().decode(TaskUser.self, from: userData){
-            TaskUser.setCurrent(user)
-            let storyboard = UIStoryboard(name: "MapLayout", bundle: .main)
-            initialViewController = storyboard.instantiateInitialViewController()!
-        }else{
-            let storyboard = UIStoryboard(name: "Main", bundle: .main)
-            initialViewController = storyboard.instantiateInitialViewController()!
-            
-        }
+        let storyboard = UIStoryboard(name: "Onboard", bundle: .main)
+        initialViewController = storyboard.instantiateInitialViewController()!
         window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
     }
@@ -200,7 +203,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        //print(userInfo)
         completionHandler()
     }
 }

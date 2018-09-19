@@ -61,7 +61,8 @@ struct DatabaseService {
                 completion(err, "")
                 return
             }
-            completion(nil,dbRef.key)
+            //Fix
+            completion(nil,dbRef.key!)
         }
     }
     
