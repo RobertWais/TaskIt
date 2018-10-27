@@ -72,6 +72,6 @@ fastlane/test_output
 
 # functions
 node_modules/
-functions/serviceAccount.json
+serviceAccount.json
 firebase.json
 GoogleService-Info.plist
