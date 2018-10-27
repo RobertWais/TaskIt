@@ -72,4 +72,4 @@ fastlane/test_output
 
 # functions
 node_modules/
-serviceAccount.json
+functions/serviceAccount.json
