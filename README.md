@@ -13,5 +13,6 @@ In the Spring of 2018 I had created an application similar to this one but much 
 ## Screenshots
 
 ## How to use
+A user must either create a group and receive a group id upon creation of the group or they must know a group id that has already been created by someone else. The user must also create an account and give a valid group id at the time of creating their account. When logging in their group id will be displayed and they can select it to log in under that group. If there is another group that the user wants to belong to they can enter its id during logging in and that group id will also be saved for them.
 
 
