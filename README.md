@@ -17,8 +17,10 @@ In the Spring of 2018 I had created an application similar to this one but much 
 <h3>Task Creation</h3>
 <img src="IMG_2601.PNG" width="200" > 
 
+<div>
 <h3>Map View</h3>
 <img src="IMG_2594.PNG" width="200" > <img src="IMG_2593.PNG" width="200" > 
+</div>
 
 <h3>Group Creation</h3>
 <img src="IMG_2597.PNG" width="200" > 
