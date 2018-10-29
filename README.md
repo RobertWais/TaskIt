@@ -11,14 +11,14 @@ The application was developed and launched to the App Store in roughly 3 weeks a
 In the Spring of 2018 I had created an application similar to this one but much smaller scale. It was specifically for the campground I had worked on and instead of dragging/dropping shapes the overlays for locations on the map were created statically. After completing this project, I was not extremely thrilled with it and knew I could do better and make it usable for more than one specific grounds.
 
 ## Screenshots
+<h3>Initial Screen</h3>
+<img src="IMG_2577.PNG" width="200" > 
+
 <h3>Task Creation</h3>
 <img src="IMG_2601.PNG" width="200" > 
 
 <h3>Map View</h3>
-
-<img src="IMG_2594.PNG" width="200" > 
-
-
+<img src="IMG_2594.PNG" width="200" > <img src="IMG_2593.PNG" width="200" > 
 
 <h3>Group Creation</h3>
 <img src="IMG_2597.PNG" width="200" > 
