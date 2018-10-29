@@ -11,6 +11,18 @@ The application was developed and launched to the App Store in roughly 3 weeks a
 In the Spring of 2018 I had created an application similar to this one but much smaller scale. It was specifically for the campground I had worked on and instead of dragging/dropping shapes the overlays for locations on the map were created statically. After completing this project, I was not extremely thrilled with it and knew I could do better and make it usable for more than one specific grounds.
 
 ## Screenshots
+<h3>Task Creation</h3>
+<img src="IMG_2601.PNG" width="200" > 
+
+<h3>Map View</h3>
+
+<img src="IMG_2594.PNG" width="200" > 
+
+
+
+<h3>Group Creation</h3>
+<img src="IMG_2597.PNG" width="200" > 
+
 
 ## How to use
 A user must either create a group and receive a group id upon creation of the group or they must know a group id that has already been created by someone else. The user must also create an account and give a valid group id at the time of creating their account. When logging in their group id will be displayed and they can select it to log in under that group. If there is another group that the user wants to belong to they can enter its id during logging in and that group id will also be saved for them.
